@@ -6,7 +6,7 @@
   <link href="/1024-xy.github.io/atom.xml" rel="self"/>
   
   <link href="//xxy201799.github.io/"/>
-  <updated>2019-10-20T06:36:19.558Z</updated>
+  <updated>2019-10-21T14:16:52.835Z</updated>
   <id>//xxy201799.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Zookeeper工作原理与应用</title>
+    <link href="//xxy201799.github.io/2019/10/21/zookeeper-gong-zuo-yuan-li-yu-ying-yong/"/>
+    <id>//xxy201799.github.io/2019/10/21/zookeeper-gong-zuo-yuan-li-yu-ying-yong/</id>
+    <published>2019-10-21T14:17:10.776Z</published>
+    <updated>2019-10-21T14:16:52.835Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>TCP_IP</title>
+    <link href="//xxy201799.github.io/2019/10/20/tcp-ip/"/>
+    <id>//xxy201799.github.io/2019/10/20/tcp-ip/</id>
+    <published>2019-10-20T15:55:03.626Z</published>
+    <updated>2019-10-20T16:16:02.606Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;#TCP_IP网络协议&lt;br&gt;###TCP协议分为哪几层，每层有哪些协议？&lt;br&gt;&lt;img src=&quot;F:/myblog/source/_posts/imges/TCP_IP%E5%8D%8F%E8%AE%AE%E5%9B%BE.png&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
