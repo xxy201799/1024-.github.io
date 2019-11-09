@@ -6,7 +6,7 @@
   <link href="/1024-xy.github.io/atom.xml" rel="self"/>
   
   <link href="//xxy201799.github.io/"/>
-  <updated>2019-10-21T14:16:52.835Z</updated>
+  <updated>2019-10-20T06:36:19.558Z</updated>
   <id>//xxy201799.github.io/</id>
   
   <author>
@@ -17,33 +17,10 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Zookeeper工作原理与应用(1)</title>
-    <link href="//xxy201799.github.io/2019/11/09/zookeeper-gong-zuo-yuan-li-yu-ying-yong-1/"/>
-    <id>//xxy201799.github.io/2019/11/09/zookeeper-gong-zuo-yuan-li-yu-ying-yong-1/</id>
-    <published>2019-11-09T01:32:51.882Z</published>
-    <updated>2019-10-21T14:16:52.835Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Hello World</title>
-    <link href="//xxy201799.github.io/2019/11/09/hello-world-1/"/>
-    <id>//xxy201799.github.io/2019/11/09/hello-world-1/</id>
-    <published>2019-11-09T01:32:51.876Z</published>
+    <link href="//xxy201799.github.io/2019/11/09/hello-world-2/"/>
+    <id>//xxy201799.github.io/2019/11/09/hello-world-2/</id>
+    <published>2019-11-09T02:04:08.955Z</published>
     <updated>2019-10-20T06:36:19.558Z</updated>
     
     <summary type="html">
@@ -63,11 +40,11 @@
   </entry>
   
   <entry>
-    <title>并发编程_构建块</title>
-    <link href="//xxy201799.github.io/2019/11/09/bing-fa-bian-cheng-gou-jian-kuai/"/>
-    <id>//xxy201799.github.io/2019/11/09/bing-fa-bian-cheng-gou-jian-kuai/</id>
-    <published>2019-11-09T01:32:51.863Z</published>
-    <updated>2019-11-09T01:24:58.632Z</updated>
+    <title>分布式中间件</title>
+    <link href="//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
+    <id>//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T02:02:28.982Z</updated>
     
     <summary type="html">
     
@@ -75,22 +52,24 @@
       
         
         
-          &lt;h1 id=&quot;并发编程-构建块&quot;&gt;&lt;a href=&quot;#并发编程-构建块&quot; class=&quot;headerlink&quot; title=&quot;并发编程_构建块&quot;&gt;&lt;/a&gt;并发编程_构建块&lt;/h1&gt;&lt;h2 id=&quot;同步容器&quot;&gt;&lt;a href=&quot;#同步容器&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
         
       
     
     </summary>
     
     
+      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
     
   </entry>
   
   <entry>
     <title>并发编程_Callable&amp;Future</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future/</id>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:26:34.691Z</updated>
+    <updated>2019-11-09T01:59:39.226Z</updated>
     
     <summary type="html">
     
@@ -112,10 +91,10 @@
   
   <entry>
     <title>并发编程_线程安全</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-1/</id>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:26:15.445Z</updated>
+    <updated>2019-11-09T01:59:53.479Z</updated>
     
     <summary type="html">
     
@@ -137,10 +116,10 @@
   
   <entry>
     <title>并发编程_共享对象</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang/</id>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:25:34.091Z</updated>
+    <updated>2019-11-09T02:00:05.074Z</updated>
     
     <summary type="html">
     
@@ -161,11 +140,36 @@
   </entry>
   
   <entry>
-    <title>并发编程_基础</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-1/</id>
+    <title>并发编程_构建块</title>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:27:00.200Z</updated>
+    <updated>2019-11-09T02:00:38.811Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-构建块&quot;&gt;&lt;a href=&quot;#并发编程-构建块&quot; class=&quot;headerlink&quot; title=&quot;并发编程_构建块&quot;&gt;&lt;/a&gt;并发编程_构建块&lt;/h1&gt;&lt;h2 id=&quot;同步容器&quot;&gt;&lt;a href=&quot;#同步容器&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程_基础</title>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T01:59:22.769Z</updated>
     
     <summary type="html">
     
@@ -188,10 +192,10 @@
   
   <entry>
     <title>并发编程_线程之间的通讯</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun/</id>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:24:48.031Z</updated>
+    <updated>2019-11-09T02:01:43.992Z</updated>
     
     <summary type="html">
     
@@ -213,10 +217,10 @@
   
   <entry>
     <title>并发编程_线程池原理</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li/</id>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:25:59.842Z</updated>
+    <updated>2019-11-09T01:58:49.004Z</updated>
     
     <summary type="html">
     
@@ -232,99 +236,6 @@
     
     
       <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_JAVA内存模型</title>
-    <link href="//xxy201799.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/"/>
-    <id>//xxy201799.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/</id>
-    <published>2019-10-22T23:48:16.906Z</published>
-    <updated>2019-10-24T14:37:32.199Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-ThreadAPI详细介绍&quot;&gt;&lt;a href=&quot;#并发编程-ThreadAPI详细介绍&quot; class=&quot;headerlink&quot; title=&quot;并发编程_ThreadAPI详细介绍&quot;&gt;&lt;/a&gt;并发编程_ThreadAPI详细介绍&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_基础</title>
-    <link href="//xxy201799.github.io/2019/10/21/bing-fa-bian-cheng-ji-chu/"/>
-    <id>//xxy201799.github.io/2019/10/21/bing-fa-bian-cheng-ji-chu/</id>
-    <published>2019-10-21T15:54:13.488Z</published>
-    <updated>2019-10-22T16:47:10.308Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程基础&quot;&gt;&lt;a href=&quot;#并发编程基础&quot; class=&quot;headerlink&quot; title=&quot;并发编程基础&quot;&gt;&lt;/a&gt;并发编程基础&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id=&quot;进程与线程的区别与联系&quot;&gt;&lt;a href=&quot;#进程与线程的区别与联系&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Zookeeper工作原理与应用</title>
-    <link href="//xxy201799.github.io/2019/10/21/zookeeper-gong-zuo-yuan-li-yu-ying-yong/"/>
-    <id>//xxy201799.github.io/2019/10/21/zookeeper-gong-zuo-yuan-li-yu-ying-yong/</id>
-    <published>2019-10-21T14:17:10.776Z</published>
-    <updated>2019-10-21T14:16:52.835Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="//xxy201799.github.io/2019/10/20/hello-world/"/>
-    <id>//xxy201799.github.io/2019/10/20/hello-world/</id>
-    <published>2019-10-20T06:36:19.558Z</published>
-    <updated>2019-10-20T06:36:19.558Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
     
     
   </entry>

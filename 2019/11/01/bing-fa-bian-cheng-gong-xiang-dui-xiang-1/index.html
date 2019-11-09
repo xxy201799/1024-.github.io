@@ -1,0 +1,1180 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="并发编程_共享对象, Hexo">
+    <meta name="description" content="并发编程_共享对象可见性在以下的代码中，主线程和读线程两个线程共同访问变量ready和number。主线程启动读线程，然后把number设置为42，ready赋值为true，读线程一直循环直到发现ready变成true，然后打印出numbe">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>并发编程_共享对象 | Hexo</title>
+    <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/css/my.css">
+
+    <script src="/1024-xy.github.io/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/1024-xy.github.io/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/1024-xy.github.io/" class="waves-effect waves-light">
+                    
+                    <img src="/1024-xy.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hexo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/1024-xy.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/xxy201799/1024-xy.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/xxy201799/1024-xy.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        并发编程_共享对象
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/1024-xy.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                并发编程
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-11-01
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="并发编程-共享对象"><a href="#并发编程-共享对象" class="headerlink" title="并发编程_共享对象"></a>并发编程_共享对象</h1><h2 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h2><p>在以下的代码中，主线程和读线程两个线程共同访问变量ready和number。主线程启动读线程，然后把number设置为42，ready赋值为true，读线程一直循环直到发现ready变成true，然后打印出number的值，虽然看上去会输出42，实则不然，很有可能输出0，因为cpu缓存的缘故，甚至线程不会终止，因为缓存永远没有同步机制到内存，所以没能保证主线程写入ready和number对读线程可见。</p>
+<pre><code>public class NoVisibility{
+    private static boolean ready;
+    private static int number;
+    public static class ReaderThread extends Thread{
+        public void run(){
+            while(!ready){
+                Thread.yield();
+            System.out.println(number);
+            }
+        }
+    }
+    public static void main(String[] args){
+        new ReaderThread().start();
+        number = 42;
+        ready = true;
+    }
+}</code></pre><p>这里甚至可能会出现奇怪的现象，NoVisibility可能会打印0，产生这种情况的原因便是指令发生了<strong>重排序</strong>。</p>
+<h3 id="过期数据"><a href="#过期数据" class="headerlink" title="过期数据"></a>过期数据</h3><p>Novisibility演示了一种没有恰当同步程序，它能股引起意外的后果：过期数据。当线程检查ready变量时，它可能看到一个过期的值。除非每一次访问变量都是同步的，否则很可能得到变量的过期值。更坏的情况，过期既不会发生在全部变量上，也不会完全不出现：一个线程可能会得到一个变量最新的值，但是也可能得到另一个变量先前写入的过期值。<br>&emsp;&emsp;以下代码并不是线程安全的，因为get和set都访问了value域，却没有进行同步。在众多危害中，以下情况对过期数据尤为敏感：如果线程调用了set，而另一个线程此时正在调用get，他可能就看不到更新的数据了。<br>&emsp;&emsp;我们可以通过同步化getter和setter，使以下代码变为线程安全。</p>
+<p><strong>非线程安全的可变整数访问器</strong></p>
+<pre><code>public class MutableInteger{
+    private int value;
+    public int get(){
+        return value;
+    }
+    public void set(int value){
+        this.value = value;
+    }
+}</code></pre><p><strong>线程安全的可变整数访问器</strong></p>
+<pre><code>public class SynchronizedInteger{
+    private int value;
+    public synchronized int get(){
+        return value;
+    }
+    public synchronized void set(int value){
+        this.value = value;
+    }
+}</code></pre><h3 id="非原子的64位操作"><a href="#非原子的64位操作" class="headerlink" title="非原子的64位操作"></a>非原子的64位操作</h3><p>&emsp;&emsp;当一个线程在没有同步的情况下读取变量，他可能会得到一个过期值。但是至少它可以看到某个线程在那里设定的一个真实数值，而不是一个凭空而来的值。这样的安全保证被称为是最低的安全性。<br>&emsp;&emsp;最低的安全性应用于所有的变量，除了一个例外：没有声明为volatile的64位数值变量（double和long）。java存储模型要求获取和存储操作都为原子的，但是对于非volatile的long和double变量，JVM允许将64位读或写划分为两个32位的操作。如果读和写发生在不同的线程，这种情况读取一个非volatile类型long就可能会出现得到一个值的高32位和另一个值的低32位。因此，即使你并不关心过期数据，但仅仅在多线程程序中使用共享的、可变的long 和 double变量也可能是不安全的，除非将它们声明为volatile类型，或者用锁保护。</p>
+<h3 id="锁和可见性"><a href="#锁和可见性" class="headerlink" title="锁和可见性"></a>锁和可见性</h3><p>&emsp;&emsp;内置锁可以用来确保一个线程以某种可预见的方式看到另一个线程的影响。当A执行执行一个同步块时，线程B也随后进入了同一个锁监视的同步块中，这时就可以保证，在锁释放之前对A可见的变量值，B获得锁之后同样是可见的。换句话说，当B执行到与A相同的锁监视的同步块，A在同步块之中或之前所做的每一件事，对B都是可见的，如果没有同步，就没有这样的保证。<br>&emsp;&emsp;<strong>锁不仅仅是关于同步与互斥的，也是关于内存可见的。为了保证所有线程都能够看到共享的、可变变量的最新值，读取和写入线程必须使用公共的锁同步。</strong></p>
+<h3 id="Volatile变量"><a href="#Volatile变量" class="headerlink" title="Volatile变量"></a>Volatile变量</h3><p>&emsp;&emsp;Java语言也提供了其他的选择，即一种同步的弱形式：volatile变量。它确保对一个变量的更新以可预见的方式告知其他线程。当域声明为volatile类型后，编译器与运行时会监视这个变量：它是共享的，而且对它的操作不会与其他的内存操作一起被重排序。volatile变量不会缓存在寄存器或者缓存在对其他处理器隐藏的地方。读一个volatile类型的变量时，总会返回由某一个线程写入的最新值。<br>&emsp;&emsp;<strong>只有当volatile变量能够简化实现和同步策略的验证时，才使用它们。当验证正确性必须推断可见性问题时，应该避免使用volatile变量。正确使用volatile变量的方式包括：用于确保它们所引用的对象状态的可见性，或者用于标志重要的生命周期事件的发生</strong>  </p>
+<pre><code>volatile boolean sleep;
+while(sleep){
+    doSomething();
+}</code></pre><p>&emsp;&emsp;volatile变量固然方便，但存在限制，比如a++ 这种操作便不是原子化，除非你能保证只有一个线程对变量执行写操作<strong>加锁可以保证原子性，可见性，但volatile只能保证可见性.</strong><br>&emsp;&emsp;只有满足了下面所有标准后，你才能使用volatile变量：</p>
+<ul>
+<li>写入变量并不依赖变量的当前值：或者能确保只有单一线程修改变量的值；</li>
+<li>变量不需要与其他的状态变量共同参与不变约束；</li>
+<li>而且，访问变量时，没有其他的原因需要加锁。<h2 id="发布和逸出"><a href="#发布和逸出" class="headerlink" title="发布和逸出"></a>发布和逸出</h2>发布一个对象的意思是使它能够被当前范围之外的代码所使用。比如将一个引用存储到其他代码可以访问的地方，在一个非私有的方法中返回这个引用，也可以把它传递到其他类的方法中。在很多情况下，我们需要确保对象以及他们的内部状态不被暴露。在另外一些情况下，为了正当的使用目的，我们又的确希望发布一个对象，但是用线程安全的方法完成这些工作时，可能需要同步。如果变量发布内部状态，就可能危及到线程安全。一个对象在尚未准备好时就将它发布，这种情况称为逸出。<h2 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h2>&emsp;&emsp;访问共享的、可变的数据要求要求。一个可以避免同步的方式就是不共享数据。如果数据仅在单线程中访问，就不需要任何同步。线程封闭技术是实现线程安全的最简单方式之一。当对象封闭在一个线程中，这种做法会自动成为线程安全的，即使被封闭的对象本身并不是。<br>&emsp;&emsp;常见的使用线程限制的应用程序是应用池化的JDBC对象。JDBC规范并没有要求Connection对象是线程安全的。然而在典型的的服务器应用中，线程总是从池中获得一个Connection对象，并且用它处理一个单一的请求，最后将它归还。每个线程都会同步处理大多数请求，而且在Connection对象在归还前，池不会再将它分配给其他线程，因此，这种连接管理模式隐式地将Connection对象限制在处于请求处理期间的线程中。  <h3 id="Ad-hoc-线程限制"><a href="#Ad-hoc-线程限制" class="headerlink" title="Ad-hoc 线程限制"></a>Ad-hoc 线程限制</h3>&emsp;&emsp;<strong>Ad-hoc 线程限制</strong>是指维护线程限制性的任务全部落在实现上的这种情况。因为没有可见性修饰符与本地变量等语言特性协助将对象限制在目标线程上，所以这方式是非常容易出错的。事实上，对于像GUI应用中的可视化组件或者数据模型这些线程限制对象，对他们的引用通常是公用域。<h3 id="栈限制"><a href="#栈限制" class="headerlink" title="栈限制"></a>栈限制</h3>&emsp;&emsp;栈限制是线程限制的一种特例，在栈限制中，只能通过本地变量才可以触及对象。正如封装不变约束更容易被保持，本地变量使对象更容易被限制在线程本地中</li>
+</ul>
+<pre><code>public void test(){
+    int i;
+    int b;//这些变量都是线程私有的，存储在栈中，别的线程无法访问。
+}</code></pre><p>维护对象引用的栈限制，需要确保对象没有逸出。倘若我们发布了对象的引用，则该对象便会逸出。</p>
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>&emsp;&emsp;一种维护线程限制的有效方式是使用ThreadLocal，它允许你将每个线程与持有数值的对象关联在一起。ThreadLocal提供了get与set访问器，为每个线程维护一份单独的拷贝。所以get总是返回当前线程执行通过set的最新值。<br>&emsp;&emsp;线程本地变量通常用于防止在基于可变单体或者全局变量的设计之中，出现不正确的共享</p>
+<pre><code>private static ThreadLocal&lt;Connection&gt; connectionHolder = new ThreadLocal&lt;Connection&gt;(){
+    public Connection initialValue(){
+        return DriverManager.getConnection(DB_URL);
+    }
+}
+public static Connection getConnection(){
+    return connectionHolder.ger();
+}</code></pre><p>&emsp;&emsp;这项技术还用于下面的情况：一个频繁执行的操作既需要像buffer的临时对象，同时还需要每次避免每次重新分配该对象。在5.0以前，Integer.toString()方法使用ThreadLocal存储一个12-byte的缓冲区来格式化结果，而不是使用共享的静态缓冲区，或者在每次调用前都分配一个新的缓冲区。**你可以将ThreadLocal看成一个map&lt;Thread,valeu&gt;但实际他不是，与线程相关的值存储在线程自身对象中，线程终止，这些值会被回收。</p>
+<h2 id="不可变性"><a href="#不可变性" class="headerlink" title="不可变性"></a>不可变性</h2><p>使用final关键字可以使对象变的不可变，不可变对象永远线程安全。只有一下状态一个对象才不可变 </p>
+<ul>
+<li>他的状态创建后不能被修改。</li>
+<li>所有域都是final类型。</li>
+<li>它被正确的创建，没有逸出。<h3 id="final域"><a href="#final域" class="headerlink" title="final域"></a>final域</h3>&emsp;&emsp;final关键字源于C++的const机制，不过受到了很多限制，它对不可变性对象的创建提供了支持。final是不可被修改的（尽管对象的状态可变，这个对象仍然可被修改），final域使得确保初始化安全性成为可能，初始化安全性让不可变性对象不需要同步就能自由的被访问和共享。<h3 id="使用volatile发布不可变对象"><a href="#使用volatile发布不可变对象" class="headerlink" title="使用volatile发布不可变对象"></a>使用volatile发布不可变对象</h3></li>
+</ul>
+<pre><code>private volatile OneValueCache cache = new OneValueCche(null,null);
+public void service(){
+    cache = new OneValueCache(i,factors);
+}</code></pre><h3 id="安全的共享对象"><a href="#安全的共享对象" class="headerlink" title="安全的共享对象"></a>安全的共享对象</h3><p>在并发程序中，遵循使用和共享对象的策略为：</p>
+<ul>
+<li>线程限制：一个线程限制的对象，在通过限制在线程中，而被线程独占，且只能被占有它的线程修改。</li>
+<li>共享只读：一个共享的只读对象，在没有同步的情况下，不会产生线程安全问题，共享只读对象包括可变对象与高效不可变对象。</li>
+<li>共享线程安全：一个线程安全的对象在内部进行同步，所以其他线程无需额外同步，就可以通过公共接口访问它。</li>
+<li>被守护的：一个被守护的对象只能通过特定的锁来访问，被守护的对象包括那些被线程安全对象封装的对象，和一直被特定的锁保护起来的已发布的对象。</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="//xxy201799.github.io" rel="external nofollow noreferrer">John Doe</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/">//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="//xxy201799.github.io" target="_blank">John Doe</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/1024-xy.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/1024-xy.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/1024-xy.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="并发编程_线程安全">
+                        
+                        <span class="card-title">并发编程_线程安全</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            并发编程_线程安全什么是线程安全性？可以被多个程序调用，并且调用没有共享内存中同一变量的交互，并且不需要使用任何操作来保证线程安全，同时得到的结果跟预期是正确的。那么我们称这个程序线程安全。示例：线程安全
+public void count
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    并发编程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/1024-xy.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="并发编程_构建块">
+                        
+                        <span class="card-title">并发编程_构建块</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            并发编程_构建块同步容器同步容器分为两部分，一个是vector和HashTable。他们早期是JDK的一部分：另一个是他们的同系容器，在JDK1.2才被加入的同步包装类。这些类是由Collections.synchronizedxxx工厂方
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    并发编程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/1024-xy.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="//xxy201799.github.io" target="_blank">John Doe</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/xxy201799/1024-xy.github.io" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/1024-xy.github.io/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/1024-xy.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/1024-xy.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/1024-xy.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="/1024-xy.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/1024-xy.github.io/libs/aos/aos.js"></script>
+    <script src="/1024-xy.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/1024-xy.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/1024-xy.github.io/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/1024-xy.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/1024-xy.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/1024-xy.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/1024-xy.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
