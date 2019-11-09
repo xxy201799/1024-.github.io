@@ -6,7 +6,7 @@
   <link href="/1024-xy.github.io/atom.xml" rel="self"/>
   
   <link href="//xxy201799.github.io/"/>
-  <updated>2019-10-21T14:16:52.835Z</updated>
+  <updated>2019-10-24T14:37:32.199Z</updated>
   <id>//xxy201799.github.io/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>并发编程_JAVA内存模型</title>
+    <link href="//xxy201799.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/"/>
+    <id>//xxy201799.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/</id>
+    <published>2019-10-22T23:48:16.906Z</published>
+    <updated>2019-10-24T14:37:32.199Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-ThreadAPI详细介绍&quot;&gt;&lt;a href=&quot;#并发编程-ThreadAPI详细介绍&quot; class=&quot;headerlink&quot; title=&quot;并发编程_ThreadAPI详细介绍&quot;&gt;&lt;/a&gt;并发编程_ThreadAPI详细介绍&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程_基础</title>
+    <link href="//xxy201799.github.io/2019/10/21/bing-fa-bian-cheng-ji-chu/"/>
+    <id>//xxy201799.github.io/2019/10/21/bing-fa-bian-cheng-ji-chu/</id>
+    <published>2019-10-21T15:54:13.488Z</published>
+    <updated>2019-10-22T16:47:10.308Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程基础&quot;&gt;&lt;a href=&quot;#并发编程基础&quot; class=&quot;headerlink&quot; title=&quot;并发编程基础&quot;&gt;&lt;/a&gt;并发编程基础&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;进程与线程的区别与联系&quot;&gt;&lt;a href=&quot;#进程与线程的区别与联系&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Zookeeper工作原理与应用</title>
@@ -30,29 +77,6 @@
         
         
           &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>TCP_IP</title>
-    <link href="//xxy201799.github.io/2019/10/20/tcp-ip/"/>
-    <id>//xxy201799.github.io/2019/10/20/tcp-ip/</id>
-    <published>2019-10-20T15:55:03.626Z</published>
-    <updated>2019-10-20T16:16:02.606Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;#TCP_IP网络协议&lt;br&gt;###TCP协议分为哪几层，每层有哪些协议？&lt;br&gt;&lt;img src=&quot;F:/myblog/source/_posts/imges/TCP_IP%E5%8D%8F%E8%AE%AE%E5%9B%BE.png&quot;
         
       
     
