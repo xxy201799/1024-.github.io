@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="并发编程_JAVA内存模型, Hexo">
-    <meta name="description" content="并发编程_ThreadAPI详细介绍Thread()构造方法">
+    <meta name="keywords" content="并发编程_共享对象, Hexo">
+    <meta name="description" content="并发编程_共享对象可见性在以下的代码中，主线程和读线程两个线程共同访问变量ready和number。主线程启动读线程，然后把number设置为42，ready赋值为true，读线程一直循环直到发现ready变成true，然后打印出numbe">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>并发编程_JAVA内存模型 | Hexo</title>
+    <title>并发编程_共享对象 | Hexo</title>
     <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
@@ -304,13 +304,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        并发编程_JAVA内存模型
+                        并发编程_共享对象
                     </div>
                 </div>
             </div>
@@ -427,13 +427,22 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                并发编程
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-10-23
+                    2019-11-01
                 </div>
 
                 
@@ -449,7 +458,85 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="并发编程-ThreadAPI详细介绍"><a href="#并发编程-ThreadAPI详细介绍" class="headerlink" title="并发编程_ThreadAPI详细介绍"></a>并发编程_ThreadAPI详细介绍</h1><h2 id="Thread-构造方法"><a href="#Thread-构造方法" class="headerlink" title="Thread()构造方法"></a>Thread()构造方法</h2>
+                <h1 id="并发编程-共享对象"><a href="#并发编程-共享对象" class="headerlink" title="并发编程_共享对象"></a>并发编程_共享对象</h1><h2 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h2><p>在以下的代码中，主线程和读线程两个线程共同访问变量ready和number。主线程启动读线程，然后把number设置为42，ready赋值为true，读线程一直循环直到发现ready变成true，然后打印出number的值，虽然看上去会输出42，实则不然，很有可能输出0，因为cpu缓存的缘故，甚至线程不会终止，因为缓存永远没有同步机制到内存，所以没能保证主线程写入ready和number对读线程可见。</p>
+<pre><code>public class NoVisibility{
+    private static boolean ready;
+    private static int number;
+    public static class ReaderThread extends Thread{
+        public void run(){
+            while(!ready){
+                Thread.yield();
+            System.out.println(number);
+            }
+        }
+    }
+    public static void main(String[] args){
+        new ReaderThread().start();
+        number = 42;
+        ready = true;
+    }
+}</code></pre><p>这里甚至可能会出现奇怪的现象，NoVisibility可能会打印0，产生这种情况的原因便是指令发生了<strong>重排序</strong>。</p>
+<h3 id="过期数据"><a href="#过期数据" class="headerlink" title="过期数据"></a>过期数据</h3><p>Novisibility演示了一种没有恰当同步程序，它能股引起意外的后果：过期数据。当线程检查ready变量时，它可能看到一个过期的值。除非每一次访问变量都是同步的，否则很可能得到变量的过期值。更坏的情况，过期既不会发生在全部变量上，也不会完全不出现：一个线程可能会得到一个变量最新的值，但是也可能得到另一个变量先前写入的过期值。<br>&emsp;&emsp;以下代码并不是线程安全的，因为get和set都访问了value域，却没有进行同步。在众多危害中，以下情况对过期数据尤为敏感：如果线程调用了set，而另一个线程此时正在调用get，他可能就看不到更新的数据了。<br>&emsp;&emsp;我们可以通过同步化getter和setter，使以下代码变为线程安全。</p>
+<p><strong>非线程安全的可变整数访问器</strong></p>
+<pre><code>public class MutableInteger{
+    private int value;
+    public int get(){
+        return value;
+    }
+    public void set(int value){
+        this.value = value;
+    }
+}</code></pre><p><strong>线程安全的可变整数访问器</strong></p>
+<pre><code>public class SynchronizedInteger{
+    private int value;
+    public synchronized int get(){
+        return value;
+    }
+    public synchronized void set(int value){
+        this.value = value;
+    }
+}</code></pre><h3 id="非原子的64位操作"><a href="#非原子的64位操作" class="headerlink" title="非原子的64位操作"></a>非原子的64位操作</h3><p>&emsp;&emsp;当一个线程在没有同步的情况下读取变量，他可能会得到一个过期值。但是至少它可以看到某个线程在那里设定的一个真实数值，而不是一个凭空而来的值。这样的安全保证被称为是最低的安全性。<br>&emsp;&emsp;最低的安全性应用于所有的变量，除了一个例外：没有声明为volatile的64位数值变量（double和long）。java存储模型要求获取和存储操作都为原子的，但是对于非volatile的long和double变量，JVM允许将64位读或写划分为两个32位的操作。如果读和写发生在不同的线程，这种情况读取一个非volatile类型long就可能会出现得到一个值的高32位和另一个值的低32位。因此，即使你并不关心过期数据，但仅仅在多线程程序中使用共享的、可变的long 和 double变量也可能是不安全的，除非将它们声明为volatile类型，或者用锁保护。</p>
+<h3 id="锁和可见性"><a href="#锁和可见性" class="headerlink" title="锁和可见性"></a>锁和可见性</h3><p>&emsp;&emsp;内置锁可以用来确保一个线程以某种可预见的方式看到另一个线程的影响。当A执行执行一个同步块时，线程B也随后进入了同一个锁监视的同步块中，这时就可以保证，在锁释放之前对A可见的变量值，B获得锁之后同样是可见的。换句话说，当B执行到与A相同的锁监视的同步块，A在同步块之中或之前所做的每一件事，对B都是可见的，如果没有同步，就没有这样的保证。<br>&emsp;&emsp;<strong>锁不仅仅是关于同步与互斥的，也是关于内存可见的。为了保证所有线程都能够看到共享的、可变变量的最新值，读取和写入线程必须使用公共的锁同步。</strong></p>
+<h3 id="Volatile变量"><a href="#Volatile变量" class="headerlink" title="Volatile变量"></a>Volatile变量</h3><p>&emsp;&emsp;Java语言也提供了其他的选择，即一种同步的弱形式：volatile变量。它确保对一个变量的更新以可预见的方式告知其他线程。当域声明为volatile类型后，编译器与运行时会监视这个变量：它是共享的，而且对它的操作不会与其他的内存操作一起被重排序。volatile变量不会缓存在寄存器或者缓存在对其他处理器隐藏的地方。读一个volatile类型的变量时，总会返回由某一个线程写入的最新值。<br>&emsp;&emsp;<strong>只有当volatile变量能够简化实现和同步策略的验证时，才使用它们。当验证正确性必须推断可见性问题时，应该避免使用volatile变量。正确使用volatile变量的方式包括：用于确保它们所引用的对象状态的可见性，或者用于标志重要的生命周期事件的发生</strong>  </p>
+<pre><code>volatile boolean sleep;
+while(sleep){
+    doSomething();
+}</code></pre><p>&emsp;&emsp;volatile变量固然方便，但存在限制，比如a++ 这种操作便不是原子化，除非你能保证只有一个线程对变量执行写操作<strong>加锁可以保证原子性，可见性，但volatile只能保证可见性.</strong><br>&emsp;&emsp;只有满足了下面所有标准后，你才能使用volatile变量：</p>
+<ul>
+<li>写入变量并不依赖变量的当前值：或者能确保只有单一线程修改变量的值；</li>
+<li>变量不需要与其他的状态变量共同参与不变约束；</li>
+<li>而且，访问变量时，没有其他的原因需要加锁。<h2 id="发布和逸出"><a href="#发布和逸出" class="headerlink" title="发布和逸出"></a>发布和逸出</h2>发布一个对象的意思是使它能够被当前范围之外的代码所使用。比如将一个引用存储到其他代码可以访问的地方，在一个非私有的方法中返回这个引用，也可以把它传递到其他类的方法中。在很多情况下，我们需要确保对象以及他们的内部状态不被暴露。在另外一些情况下，为了正当的使用目的，我们又的确希望发布一个对象，但是用线程安全的方法完成这些工作时，可能需要同步。如果变量发布内部状态，就可能危及到线程安全。一个对象在尚未准备好时就将它发布，这种情况称为逸出。<h2 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h2>&emsp;&emsp;访问共享的、可变的数据要求要求。一个可以避免同步的方式就是不共享数据。如果数据仅在单线程中访问，就不需要任何同步。线程封闭技术是实现线程安全的最简单方式之一。当对象封闭在一个线程中，这种做法会自动成为线程安全的，即使被封闭的对象本身并不是。<br>&emsp;&emsp;常见的使用线程限制的应用程序是应用池化的JDBC对象。JDBC规范并没有要求Connection对象是线程安全的。然而在典型的的服务器应用中，线程总是从池中获得一个Connection对象，并且用它处理一个单一的请求，最后将它归还。每个线程都会同步处理大多数请求，而且在Connection对象在归还前，池不会再将它分配给其他线程，因此，这种连接管理模式隐式地将Connection对象限制在处于请求处理期间的线程中。  <h3 id="Ad-hoc-线程限制"><a href="#Ad-hoc-线程限制" class="headerlink" title="Ad-hoc 线程限制"></a>Ad-hoc 线程限制</h3>&emsp;&emsp;<strong>Ad-hoc 线程限制</strong>是指维护线程限制性的任务全部落在实现上的这种情况。因为没有可见性修饰符与本地变量等语言特性协助将对象限制在目标线程上，所以这方式是非常容易出错的。事实上，对于像GUI应用中的可视化组件或者数据模型这些线程限制对象，对他们的引用通常是公用域。<h3 id="栈限制"><a href="#栈限制" class="headerlink" title="栈限制"></a>栈限制</h3>&emsp;&emsp;栈限制是线程限制的一种特例，在栈限制中，只能通过本地变量才可以触及对象。正如封装不变约束更容易被保持，本地变量使对象更容易被限制在线程本地中</li>
+</ul>
+<pre><code>public void test(){
+    int i;
+    int b;//这些变量都是线程私有的，存储在栈中，别的线程无法访问。
+}</code></pre><p>维护对象引用的栈限制，需要确保对象没有逸出。倘若我们发布了对象的引用，则该对象便会逸出。</p>
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>&emsp;&emsp;一种维护线程限制的有效方式是使用ThreadLocal，它允许你将每个线程与持有数值的对象关联在一起。ThreadLocal提供了get与set访问器，为每个线程维护一份单独的拷贝。所以get总是返回当前线程执行通过set的最新值。<br>&emsp;&emsp;线程本地变量通常用于防止在基于可变单体或者全局变量的设计之中，出现不正确的共享</p>
+<pre><code>private static ThreadLocal&lt;Connection&gt; connectionHolder = new ThreadLocal&lt;Connection&gt;(){
+    public Connection initialValue(){
+        return DriverManager.getConnection(DB_URL);
+    }
+}
+public static Connection getConnection(){
+    return connectionHolder.ger();
+}</code></pre><p>&emsp;&emsp;这项技术还用于下面的情况：一个频繁执行的操作既需要像buffer的临时对象，同时还需要每次避免每次重新分配该对象。在5.0以前，Integer.toString()方法使用ThreadLocal存储一个12-byte的缓冲区来格式化结果，而不是使用共享的静态缓冲区，或者在每次调用前都分配一个新的缓冲区。**你可以将ThreadLocal看成一个map&lt;Thread,valeu&gt;但实际他不是，与线程相关的值存储在线程自身对象中，线程终止，这些值会被回收。</p>
+<h2 id="不可变性"><a href="#不可变性" class="headerlink" title="不可变性"></a>不可变性</h2><p>使用final关键字可以使对象变的不可变，不可变对象永远线程安全。只有一下状态一个对象才不可变 </p>
+<ul>
+<li>他的状态创建后不能被修改。</li>
+<li>所有域都是final类型。</li>
+<li>它被正确的创建，没有逸出。<h3 id="final域"><a href="#final域" class="headerlink" title="final域"></a>final域</h3>&emsp;&emsp;final关键字源于C++的const机制，不过受到了很多限制，它对不可变性对象的创建提供了支持。final是不可被修改的（尽管对象的状态可变，这个对象仍然可被修改），final域使得确保初始化安全性成为可能，初始化安全性让不可变性对象不需要同步就能自由的被访问和共享。<h3 id="使用volatile发布不可变对象"><a href="#使用volatile发布不可变对象" class="headerlink" title="使用volatile发布不可变对象"></a>使用volatile发布不可变对象</h3></li>
+</ul>
+<pre><code>private volatile OneValueCache cache = new OneValueCche(null,null);
+public void service(){
+    cache = new OneValueCache(i,factors);
+}</code></pre><h3 id="安全的共享对象"><a href="#安全的共享对象" class="headerlink" title="安全的共享对象"></a>安全的共享对象</h3><p>在并发程序中，遵循使用和共享对象的策略为：</p>
+<ul>
+<li>线程限制：一个线程限制的对象，在通过限制在线程中，而被线程独占，且只能被占有它的线程修改。</li>
+<li>共享只读：一个共享的只读对象，在没有同步的情况下，不会产生线程安全问题，共享只读对象包括可变对象与高效不可变对象。</li>
+<li>共享线程安全：一个线程安全的对象在内部进行同步，所以其他线程无需额外同步，就可以通过公共接口访问它。</li>
+<li>被守护的：一个被守护的对象只能通过特定的锁来访问，被守护的对象包括那些被线程安全对象封装的对象，和一直被特定的锁保护起来的已发布的对象。</li>
+</ul>
+
             </div>
             <hr/>
 
@@ -474,7 +561,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/">//xxy201799.github.io/1024-xy.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/</a>
+                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang/">//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -680,21 +767,20 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li/">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="并发编程_线程池原理">
+                        <img src="/1024-xy.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="并发编程_线程安全">
                         
-                        <span class="card-title">并发编程_线程池原理</span>
+                        <span class="card-title">并发编程_线程安全</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程_线程池原理阻塞队列与非阻塞队列
-阻塞队列进行出队与入队操作会进行等待。
-非阻塞队列不会进行阻塞ConcurrentLinkedQueue(非阻塞)BlockingQueue(阻塞)实现BlockingQueue接口的有ArrayB
+                            并发编程_线程安全什么是线程安全性？可以被多个程序调用，并且调用没有共享内存中同一变量的交互，并且不需要使用任何操作来保证线程安全，同时得到的结果跟预期是正确的。那么我们称这个程序线程安全。示例：线程安全
+public void count
                         
                     </div>
                     <div class="publish-info">
@@ -723,7 +809,7 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/10/21/bing-fa-bian-cheng-ji-chu/">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-1/">
                     <div class="card-image">
                         
                         
@@ -742,12 +828,16 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    并发编程
+                                </a>
+                            
                             
                         </span>
                     </div>

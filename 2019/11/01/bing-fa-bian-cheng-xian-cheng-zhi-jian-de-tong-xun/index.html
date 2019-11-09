@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="并发编程_JAVA内存模型, Hexo">
-    <meta name="description" content="并发编程_ThreadAPI详细介绍Thread()构造方法">
+    <meta name="keywords" content="并发编程_线程之间的通讯, Hexo">
+    <meta name="description" content="并发编程_线程之间的通讯volatile与Synchronized的区别
+volatile只能保持可见性，但不能保证原子性，synchronized既可以保证可见性又可以保证原子性
+volatile禁止重排序，synchronized不禁止">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>并发编程_JAVA内存模型 | Hexo</title>
+    <title>并发编程_线程之间的通讯 | Hexo</title>
     <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
@@ -304,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        并发编程_JAVA内存模型
+                        并发编程_线程之间的通讯
                     </div>
                 </div>
             </div>
@@ -427,13 +429,22 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                并发编程
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-10-23
+                    2019-11-01
                 </div>
 
                 
@@ -449,7 +460,103 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="并发编程-ThreadAPI详细介绍"><a href="#并发编程-ThreadAPI详细介绍" class="headerlink" title="并发编程_ThreadAPI详细介绍"></a>并发编程_ThreadAPI详细介绍</h1><h2 id="Thread-构造方法"><a href="#Thread-构造方法" class="headerlink" title="Thread()构造方法"></a>Thread()构造方法</h2>
+                <h1 id="并发编程-线程之间的通讯"><a href="#并发编程-线程之间的通讯" class="headerlink" title="并发编程_线程之间的通讯"></a>并发编程_线程之间的通讯</h1><h2 id="volatile与Synchronized的区别"><a href="#volatile与Synchronized的区别" class="headerlink" title="volatile与Synchronized的区别"></a>volatile与Synchronized的区别</h2><ul>
+<li>volatile只能保持可见性，但不能保证原子性，synchronized既可以保证可见性又可以保证原子性</li>
+<li>volatile禁止重排序，synchronized不禁止重排序。</li>
+<li>volatile不需要加锁，比synchronized更加轻量级，并且不会阻塞线程。</li>
+<li>volatile是变量修饰符，而synchronized是方法或者块的修饰符</li>
+</ul>
+<h2 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h2><p>编译器会对没有依赖关系的代码进行重排序<br>以下代码可能会发生重排序。</p>
+<pre><code>int a;
+int b;</code></pre><h3 id="as-if-serial语义"><a href="#as-if-serial语义" class="headerlink" title="as-if-serial语义"></a>as-if-serial语义</h3><p>不管怎么去做重排序，其目的都是为了提高代码执行效率，但是不能影响正常结果。重排序只会在多线程的情况下预见，单线程不会。</p>
+<pre><code>class RecordExample{
+    int a = 0;
+    boolean flag = false;
+    public void writer(){
+        a = 1;//1
+        flag = true;//2
+    }
+    public void reader(){
+        if(flag){//3
+            int i = a * a;//4
+        }
+    }
+}</code></pre><p>假如在writer()方法中发生了重排序，将使得reader得到错误的结果，此时flag=true;a还是0。</p>
+<h2 id="wait和notify以及对象锁池"><a href="#wait和notify以及对象锁池" class="headerlink" title="wait和notify以及对象锁池"></a>wait和notify以及对象锁池</h2><h3 id="生产者与消费者"><a href="#生产者与消费者" class="headerlink" title="生产者与消费者"></a>生产者与消费者</h3><pre><code>/**
+ * 生产者和消费者，wait()和notify()的实现
+ * @author ZGJ
+ * @date 2017年6月22日
+ */
+public class Test1 {
+    private static Integer count = 0;
+    private static final Integer FULL = 10;
+    private static String LOCK = &quot;lock&quot;;
+
+    public static void main(String[] args) {
+        Test1 test1 = new Test1();
+        new Thread(test1.new Producer()).start();
+        new Thread(test1.new Consumer()).start();
+        new Thread(test1.new Producer()).start();
+        new Thread(test1.new Consumer()).start();
+        new Thread(test1.new Producer()).start();
+        new Thread(test1.new Consumer()).start();
+        new Thread(test1.new Producer()).start();
+        new Thread(test1.new Consumer()).start();
+    }
+    class Producer implements Runnable {
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                synchronized (LOCK) {
+                    while (count == FULL) {
+                        try {
+                            LOCK.wait();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    count++;
+                    System.out.println(Thread.currentThread().getName() + &quot;生产者生产，目前总共有&quot; + count);
+                    LOCK.notifyAll();
+                }
+            }
+        }
+    }
+    class Consumer implements Runnable {
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                synchronized (LOCK) {
+                    while (count == 0) {
+                        try {
+                            LOCK.wait();
+                        } catch (Exception e) {
+                        }
+                    }
+                    count--;
+                    System.out.println(Thread.currentThread().getName() + &quot;消费者消费，目前总共有&quot; + count);
+                    LOCK.notifyAll();
+                }
+            }
+        }
+    }
+}</code></pre><h3 id="wait与notify"><a href="#wait与notify" class="headerlink" title="wait与notify"></a>wait与notify</h3><p>1、为什么wait与notify需要定义在object中呢？<br>其实原理很简单，我们需要知道在java对象中，对象头里面含有锁标志，每个对象同时在虚拟机中对应一个监视器，但线程拿到该对象的锁标志，监视器会监视该线程的锁情况，所以在java中是用对象进行加锁，而所有对象又继承于Object类，所以这样定义在Object中，所有对象才会有唤醒和等待的方法。</p>
+<h3 id="对象锁池"><a href="#对象锁池" class="headerlink" title="对象锁池"></a>对象锁池</h3><p>在Java中，每个对象都有两个池，锁(monitor)池和等待池  </p>
+<ul>
+<li>锁池:假设线程A已经拥有了某个对象(注意:不是类)的锁，而其它的线程想要调用这个对象的某个synchronized方法(或者synchronized块)，由于这些线程在进入对象的synchronized方法之前必须先获得该对象的锁的拥有权，但是该对象的锁目前正被线程A拥有，所以这些线程就进入了该对象的锁池中。</li>
+<li>等待池:假设一个线程A调用了某个对象的wait()方法，线程A就会释放该对象的锁(因为wait()方法必须出现在synchronized中，这样自然在执行wait()方法之前线程A就已经拥有了该对象的锁)，同时线程A就进入到了该对象的等待池中。如果另外的一个线程调用了相同对象的notifyAll()方法，那么处于该对象的等待池中的线程就会全部进入该对象的锁池中，准备争夺锁的拥有权。如果另外的一个线程调用了相同对象的notify()方法，那么仅仅有一个处于该对象的等待池中的线程(随机)会进入该对象的锁池.</li>
+</ul>
+
             </div>
             <hr/>
 
@@ -474,7 +581,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/">//xxy201799.github.io/1024-xy.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/</a>
+                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun/">//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -680,21 +787,21 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li/">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="并发编程_线程池原理">
+                        <img src="/1024-xy.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="并发编程_基础">
                         
-                        <span class="card-title">并发编程_线程池原理</span>
+                        <span class="card-title">并发编程_基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程_线程池原理阻塞队列与非阻塞队列
-阻塞队列进行出队与入队操作会进行等待。
-非阻塞队列不会进行阻塞ConcurrentLinkedQueue(非阻塞)BlockingQueue(阻塞)实现BlockingQueue接口的有ArrayB
+                            并发编程基础
+进程与线程的区别与联系进程是一个独立运行的程序，它有操作系统分配的内存空间，进程间的切换需要cpu进行空间地址的切换以及物理内存的交互。所以进程间的切换更加消耗资源。而线程是进程的组成基本单位，也是cpu调度的基本单位。
+使用
                         
                     </div>
                     <div class="publish-info">
@@ -723,31 +830,35 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/10/21/bing-fa-bian-cheng-ji-chu/">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="并发编程_基础">
+                        <img src="/1024-xy.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="并发编程_线程池原理">
                         
-                        <span class="card-title">并发编程_基础</span>
+                        <span class="card-title">并发编程_线程池原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程基础
-进程与线程的区别与联系进程是一个独立运行的程序，它有操作系统分配的内存空间，进程间的切换需要cpu进行空间地址的切换以及物理内存的交互。所以进程间的切换更加消耗资源。而线程是进程的组成基本单位，也是cpu调度的基本单位。
-使用
+                            并发编程_线程池原理阻塞队列与非阻塞队列
+阻塞队列进行出队与入队操作会进行等待。
+非阻塞队列不会进行阻塞ConcurrentLinkedQueue(非阻塞)BlockingQueue(阻塞)实现BlockingQueue接口的有ArrayB
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    并发编程
+                                </a>
+                            
                             
                         </span>
                     </div>

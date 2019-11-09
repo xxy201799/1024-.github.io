@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="并发编程_JAVA内存模型, Hexo">
-    <meta name="description" content="并发编程_ThreadAPI详细介绍Thread()构造方法">
+    <meta name="keywords" content="并发编程_线程安全, Hexo">
+    <meta name="description" content="并发编程_线程安全什么是线程安全性？可以被多个程序调用，并且调用没有共享内存中同一变量的交互，并且不需要使用任何操作来保证线程安全，同时得到的结果跟预期是正确的。那么我们称这个程序线程安全。示例：线程安全
+public void count">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>并发编程_JAVA内存模型 | Hexo</title>
+    <title>并发编程_线程安全 | Hexo</title>
     <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
@@ -304,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        并发编程_JAVA内存模型
+                        并发编程_线程安全
                     </div>
                 </div>
             </div>
@@ -427,13 +428,22 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                并发编程
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-10-23
+                    2019-11-01
                 </div>
 
                 
@@ -449,7 +459,50 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="并发编程-ThreadAPI详细介绍"><a href="#并发编程-ThreadAPI详细介绍" class="headerlink" title="并发编程_ThreadAPI详细介绍"></a>并发编程_ThreadAPI详细介绍</h1><h2 id="Thread-构造方法"><a href="#Thread-构造方法" class="headerlink" title="Thread()构造方法"></a>Thread()构造方法</h2>
+                <h1 id="并发编程-线程安全"><a href="#并发编程-线程安全" class="headerlink" title="并发编程_线程安全"></a>并发编程_线程安全</h1><h2 id="什么是线程安全性？"><a href="#什么是线程安全性？" class="headerlink" title="什么是线程安全性？"></a>什么是线程安全性？</h2><p>可以被多个程序调用，并且调用没有共享内存中同一变量的交互，并且不需要使用任何操作来保证线程安全，同时得到的结果跟预期是正确的。那么我们称这个程序线程安全。<br><strong>示例</strong>：<br>线程安全</p>
+<pre><code>public void count(){
+    int count = 0;
+    count++;
+}</code></pre><p>非线程安全</p>
+<pre><code>int count = 0;
+public void count(){
+    count++;
+}</code></pre><h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><p>我们在向无状态的对象中加入一个状态将会破坏他的线程安全如：  </p>
+<pre><code>int count = 0;
+public void count(){
+    count++;
+}</code></pre><p>该count非线程安全，看似count++是个原子操作，其实cpu对它进行了从cpu缓存中读取，+1，写入缓存的操作。假如同时两个线程执行该方法，如果第一个线程在同一个时间拿到这个count并且都看到是9，同时+1写入缓存中，你将不会得到11，而是错误的10。</p>
+<h3 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h3><p>使用潜在的过期观察值来决策或执行计算，这种竞争条件被称为<strong>检查在运行</strong>，你观察到一些一些事情为真，然后基于你的观察去执行一些动作：但事实上，从你观察再执行的期间，观察结果已经无效，从而引发错误修改。</p>
+<h4 id="惰性初始化竞争条件"><a href="#惰性初始化竞争条件" class="headerlink" title="惰性初始化竞争条件"></a>惰性初始化竞争条件</h4><p>懒汉式单例模式就是一个很明显的例子(<strong>Dont do this</strong>)：</p>
+<pre><code>public class LazyInitRace{
+    private ExpensiveObject instance = null;
+
+    public ExpensiveObject getInstance(){
+        if(instance == null){
+            instance = new ExpensiveObject();
+        }
+        return instance;
+    }
+}</code></pre><h3 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h3><p>前面说到的懒汉式单例以及count++都是非线程安全的，如何解决线程安全呢？为了避免竞争条件，必须阻止其他线程访问我们正在修改的变量，让我们可以确保：其他的线程想要查看和修改这一状态时，必须在我们线程开始之前或者之后。我们可以使用线程安全类来实现count++的安全问题。</p>
+<pre><code>private final AtomicLong count = new AtomicLong (0);
+public void count(){
+    //对count进行自增操作
+    count.incrementAndGet();
+}</code></pre><p>java.util.concurrent.atomic包中包括了原子变量类，而这些对数值的操作都可以看做是原子操作。</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>通过线程安全的对象来管理类中非安全的状态，可以维护线程的安全性，但这样我们只能加入一种状态，但我们想要加入更多状态，可以仅仅加入更多线程安全的变量吗？</p>
+<pre><code>private final AtomicReference&lt;Integer&gt; lastNumber = new AtomicReference&lt;Integer&gt;();
+private final AtomicReference&lt;Integer&gt; lastFactor = new AtomicReference&lt;Integer&gt;();
+public void service(){
+    Integer i = exec();
+    //存在竞争条件，不安全
+    Integer[] factorys  = factory[i] 
+    lastNumber.set(i);
+    lastFactory.set(factors);
+}</code></pre><p>当A线程尝试获取这两个变量时，B线程已经修改了他们，A拿到了错误的结果，所以线程不安全。为了保护状态的一致性，要在单一的原子操作中更新相互关联的状态变量。  </p>
+<h3 id="内部锁"><a href="#内部锁" class="headerlink" title="内部锁"></a>内部锁</h3><p>java提供了强制原子性的内置锁机制：synchronized块。一个synchronized块有两个部分：锁对象的引用，以及这个锁保护的代码块。其中<a href="https://blog.csdn.net/javazejian/article/details/72828483" target="_blank" rel="noopener">synchronized底层原理</a>为我们详细解释了这一关键字具体在字节码级别的实现。synchronized在方法上，拿到的对象就是对象本身，如果在静态方法上，则拿到该类的class字节码对象。每个java对象都可以隐式的扮演一个用于同步的锁的角色：这些内置的锁被称为内部锁或者监视器锁。执行线程进入synchronized块之前会自动获得锁；而无论正常退出还是抛出异常，线程都将释放锁资源。内部锁是互斥锁。</p>
+<h3 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h3><p>当一个线程请求其他线程已经占有的锁时，请求线程将会被阻塞。然而内部锁是可重进入的，因此线程在试图获得它自己占有的锁时，请求会成功。重入的实现是为每个锁关联一个请求计数和一个占有它的线程。当计数器为0时，认为锁未被占用。线程请求一个未被占用的锁时，jvm将记录锁的占有者，并将请求数设置为1.如果同一线程在此请求这个锁，计数将递增；每次占用线程退出同步块，将递减。直到0时，锁释放。</p>
+<h2 id="用锁来保护状态"><a href="#用锁来保护状态" class="headerlink" title="用锁来保护状态"></a>用锁来保护状态</h2><p>对于每个可被多个线程访问的可变状态变量，如果所有访问它的线程在执行时，都占有同一个锁，我们便称它是由锁保护的。</p>
+
             </div>
             <hr/>
 
@@ -474,7 +527,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/">//xxy201799.github.io/1024-xy.github.io/2019/10/23/bing-fa-bian-cheng-java-nei-cun-mo-xing/</a>
+                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-1/">//xxy201799.github.io/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -680,21 +733,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li/">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-callable-future/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="并发编程_线程池原理">
+                        <img src="/1024-xy.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="并发编程_Callable&Future">
                         
-                        <span class="card-title">并发编程_线程池原理</span>
+                        <span class="card-title">并发编程_Callable&Future</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程_线程池原理阻塞队列与非阻塞队列
-阻塞队列进行出队与入队操作会进行等待。
-非阻塞队列不会进行阻塞ConcurrentLinkedQueue(非阻塞)BlockingQueue(阻塞)实现BlockingQueue接口的有ArrayB
+                            并发编程_Callable&amp;Future
                         
                     </div>
                     <div class="publish-info">
@@ -723,31 +774,33 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/10/21/bing-fa-bian-cheng-ji-chu/">
+                <a href="/1024-xy.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="并发编程_基础">
+                        <img src="/1024-xy.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="并发编程_共享对象">
                         
-                        <span class="card-title">并发编程_基础</span>
+                        <span class="card-title">并发编程_共享对象</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程基础
-进程与线程的区别与联系进程是一个独立运行的程序，它有操作系统分配的内存空间，进程间的切换需要cpu进行空间地址的切换以及物理内存的交互。所以进程间的切换更加消耗资源。而线程是进程的组成基本单位，也是cpu调度的基本单位。
-使用
+                            并发编程_共享对象可见性在以下的代码中，主线程和读线程两个线程共同访问变量ready和number。主线程启动读线程，然后把number设置为42，ready赋值为true，读线程一直循环直到发现ready变成true，然后打印出numbe
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/1024-xy.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    并发编程
+                                </a>
+                            
                             
                         </span>
                     </div>
