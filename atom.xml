@@ -3,7 +3,7 @@
   <title>Hexo</title>
   
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="xxystudybook.club/atom.xml" rel="self"/>
   
   <link href="http://xxystudybook.club/"/>
   <updated>2020-03-07T15:09:54.685Z</updated>
@@ -249,31 +249,6 @@
   </entry>
   
   <entry>
-    <title>Spring AOP</title>
-    <link href="http://xxystudybook.club/2019/11/01/springaop/"/>
-    <id>http://xxystudybook.club/2019/11/01/springaop/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-12T15:52:34.084Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Spring-Aop&quot;&gt;&lt;a href=&quot;#Spring-Aop&quot; class=&quot;headerlink&quot; title=&quot;Spring Aop&quot;&gt;&lt;/a&gt;Spring
-        
-      
-    
-    </summary>
-    
-    
-      <category term="框架学习" scheme="http://xxystudybook.club/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>zookeeper分布式原理与应用</title>
     <link href="http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
     <id>http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
@@ -299,31 +274,6 @@
   </entry>
   
   <entry>
-    <title>并发编程_Callable&amp;Future</title>
-    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
-    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:59:39.226Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-Callable-amp-Future&quot;&gt;&lt;a href=&quot;#并发编程-Callable-amp-Future&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>并发编程_线程安全</title>
     <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/"/>
     <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/</id>
@@ -337,6 +287,31 @@
         
         
           &lt;h1 id=&quot;并发编程-线程安全&quot;&gt;&lt;a href=&quot;#并发编程-线程安全&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程安全&quot;&gt;&lt;/a&gt;并发编程_线程安全&lt;/h1&gt;&lt;h2 id=&quot;什么是线程安全性？&quot;&gt;&lt;a href=&quot;#什么是线程安全性？&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程_Callable&amp;Future</title>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T01:59:39.226Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-Callable-amp-Future&quot;&gt;&lt;a href=&quot;#并发编程-Callable-amp-Future&quot; class=&quot;headerlink&quot;
         
       
     
@@ -420,6 +395,31 @@
     
     
       <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Spring AOP</title>
+    <link href="http://xxystudybook.club/2019/11/01/springaop/"/>
+    <id>http://xxystudybook.club/2019/11/01/springaop/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-12T15:52:34.084Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Spring-Aop&quot;&gt;&lt;a href=&quot;#Spring-Aop&quot; class=&quot;headerlink&quot; title=&quot;Spring Aop&quot;&gt;&lt;/a&gt;Spring
+        
+      
+    
+    </summary>
+    
+    
+      <category term="框架学习" scheme="http://xxystudybook.club/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
