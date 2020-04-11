@@ -6,7 +6,7 @@
   <link href="/1024-xy.github.io/atom.xml" rel="self"/>
   
   <link href="//xxy201799.github.io/"/>
-  <updated>2019-10-20T06:36:19.558Z</updated>
+  <updated>2020-03-07T15:09:54.685Z</updated>
   <id>//xxy201799.github.io/</id>
   
   <author>
@@ -15,6 +15,215 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法_排序算法</title>
+    <link href="//xxy201799.github.io/2020/03/07/suan-fa-pai-xu-suan-fa/"/>
+    <id>//xxy201799.github.io/2020/03/07/suan-fa-pai-xu-suan-fa/</id>
+    <published>2020-03-07T15:07:15.678Z</published>
+    <updated>2020-03-07T15:09:54.685Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;八大排序算法&quot;&gt;&lt;a href=&quot;#八大排序算法&quot; class=&quot;headerlink&quot; title=&quot;八大排序算法&quot;&gt;&lt;/a&gt;八大排序算法&lt;/h1&gt;&lt;h1 id=&quot;冒泡排序&quot;&gt;&lt;a href=&quot;#冒泡排序&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式_原型模式_建造者模式</title>
+    <link href="//xxy201799.github.io/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/"/>
+    <id>//xxy201799.github.io/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/</id>
+    <published>2020-03-07T15:03:41.134Z</published>
+    <updated>2020-03-08T12:35:32.510Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;原型模式与建造者模式&quot;&gt;&lt;a href=&quot;#原型模式与建造者模式&quot; class=&quot;headerlink&quot; title=&quot;原型模式与建造者模式&quot;&gt;&lt;/a&gt;原型模式与建造者模式&lt;/h1&gt;&lt;h1 id=&quot;原型模式&quot;&gt;&lt;a href=&quot;#原型模式&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式_门面模式_装饰模式</title>
+    <link href="//xxy201799.github.io/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/"/>
+    <id>//xxy201799.github.io/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/</id>
+    <published>2020-03-04T12:48:32.036Z</published>
+    <updated>2020-03-08T13:55:32.555Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;门面模式与装饰器模式&quot;&gt;&lt;a href=&quot;#门面模式与装饰器模式&quot; class=&quot;headerlink&quot; title=&quot;门面模式与装饰器模式&quot;&gt;&lt;/a&gt;门面模式与装饰器模式&lt;/h1&gt;&lt;h2 id=&quot;门面模式&quot;&gt;&lt;a href=&quot;#门面模式&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式_工厂模式</title>
+    <link href="//xxy201799.github.io/2020/03/03/she-ji-mo-shi-gong-han-mo-shi/"/>
+    <id>//xxy201799.github.io/2020/03/03/she-ji-mo-shi-gong-han-mo-shi/</id>
+    <published>2020-03-02T17:24:51.555Z</published>
+    <updated>2020-03-07T14:16:52.377Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;设计模式总览，工厂模式&quot;&gt;&lt;a href=&quot;#设计模式总览，工厂模式&quot; class=&quot;headerlink&quot; title=&quot;设计模式总览，工厂模式&quot;&gt;&lt;/a&gt;设计模式总览，工厂模式&lt;/h1&gt;&lt;h2 id=&quot;软件设计原则&quot;&gt;&lt;a href=&quot;#软件设计原则&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>问题详记</title>
+    <link href="//xxy201799.github.io/2019/12/27/wen-ti-xiang-ji/"/>
+    <id>//xxy201799.github.io/2019/12/27/wen-ti-xiang-ji/</id>
+    <published>2019-12-26T16:35:39.777Z</published>
+    <updated>2019-12-26T16:35:39.778Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;问题详记&quot;&gt;&lt;a href=&quot;#问题详记&quot; class=&quot;headerlink&quot; title=&quot;问题详记&quot;&gt;&lt;/a&gt;问题详记&lt;/h1&gt;&lt;h2 id=&quot;nacos整合gageway产生的问题&quot;&gt;&lt;a href=&quot;#nacos整合gageway产生的问题&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>RabbitMQ常见面试题详解</title>
+    <link href="//xxy201799.github.io/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/"/>
+    <id>//xxy201799.github.io/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/</id>
+    <published>2019-11-23T08:42:44.707Z</published>
+    <updated>2019-11-26T06:02:32.056Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;rabbitMQ消息队列&quot;&gt;&lt;a href=&quot;#rabbitMQ消息队列&quot; class=&quot;headerlink&quot; title=&quot;rabbitMQ消息队列&quot;&gt;&lt;/a&gt;rabbitMQ消息队列&lt;/h1&gt;&lt;h2 id=&quot;RabbitMQ消息队列的优势&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Redis持久化机制</title>
+    <link href="//xxy201799.github.io/2019/11/23/redis-chi-jiu-hua-ji-zhi/"/>
+    <id>//xxy201799.github.io/2019/11/23/redis-chi-jiu-hua-ji-zhi/</id>
+    <published>2019-11-22T17:02:02.744Z</published>
+    <updated>2019-11-22T17:44:00.396Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Redis持久化机制&quot;&gt;&lt;a href=&quot;#Redis持久化机制&quot; class=&quot;headerlink&quot; title=&quot;Redis持久化机制&quot;&gt;&lt;/a&gt;Redis持久化机制&lt;/h1&gt;&lt;p&gt;redis是单线程，高性能的，并且是拥有持久化机制的nosql内存数据库 
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Redis常见问题</title>
+    <link href="//xxy201799.github.io/2019/11/22/redis-chang-jian-mian-shi-ti/"/>
+    <id>//xxy201799.github.io/2019/11/22/redis-chang-jian-mian-shi-ti/</id>
+    <published>2019-11-22T04:12:57.000Z</published>
+    <updated>2019-11-22T05:16:02.174Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Redis常见问题&quot;&gt;&lt;a href=&quot;#Redis常见问题&quot; class=&quot;headerlink&quot; title=&quot;Redis常见问题&quot;&gt;&lt;/a&gt;Redis常见问题&lt;/h1&gt;&lt;h2 id=&quot;什么是RDB持久化机制&quot;&gt;&lt;a href=&quot;#什么是RDB持久化机制&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="缓存中间件" scheme="//xxy201799.github.io/categories/%E7%BC%93%E5%AD%98%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟机基础</title>
+    <link href="//xxy201799.github.io/2019/11/20/xu-ni-ji-ji-chu/"/>
+    <id>//xxy201799.github.io/2019/11/20/xu-ni-ji-ji-chu/</id>
+    <published>2019-11-20T14:31:29.908Z</published>
+    <updated>2019-11-25T09:24:12.776Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;jvm虚拟机优化看这里！！！强烈推荐&quot;&gt;&lt;a href=&quot;#jvm虚拟机优化看这里！！！强烈推荐&quot; class=&quot;headerlink&quot; title=&quot;jvm虚拟机优化看这里！！！强烈推荐&quot;&gt;&lt;/a&gt;jvm虚拟机优化&lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
@@ -40,6 +249,56 @@
   </entry>
   
   <entry>
+    <title>zookeeper分布式原理与应用</title>
+    <link href="//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
+    <id>//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-23T08:42:05.569Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+      <category term="分布式中间件" scheme="//xxy201799.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Spring AOP</title>
+    <link href="//xxy201799.github.io/2019/11/01/springaop/"/>
+    <id>//xxy201799.github.io/2019/11/01/springaop/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-12T15:52:34.084Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Spring-Aop&quot;&gt;&lt;a href=&quot;#Spring-Aop&quot; class=&quot;headerlink&quot; title=&quot;Spring Aop&quot;&gt;&lt;/a&gt;Spring
+        
+      
+    
+    </summary>
+    
+    
+      <category term="框架学习" scheme="//xxy201799.github.io/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>并发编程_Callable&amp;Future</title>
     <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
     <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
@@ -53,31 +312,6 @@
         
         
           &lt;h1 id=&quot;并发编程-Callable-amp-Future&quot;&gt;&lt;a href=&quot;#并发编程-Callable-amp-Future&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_线程安全</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:59:53.479Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-线程安全&quot;&gt;&lt;a href=&quot;#并发编程-线程安全&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程安全&quot;&gt;&lt;/a&gt;并发编程_线程安全&lt;/h1&gt;&lt;h2 id=&quot;什么是线程安全性？&quot;&gt;&lt;a href=&quot;#什么是线程安全性？&quot;
         
       
     
@@ -129,6 +363,31 @@
         
           &lt;h1 id=&quot;并发编程基础&quot;&gt;&lt;a href=&quot;#并发编程基础&quot; class=&quot;headerlink&quot; title=&quot;并发编程基础&quot;&gt;&lt;/a&gt;并发编程基础&lt;/h1&gt;&lt;hr&gt;
 &lt;h2 id=&quot;进程与线程的区别与联系&quot;&gt;&lt;a href=&quot;#进程与线程的区别与联系&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程_线程安全</title>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T01:59:53.479Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-线程安全&quot;&gt;&lt;a href=&quot;#并发编程-线程安全&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程安全&quot;&gt;&lt;/a&gt;并发编程_线程安全&lt;/h1&gt;&lt;h2 id=&quot;什么是线程安全性？&quot;&gt;&lt;a href=&quot;#什么是线程安全性？&quot;
         
       
     
@@ -211,31 +470,6 @@
     
     
       <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>zookeeper分布式原理与应用</title>
-    <link href="//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
-    <id>//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:08:03.238Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="分布式中间件" scheme="//xxy201799.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
   </entry>

@@ -1,0 +1,1995 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="设计模式_原型模式_建造者模式, Hexo">
+    <meta name="description" content="原型模式与建造者模式原型模式原型模式其主要目的是为了防止当我们想新建一个实体对象并为其赋值时，需要不停调用其get set方法为该对象赋值，而，原型模式是将对象赋值放在该对象内部，直接调用其克隆方法就能完成赋值。
+浅克隆实现cloneabl">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>设计模式_原型模式_建造者模式 | Hexo</title>
+    <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/css/my.css">
+
+    <script src="/1024-xy.github.io/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/1024-xy.github.io/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/1024-xy.github.io/" class="waves-effect waves-light">
+                    
+                    <img src="/1024-xy.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hexo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/1024-xy.github.io/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/1024-xy.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/1024-xy.github.io/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/xxy201799/1024-xy.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/xxy201799/1024-xy.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        设计模式_原型模式_建造者模式
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/1024-xy.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-03-07
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="原型模式与建造者模式"><a href="#原型模式与建造者模式" class="headerlink" title="原型模式与建造者模式"></a>原型模式与建造者模式</h1><h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><p>原型模式其主要目的是为了防止当我们想新建一个实体对象并为其赋值时，需要不停调用其get set方法为该对象赋值，而，原型模式是将对象赋值放在该对象内部，直接调用其克隆方法就能完成赋值。</p>
+<h2 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h2><p>实现cloneable接口的属于浅克隆，它只能完成对对象基本数据类型的复制，但对于对象内的对象引用数据类型，只能复制其地址，而不能复制其内存中的值。</p>
+<pre><code>public static void main(String[] args) throws CloneNotSupportedException {  
+        Address address = new Address(&quot;CH&quot; , &quot;SD&quot; , &quot;QD&quot;);  
+        Customer customer1 = new Customer(1 , 23 , address);  
+        Customer customer2 = customer1.clone();  
+        customer2.getAddress().setCity(&quot;JN&quot;);  
+        customer2.setID(2);  
+        System.out.println(&quot;customer1:&quot;+customer1.toString());  
+        System.out.println(&quot;customer2:&quot;+customer2.toString());  
+    }  
+}  
+class Customer implements Cloneable{  
+    public int ID;  
+    public int age;  
+    public Address address;  
+    public int getID() {  
+        return ID;  
+    }  
+    public void setID(int iD) {  
+        ID = iD;  
+    }  
+    public int getAge() {  
+        return age;  
+    }  
+    public void setAge(int age) {  
+        this.age = age;  
+    }  
+    public Address getAddress() {  
+        return address;  
+    }  
+    public void setAddress(Address address) {  
+        this.address = address;  
+    }  
+    public Customer(int iD, int age, Address address) {  
+        super();  
+        ID = iD;  
+        this.age = age;  
+        this.address = address;  
+    }  
+    @Override  
+    public String toString() {  
+        return &quot;Customer [ID=&quot; + ID + &quot;, age=&quot; + age + &quot;, address=&quot; + address  
+                + &quot;]&quot;;  
+    }  
+    @Override  
+    public Customer clone() throws CloneNotSupportedException {  
+        return (Customer) super.clone();  
+    }  
+}  
+class Address{  
+    private String country;  
+    private String province;  
+    private String city;  
+    public String getCountry() {  
+        return country;  
+    }  
+    public void setCountry(String country) {  
+        this.country = country;  
+    }  
+    public String getProvince() {  
+        return province;  
+    }  
+    public void setProvince(String province) {  
+        this.province = province;  
+    }  
+    public String getCity() {  
+        return city;  
+    }  
+    public void setCity(String city) {  
+        this.city = city;  
+    }  
+    @Override  
+    public String toString() {  
+        return &quot;Address [country=&quot; + country + &quot;, province=&quot; + province  
+                + &quot;, city=&quot; + city + &quot;]&quot;;  
+    }  
+    public Address(String country, String province, String city) {  
+        super();  
+        this.country = country;  
+        this.province = province;  
+        this.city = city;  
+    }  
+}  
+//输出的结果是：  
+//customer1:Customer [ID=1, age=23, address=Address [country=CH, province=SD, city=JN]]  
+//customer2:Customer [ID=2, age=23, address=Address [country=CH, province=SD, city=JN]]  </code></pre><h2 id="深克隆"><a href="#深克隆" class="headerlink" title="深克隆"></a>深克隆</h2><p>深克隆与浅克隆的区别就是，浅克隆不会克隆原对象中的引用类型，仅仅拷贝了引用类型的指向。深克隆则拷贝了所有。也就是说深克隆能够做到原对象和新对象之间完全没有影响。  </p>
+<p>而深克隆的实现就是在引用类型所在的类实现Cloneable接口，并使用public访问修饰符重写clone方法。 </p>
+<p>1．Address类实现Cloneable接口，重写clone方法;</p>
+<pre><code>@Override  
+public Address clone() throws CloneNotSupportedException {  
+    return (Address) super.clone();  
+}  </code></pre><p>2.在Customer类的clone方法中调用Address类的clone方法。</p>
+<pre><code>@Override  
+public Customer clone() throws CloneNotSupportedException {  
+    Customer customer = (Customer) super.clone();  
+    customer.address = address.clone();  
+    return customer;  
+}  
+输出结果
+customer1:Customer[ID=1, age=23, address=Address [country=CH, province=SD, city=QD]]
+
+customer2:Customer[ID=2, age=23, address=Address [country=CH, province=SD, city=JN]]</code></pre><p>发现customer2无论如何修改，customer1都没有受到影响。<br>实现深克隆的另一种方法就是使用序列化，将对象写入到流中，这样对象的内容就变成了字节流，也就不存在什么引用了。然后读取字节流反序列化为对象就完成了完全的复制操作了。  </p>
+<pre><code> Address address = new Address(&quot;CH&quot; , &quot;SD&quot; , &quot;QD&quot;);  
+ Customer customer1 = new Customer(1 , 23 , address);  
+ Customer customer2 = (Customer) cloneObject(customer1);  
+ customer2.getAddress().setCity(&quot;JN&quot;);  
+ customer2.setID(2);  
+ System.out.println(&quot;customer1:&quot;+customer1.toString());  
+ System.out.println(&quot;customer2:&quot;+customer2.toString());  
+//customer1:Customer [ID=1, age=23, address=Address [country=CH, province=SD, city=QD]]  
+//customer2:Customer [ID=2, age=23, address=Address [country=CH, province=SD, city=JN]]</code></pre><p>cloneObject方法的定义：  </p>
+<pre><code>public static Object cloneObject(Object obj) throws IOException, ClassNotFoundException{  
+    ByteArrayOutputStream byteOut = new ByteArrayOutputStream();  
+    ObjectOutputStream out = new ObjectOutputStream(byteOut);  
+    out.writeObject(obj);   
+    ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());  
+    ObjectInputStream in =new ObjectInputStream(byteIn);  
+    return in.readObject();  
+}    </code></pre><h1 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h1><p>建造者模式使用多个对象一步一步构建成一个<strong>复杂的对象</strong>。这种类型的设计模式属于建造型模式，它提供了一种创建对象的最佳方式。<br>一个Builder会一步步构建最终对象。该Builder类是独立于其他对象。  </p>
+<p>使用建造者模式构建sql</p>
+<p>package com.xxy.gper.model.建造者模式;</p>
+<pre><code>/**
+ * sql排序组件
+ * @author Tom
+ */
+public class Order {
+    private boolean ascending; //升序还是降序
+    private String propertyName; //哪个字段升序，哪个字段降序
+
+    public String toString() {
+        return propertyName + &#39; &#39; + (ascending ? &quot;asc&quot; : &quot;desc&quot;);
+    }
+
+    /**
+     * Constructor for Order.
+     */
+    protected Order(String propertyName, boolean ascending) {
+        this.propertyName = propertyName;
+        this.ascending = ascending;
+    }
+
+    /**
+     * Ascending order
+     *
+     * @param propertyName
+     * @return Order
+     */
+    public static Order asc(String propertyName) {
+        return new Order(propertyName, true);
+    }
+
+    /**
+     * Descending order
+     *
+     * @param propertyName
+     * @return Order
+     */
+    public static Order desc(String propertyName) {
+        return new Order(propertyName, false);
+    }
+
+}
+
+package com.xxy.gper.model.建造者模式;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * QueryRule,主要功能用于构造查询条件
+ * 
+ * @author Tom
+ */
+public final class QueryRule implements Serializable
+{
+    private static final long serialVersionUID = 1L;
+    public static final int ASC_ORDER = 101;
+    public static final int DESC_ORDER = 102;
+    public static final int LIKE = 1;
+    public static final int IN = 2;
+    public static final int NOTIN = 3;
+    public static final int BETWEEN = 4;
+    public static final int EQ = 5;
+    public static final int NOTEQ = 6;
+    public static final int GT = 7;
+    public static final int GE = 8;
+    public static final int LT = 9;
+    public static final int LE = 10;
+    public static final int ISNULL = 11;
+    public static final int ISNOTNULL = 12;
+    public static final int ISEMPTY = 13;
+    public static final int ISNOTEMPTY = 14;
+    public static final int AND = 201;
+    public static final int OR = 202;
+    private List&lt;Rule&gt; ruleList = new ArrayList&lt;Rule&gt;();
+    private List&lt;QueryRule&gt; queryRuleList = new ArrayList&lt;QueryRule&gt;();
+    private String propertyName;
+
+    private QueryRule() {}
+
+    private QueryRule(String propertyName) {
+        this.propertyName = propertyName;
+    }
+
+    public static QueryRule getInstance() {
+        return new QueryRule();
+    }
+
+    /**
+     * 添加升序规则
+     * @param propertyName
+     * @return
+     */
+    public QueryRule addAscOrder(String propertyName) {
+        this.ruleList.add(new Rule(ASC_ORDER, propertyName));
+        return this;
+    }
+
+    /**
+     * 添加降序规则
+     * @param propertyName
+     * @return
+     */
+    public QueryRule addDescOrder(String propertyName) {
+        this.ruleList.add(new Rule(DESC_ORDER, propertyName));
+        return this;
+    }
+
+    public QueryRule andIsNull(String propertyName) {
+        this.ruleList.add(new Rule(ISNULL, propertyName).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andIsNotNull(String propertyName) {
+        this.ruleList.add(new Rule(ISNOTNULL, propertyName).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andIsEmpty(String propertyName) {
+        this.ruleList.add(new Rule(ISEMPTY, propertyName).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andIsNotEmpty(String propertyName) {
+        this.ruleList.add(new Rule(ISNOTEMPTY, propertyName).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andLike(String propertyName, Object value) {
+        this.ruleList.add(new Rule(LIKE, propertyName, new Object[] { value }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(EQ, propertyName, new Object[] { value }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andBetween(String propertyName, Object... values) {
+        this.ruleList.add(new Rule(BETWEEN, propertyName, values).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andIn(String propertyName, List&lt;Object&gt; values) {
+        this.ruleList.add(new Rule(IN, propertyName, new Object[] { values }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andIn(String propertyName, Object... values) {
+        this.ruleList.add(new Rule(IN, propertyName, values).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andNotIn(String propertyName, List&lt;Object&gt; values) {
+        this.ruleList.add(new Rule(NOTIN, propertyName, new Object[] { values }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule orNotIn(String propertyName, Object... values) {
+        this.ruleList.add(new Rule(NOTIN, propertyName, values).setAndOr(OR));
+        return this;
+    }
+
+
+    public QueryRule andNotEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(NOTEQ, propertyName, new Object[] { value }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andGreaterThan(String propertyName, Object value) {
+        this.ruleList.add(new Rule(GT, propertyName, new Object[] { value }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andGreaterEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(GE, propertyName, new Object[] { value }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andLessThan(String propertyName, Object value) {
+        this.ruleList.add(new Rule(LT, propertyName, new Object[] { value }).setAndOr(AND));
+        return this;
+    }
+
+    public QueryRule andLessEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(LE, propertyName, new Object[] { value }).setAndOr(AND));
+        return this;
+    }
+
+
+    public QueryRule orIsNull(String propertyName) {
+        this.ruleList.add(new Rule(ISNULL, propertyName).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orIsNotNull(String propertyName) {
+        this.ruleList.add(new Rule(ISNOTNULL, propertyName).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orIsEmpty(String propertyName) {
+        this.ruleList.add(new Rule(ISEMPTY, propertyName).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orIsNotEmpty(String propertyName) {
+        this.ruleList.add(new Rule(ISNOTEMPTY, propertyName).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orLike(String propertyName, Object value) {
+        this.ruleList.add(new Rule(LIKE, propertyName, new Object[] { value }).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(EQ, propertyName, new Object[] { value }).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orBetween(String propertyName, Object... values) {
+        this.ruleList.add(new Rule(BETWEEN, propertyName, values).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orIn(String propertyName, List&lt;Object&gt; values) {
+        this.ruleList.add(new Rule(IN, propertyName, new Object[] { values }).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orIn(String propertyName, Object... values) {
+        this.ruleList.add(new Rule(IN, propertyName, values).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orNotEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(NOTEQ, propertyName, new Object[] { value }).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orGreaterThan(String propertyName, Object value) {
+        this.ruleList.add(new Rule(GT, propertyName, new Object[] { value }).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orGreaterEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(GE, propertyName, new Object[] { value }).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orLessThan(String propertyName, Object value) {
+        this.ruleList.add(new Rule(LT, propertyName, new Object[] { value }).setAndOr(OR));
+        return this;
+    }
+
+    public QueryRule orLessEqual(String propertyName, Object value) {
+        this.ruleList.add(new Rule(LE, propertyName, new Object[] { value }).setAndOr(OR));
+        return this;
+    }
+
+
+    public List&lt;Rule&gt; getRuleList() {
+        return this.ruleList;
+    }
+
+    public List&lt;QueryRule&gt; getQueryRuleList() {
+        return this.queryRuleList;
+    }
+
+    public String getPropertyName() {
+        return this.propertyName;
+    }
+
+    protected class Rule implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private int type;    //规则的类型
+        private String property_name;
+        private Object[] values;
+        private int andOr = AND;
+
+        public Rule(int paramInt, String paramString) {
+            this.property_name = paramString;
+            this.type = paramInt;
+        }
+
+        public Rule(int paramInt, String paramString,
+                Object[] paramArrayOfObject) {
+            this.property_name = paramString;
+            this.values = paramArrayOfObject;
+            this.type = paramInt;
+        }
+
+        public Rule setAndOr(int andOr){
+            this.andOr = andOr;
+            return this;
+        }
+
+        public int getAndOr(){
+            return this.andOr;
+        }
+
+        public Object[] getValues() {
+            return this.values;
+        }
+
+        public int getType() {
+            return this.type;
+        }
+
+        public String getPropertyName() {
+            return this.property_name;
+        }
+    }
+}
+
+package com.xxy.gper.model.建造者模式;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.ArrayUtils;
+
+import org.apache.commons.lang.StringUtils;
+
+
+/**
+ * 根据QueryRule自动构建sql语句
+ * @author Tom
+ *
+ */
+public class QueryRuleSqlBuilder {
+    private int CURR_INDEX = 0; //记录参数所在的位置
+    private List&lt;String&gt; properties; //保存列名列表
+    private List&lt;Object&gt; values; //保存参数值列表
+    private List&lt;Order&gt; orders; //保存排序规则列表
+
+    private String whereSql = &quot;&quot;; 
+    private String orderSql = &quot;&quot;;
+    private Object [] valueArr = new Object[]{};
+    private Map&lt;Object,Object&gt; valueMap = new HashMap&lt;Object,Object&gt;();
+
+    /**
+     * 或得查询条件
+     * @return
+     */
+    private String getWhereSql(){
+        return this.whereSql;
+    }
+
+    /**
+     * 获得排序条件
+     * @return
+     */
+    private String getOrderSql(){
+        return this.orderSql;
+    }
+
+    /**
+     * 获得参数值列表
+     * @return
+     */
+    public Object [] getValues(){
+        return this.valueArr;
+    }
+
+    /**
+     * 获取参数列表
+     * @return
+     */
+    private Map&lt;Object,Object&gt; getValueMap(){
+        return this.valueMap;
+    }
+
+    /**
+     * 创建SQL构造器
+     * @param queryRule
+     */
+    public QueryRuleSqlBuilder(QueryRule queryRule) {
+        CURR_INDEX = 0;
+        properties = new ArrayList&lt;String&gt;();
+        values = new ArrayList&lt;Object&gt;();
+        orders = new ArrayList&lt;Order&gt;();
+        for (QueryRule.Rule rule : queryRule.getRuleList()) {
+            switch (rule.getType()) {
+            case QueryRule.BETWEEN:
+                processBetween(rule);
+                break;
+            case QueryRule.EQ:
+                processEqual(rule);
+                break;
+            case QueryRule.LIKE:
+                processLike(rule);
+                break;
+            case QueryRule.NOTEQ:
+                processNotEqual(rule);
+                break;
+            case QueryRule.GT:
+                processGreaterThen(rule);
+                break;
+            case QueryRule.GE:
+                processGreaterEqual(rule);
+                break;
+            case QueryRule.LT:
+                processLessThen(rule);
+                break;
+            case QueryRule.LE:
+                processLessEqual(rule);
+                break;
+            case QueryRule.IN:
+                processIN(rule);
+                break;
+            case QueryRule.NOTIN:
+                processNotIN(rule);
+                break;
+            case QueryRule.ISNULL:
+                processIsNull(rule);
+                break;
+            case QueryRule.ISNOTNULL:
+                processIsNotNull(rule);
+                break;
+            case QueryRule.ISEMPTY:
+                processIsEmpty(rule);
+                break;
+            case QueryRule.ISNOTEMPTY:
+                processIsNotEmpty(rule);
+                break;
+            case QueryRule.ASC_ORDER:
+                processOrder(rule);
+                break;
+            case QueryRule.DESC_ORDER:
+                processOrder(rule);
+                break;
+            default:
+                throw new IllegalArgumentException(&quot;type &quot; + rule.getType() + &quot; not supported.&quot;);
+            }
+        }
+        //拼装where语句
+        appendWhereSql();
+        //拼装排序语句
+        appendOrderSql();
+        //拼装参数值
+        appendValues();
+    }
+
+    /**
+     * 去掉order
+     * 
+     * @param sql
+     * @return
+     */
+    private String removeOrders(String sql) {
+        Pattern p = Pattern.compile(&quot;order\\s*by[\\w|\\W|\\s|\\S]*&quot;, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(sql);
+        StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(sb, &quot;&quot;);
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
+    /**
+     * 去掉select
+     * 
+     * @param sql
+     * @return
+     */
+    private String removeSelect(String sql) {
+        if(sql.toLowerCase().matches(&quot;from\\s+&quot;)){
+            int beginPos = sql.toLowerCase().indexOf(&quot;from&quot;);
+            return sql.substring(beginPos);
+        }else{
+            return sql;
+        }
+    }
+
+    /**
+     * 处理like
+     * @param rule
+     */
+    private  void processLike(QueryRule.Rule rule) {
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        Object obj = rule.getValues()[0];
+
+        if (obj != null) {
+            String value = obj.toString();
+            if (!StringUtils.isEmpty(value)) {
+                value = value.replace(&#39;*&#39;, &#39;%&#39;);
+                obj = value;
+            }
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;like&quot;,&quot;%&quot;+rule.getValues()[0]+&quot;%&quot;);
+    }
+
+    /**
+     * 处理between
+     * @param rule
+     */
+    private  void processBetween(QueryRule.Rule rule) {
+        if ((ArrayUtils.isEmpty(rule.getValues()))
+                || (rule.getValues().length &lt; 2)) {
+            return;
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;&quot;,&quot;between&quot;,rule.getValues()[0],&quot;and&quot;);
+        add(0,&quot;&quot;,&quot;&quot;,&quot;&quot;,rule.getValues()[1],&quot;&quot;);
+    }
+
+    /**
+     * 处理 =
+     * @param rule
+     */
+    private  void processEqual(QueryRule.Rule rule) {
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;=&quot;,rule.getValues()[0]);
+    }
+
+    /**
+     * 处理 &lt;&gt;
+     * @param rule
+     */
+    private  void processNotEqual(QueryRule.Rule rule) {
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;&lt;&gt;&quot;,rule.getValues()[0]);
+    }
+
+    /**
+     * 处理 &gt;
+     * @param rule
+     */
+    private  void processGreaterThen(
+            QueryRule.Rule rule) {
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;&gt;&quot;,rule.getValues()[0]);
+    }
+
+    /**
+     * 处理&gt;=
+     * @param rule
+     */
+    private  void processGreaterEqual(
+            QueryRule.Rule rule) {
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;&gt;=&quot;,rule.getValues()[0]);
+    }
+
+    /**
+     * 处理&lt;
+     * @param rule
+     */
+    private  void processLessThen(QueryRule.Rule rule) {
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;&lt;&quot;,rule.getValues()[0]);
+    }
+
+    /**
+     * 处理&lt;=
+     * @param rule
+     */
+    private  void processLessEqual(
+            QueryRule.Rule rule) {
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;&lt;=&quot;,rule.getValues()[0]);
+    }
+
+    /**
+     * 处理  is null
+     * @param rule
+     */
+    private  void processIsNull(QueryRule.Rule rule) {
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;is null&quot;,null);
+    }
+
+    /**
+     * 处理 is not null
+     * @param rule
+     */
+    private  void processIsNotNull(QueryRule.Rule rule) {
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;is not null&quot;,null);
+    }
+
+    /**
+     * 处理  &lt;&gt;&#39;&#39;
+     * @param rule
+     */
+    private  void processIsNotEmpty(QueryRule.Rule rule) {
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;&lt;&gt;&quot;,&quot;&#39;&#39;&quot;);
+    }
+
+    /**
+     * 处理 =&#39;&#39;
+     * @param rule
+     */
+    private  void processIsEmpty(QueryRule.Rule rule) {
+        add(rule.getAndOr(),rule.getPropertyName(),&quot;=&quot;,&quot;&#39;&#39;&quot;);
+    }
+
+
+    /**
+     * 处理in和not in
+     * @param rule
+     * @param name
+     */
+    private void inAndNotIn(QueryRule.Rule rule,String name){
+        if (ArrayUtils.isEmpty(rule.getValues())) {
+            return;
+        }
+        if ((rule.getValues().length == 1) &amp;&amp; (rule.getValues()[0] != null)
+                &amp;&amp; (rule.getValues()[0] instanceof List)) {
+            List&lt;Object&gt; list = (List) rule.getValues()[0];
+
+            if ((list != null) &amp;&amp; (list.size() &gt; 0)){
+                for (int i = 0; i &lt; list.size(); i++) {
+                    if(i == 0 &amp;&amp; i == list.size() - 1){
+                        add(rule.getAndOr(),rule.getPropertyName(),&quot;&quot;,name + &quot; (&quot;,list.get(i),&quot;)&quot;);
+                    }else if(i == 0 &amp;&amp; i &lt; list.size() - 1){
+                        add(rule.getAndOr(),rule.getPropertyName(),&quot;&quot;,name + &quot; (&quot;,list.get(i),&quot;&quot;);
+                    }
+                    if(i &gt; 0 &amp;&amp; i &lt; list.size() - 1){
+                        add(0,&quot;&quot;,&quot;,&quot;,&quot;&quot;,list.get(i),&quot;&quot;);
+                    }
+                    if(i == list.size() - 1 &amp;&amp; i != 0){
+                        add(0,&quot;&quot;,&quot;,&quot;,&quot;&quot;,list.get(i),&quot;)&quot;);
+                    }
+                }
+            }
+        } else {
+            Object[] list =  rule.getValues();
+            for (int i = 0; i &lt; list.length; i++) {
+                if(i == 0 &amp;&amp; i == list.length - 1){
+                    add(rule.getAndOr(),rule.getPropertyName(),&quot;&quot;,name + &quot; (&quot;,list[i],&quot;)&quot;);
+                }else if(i == 0 &amp;&amp; i &lt; list.length - 1){
+                    add(rule.getAndOr(),rule.getPropertyName(),&quot;&quot;,name + &quot; (&quot;,list[i],&quot;&quot;);
+                }
+                if(i &gt; 0 &amp;&amp; i &lt; list.length - 1){
+                    add(0,&quot;&quot;,&quot;,&quot;,&quot;&quot;,list[i],&quot;&quot;);
+                }
+                if(i == list.length - 1 &amp;&amp; i != 0){
+                    add(0,&quot;&quot;,&quot;,&quot;,&quot;&quot;,list[i],&quot;)&quot;);
+                }
+            }
+        }
+    }
+
+    /**
+     * 处理 not in
+     * @param rule
+     */
+    private void processNotIN(QueryRule.Rule rule){
+        inAndNotIn(rule,&quot;not in&quot;);
+    }
+
+    /**
+     * 处理 in
+     * @param rule
+     */
+    private  void processIN(QueryRule.Rule rule) {
+        inAndNotIn(rule,&quot;in&quot;);
+    }
+
+    /**
+     * 处理 order by
+     * @param rule 查询规则
+     */
+    private void processOrder(QueryRule.Rule rule) {
+        switch (rule.getType()) {
+        case QueryRule.ASC_ORDER:
+            // propertyName非空
+            if (!StringUtils.isEmpty(rule.getPropertyName())) {
+                orders.add(Order.asc(rule.getPropertyName()));
+            }
+            break;
+        case QueryRule.DESC_ORDER:
+            // propertyName非空
+            if (!StringUtils.isEmpty(rule.getPropertyName())) {
+                orders.add(Order.desc(rule.getPropertyName()));
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+
+    /**
+     * 加入到sql查询规则队列
+     * @param andOr and 或者 or
+     * @param key 列名
+     * @param split 列名与值之间的间隔
+     * @param value 值
+     */
+    private  void add(int andOr,String key,String split ,Object value){
+        add(andOr,key,split,&quot;&quot;,value,&quot;&quot;);
+    }
+
+    /**
+     * 加入到sql查询规则队列
+     * @param andOr and 或则 or
+     * @param key 列名
+     * @param split 列名与值之间的间隔
+     * @param prefix 值前缀
+     * @param value 值
+     * @param suffix 值后缀
+     */
+    private  void add(int andOr,String key,String split ,String prefix,Object value,String  suffix){
+        String andOrStr = (0 == andOr ? &quot;&quot; :(QueryRule.AND == andOr ? &quot; and &quot; : &quot; or &quot;));  
+        properties.add(CURR_INDEX, andOrStr + key + &quot; &quot; + split + prefix + (null != value ? &quot; ? &quot; : &quot; &quot;) + suffix);
+        if(null != value){
+            values.add(CURR_INDEX,value);
+            CURR_INDEX ++;
+        }
+    }
+
+
+    /**
+     * 拼装 where 语句
+     */
+    private void appendWhereSql(){
+        StringBuffer whereSql = new StringBuffer();
+        for (String p : properties) {
+            whereSql.append(p);
+        }
+        this.whereSql = removeSelect(removeOrders(whereSql.toString()));
+    }
+
+    /**
+     * 拼装排序语句
+     */
+    private void appendOrderSql(){
+        StringBuffer orderSql = new StringBuffer();
+        for (int i = 0 ; i &lt; orders.size(); i ++) {
+            if(i &gt; 0 &amp;&amp; i &lt; orders.size()){
+                orderSql.append(&quot;,&quot;);
+            }
+            orderSql.append(orders.get(i).toString());
+        }
+        this.orderSql = removeSelect(removeOrders(orderSql.toString()));
+    }
+
+    /**
+     * 拼装参数值
+     */
+    private void appendValues(){
+        Object [] val = new Object[values.size()];
+        for (int i = 0; i &lt; values.size(); i ++) {
+            val[i] = values.get(i);
+            valueMap.put(i, values.get(i));
+        }
+        this.valueArr = val;
+    }
+
+    public String builder(String tableName){
+        String ws = removeFirstAnd(this.getWhereSql());
+        String whereSql = (&quot;&quot;.equals(ws) ? ws : (&quot; where &quot; + ws));
+        String sql = &quot;select * from &quot; + tableName + whereSql;
+        Object [] values = this.getValues();
+        String orderSql = this.getOrderSql();
+        orderSql = (StringUtils.isEmpty(orderSql) ? &quot; &quot; : (&quot; order by &quot; + orderSql));
+        sql += orderSql;
+        return sql;
+    }
+
+
+    private String removeFirstAnd(String sql){
+        if(StringUtils.isEmpty(sql)){return sql;}
+        return sql.trim().toLowerCase().replaceAll(&quot;^\\s*and&quot;, &quot;&quot;) + &quot; &quot;;
+    }
+
+}</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="//xxy201799.github.io" rel="external nofollow noreferrer">John Doe</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="//xxy201799.github.io/1024-xy.github.io/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/">//xxy201799.github.io/1024-xy.github.io/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="//xxy201799.github.io" target="_blank">John Doe</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/1024-xy.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/1024-xy.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/1024-xy.github.io/2020/03/07/suan-fa-pai-xu-suan-fa/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/1024-xy.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="算法_排序算法">
+                        
+                        <span class="card-title">算法_排序算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            八大排序算法冒泡排序  
+
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/1024-xy.github.io/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/1024-xy.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="设计模式_门面模式_装饰模式">
+                        
+                        <span class="card-title">设计模式_门面模式_装饰模式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            门面模式与装饰器模式门面模式门面模式又叫外观模式，提供了一个统一的接口，用来访问子系统的一群接口。
+特征：门面模式定义了一个高层接口，让子系统更容易使用。属于结构模式  
+门面模式适用场景越来越复杂的子系统，需要一个统一的接口，供用户使用。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/1024-xy.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="//xxy201799.github.io" target="_blank">John Doe</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/xxy201799/1024-xy.github.io" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/1024-xy.github.io/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/1024-xy.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/1024-xy.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/1024-xy.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="/1024-xy.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/1024-xy.github.io/libs/aos/aos.js"></script>
+    <script src="/1024-xy.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/1024-xy.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/1024-xy.github.io/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/1024-xy.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/1024-xy.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/1024-xy.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/1024-xy.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="zookeeper分布式原理与应用, Hexo">
-    <meta name="description" content="zookeeper分布式原理与应用场景一
-&amp;emsp;&amp;emsp;假设我们有20个搜索引擎的服务器（每个负责总索引中的一部分搜索任务）和一个总服务器（负责向这20个搜索引擎的服务器发出搜索请求并合并 结果集），一个备用的总服务器（负责总服务">
+    <meta name="keywords" content="RabbitMQ常见面试题详解, Hexo">
+    <meta name="description" content="rabbitMQ消息队列RabbitMQ消息队列的优势
+解耦：服务之间或应用程序之间的调用实现解耦
+异步：生产者将消息写入队列，不用管消费者收没收到，而消费者只需要订阅，等拿到消息了在进行逻辑处理。
+削峰：并发量大的时候，所有请求直接怼数据">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>zookeeper分布式原理与应用 | Hexo</title>
+    <title>RabbitMQ常见面试题详解 | Hexo</title>
     <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
@@ -311,7 +313,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        zookeeper分布式原理与应用
+                        RabbitMQ常见面试题详解
                     </div>
                 </div>
             </div>
@@ -428,22 +430,13 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/1024-xy.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category">
-                                分布式中间件
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-11-01
+                    2019-11-23
                 </div>
 
                 
@@ -459,118 +452,138 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="zookeeper分布式原理与应用"><a href="#zookeeper分布式原理与应用" class="headerlink" title="zookeeper分布式原理与应用"></a>zookeeper分布式原理与应用</h1><h3 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h3><hr>
-<p>&emsp;&emsp;假设我们有20个搜索引擎的服务器（每个负责总索引中的一部分搜索任务）和一个总服务器（负责向这20个搜索引擎的服务器发出搜索请求并合并 结果集），一个备用的总服务器（负责总服务器宕机时替换总服务器），一个web cli（向总服务器发出搜索请求）。搜索引擎的服务器中的15个服务器现在提供搜索服务，5个服务器正在生成索引。这20个搜索引擎的服务器经常要让正在 提供搜索服务的服务器停止提供服务开始生成索引,或生成索引的服务器已经把索引生成完成可以搜索提供服务了.使用Zookeeper可以保证总服务器自动 感知有多少提供搜索引擎的服务器并向这些服务器发出搜索请求,备用的总服务器宕机时自动启用备用的总服务器,web的cgi能够自动地获知总服务器的网络地址变化.这些又如何做到呢?   </p>
+                <h1 id="rabbitMQ消息队列"><a href="#rabbitMQ消息队列" class="headerlink" title="rabbitMQ消息队列"></a>rabbitMQ消息队列</h1><h2 id="RabbitMQ消息队列的优势"><a href="#RabbitMQ消息队列的优势" class="headerlink" title="RabbitMQ消息队列的优势"></a>RabbitMQ消息队列的优势</h2><ol>
+<li>解耦：服务之间或应用程序之间的调用实现解耦</li>
+<li>异步：生产者将消息写入队列，不用管消费者收没收到，而消费者只需要订阅，等拿到消息了在进行逻辑处理。</li>
+<li>削峰：并发量大的时候，所有请求直接怼数据库，造成数据库连接异常。</li>
+</ol>
+<h2 id="rabbit中的交换器"><a href="#rabbit中的交换器" class="headerlink" title="rabbit中的交换器"></a>rabbit中的交换器</h2><ol>
+<li>direct: 默认的交换器，必须要配置，该路由器非常简单，如果路由键匹配，消息就被投递到相应的队列。</li>
+<li>fanout: 这种类型的交换器将收到的消息广播到绑定的队列上。消息通信模式很简单：当你发送一条消息到fanout交换器时，它会把消息投递到所有绑定它的消息队列。</li>
+<li>topic:它能使得不同源头的消息能够到达同一队列，其基于通配符进行匹配。</li>
+</ol>
+<h2 id="RabbitMQ的broker是指什么？cluster又是什么？"><a href="#RabbitMQ的broker是指什么？cluster又是什么？" class="headerlink" title="RabbitMQ的broker是指什么？cluster又是什么？"></a>RabbitMQ的broker是指什么？cluster又是什么？</h2><p>broker 是指一个或多个 erlang node 的逻辑分组，且 node 上运行着 RabbitMQ 应用程序。cluster 是在 broker 的基础之上，增加了 node 之间共享元数据的约束。</p>
+<h2 id="RabbitMQ概念里的channel、exchange和queue是逻辑概念，还是对应着进程实体？分别起什么作用？"><a href="#RabbitMQ概念里的channel、exchange和queue是逻辑概念，还是对应着进程实体？分别起什么作用？" class="headerlink" title="RabbitMQ概念里的channel、exchange和queue是逻辑概念，还是对应着进程实体？分别起什么作用？"></a>RabbitMQ概念里的channel、exchange和queue是逻辑概念，还是对应着进程实体？分别起什么作用？</h2><ol>
+<li>channel:是实际进行路由工作的实体，它负责按照routing_key将message投递给queue</li>
+<li>queue:单独进程运行的消息队列，消息存在该队列里。</li>
+<li>exchange:交换机，内部实现为保存binding(队列绑定）关系的查找表。</li>
+</ol>
+<p>channel是真实TCP连接上的虚拟连接，每个channel对应一个线程，一个线程可以处理多个channel。绑定到channel上的message是有序的。</p>
+<h2 id="vhost是指什么？起什么作用？"><a href="#vhost是指什么？起什么作用？" class="headerlink" title="vhost是指什么？起什么作用？"></a>vhost是指什么？起什么作用？</h2><p>vhost是虚拟主机的意思。它像一个小型的rabbitmq，拥有自己的队列、交换器和绑定，更重要的是它拥有自己的权限机制。<br>作用：安全的使用一个rabbitmq服务众多应用程序，而不用担心你的两个完全没有产生联系的应用，因为使用了同一条队列产生错误的数据。它通过在各个实例间提供逻辑上的分离，允许你为不同的应用程序安全保密的运行数据。它既可以区分rabbitmq众多客户，又能避免队列名以及交换机的冲突。你只需要安装一台服务器，按需求启动或关闭vhost。</p>
+<h2 id="消息基于什么传输？"><a href="#消息基于什么传输？" class="headerlink" title="消息基于什么传输？"></a>消息基于什么传输？</h2><p>rabbitmq基于信道的方式来传输数据。信道是建立在真实的TCP连接内的虚拟连接，且每条TCP连接上的信道数量没有限制。</p>
+<h2 id="消息如何分发？"><a href="#消息如何分发？" class="headerlink" title="消息如何分发？"></a>消息如何分发？</h2><p>若该队列至少有一个消费者订阅，消费将以循环的方式发送给消费者。每条消息只会分发给一个订阅的消费者（前提是消费者能够正常处理消息并进行确认）。</p>
+<h2 id="消息如何路由？？"><a href="#消息如何路由？？" class="headerlink" title="消息如何路由？？"></a>消息如何路由？？</h2><p>从概念上来说，消息路由必须有三部分：交换器、路由、绑定。生产者把消息发布到交换器上；绑定决定了消息如何从路由器到路由到特定的队列，并被消费者接收。  </p>
 <ol>
-<li>提供搜索引擎的服务器都在Zookeeper中创建znode,zk.create(“/search/nodes/node1”,</li>
+<li>消息发布到交换器，消息将拥有一个路由键，在消息创建时设定。  </li>
+<li>通过队列路由键，可以把队列绑定到交换器上。  </li>
+<li>消息到达交换器，RabbitMQ会将消息的路由键与队列的路由键进行匹配（针对不同的交换器有不同的路由规则）。如果能够匹配到队列，则消息会投递到相应队列中；如果不能匹配到任何队列，消息将进入“黑洞”。</li>
 </ol>
-<p>“hostname”.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateFlags.EPHEMERAL);</p>
-<ol start="2">
-<li><p>总服务器可以从Zookeeper中获取一个znode的子节点的列表,zk.getChildren(“/search/nodes”, true);</p>
-</li>
-<li><p>总服务器遍历这些子节点,并获取子节点的数据生成提供搜索引擎的服务器列表.</p>
-</li>
-<li><p>当总服务器接收到子节点改变的事件信息,重新返回第二步.</p>
-</li>
-<li><p>总服务器在Zookeeper中创建节点,zk.create(“/search/master”, “hostname”.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateFlags.EPHEMERAL);</p>
-</li>
-<li><p>备用的总服务器监控Zookeeper中的”/search/master”节点.当这个znode的节点数据改变时,把自己启动变成总服务器,并把自己的网络地址数据放进这个节点.</p>
-</li>
-<li><p>web的cgi从Zookeeper中”/search/master”节点获取总服务器的网络地址数据并向其发送搜索请求.</p>
-</li>
-<li><p>web的cgi监控Zookeeper中的”/search/master”节点,当这个znode的节点数据改变时,从这个节点获取总服务器的网络地址数据,并改变当前的总服务器的网络地址.  </p>
-</li>
-</ol>
-<h3 id="Zookeeper的功能有哪些"><a href="#Zookeeper的功能有哪些" class="headerlink" title="Zookeeper的功能有哪些"></a>Zookeeper的功能有哪些</h3><hr>
-<h4 id="1、文件系统"><a href="#1、文件系统" class="headerlink" title="1、文件系统"></a>1、文件系统</h4><p>zookeeper维护了一个类似文件系统的数据结构：<br><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213344_45.png" alt="zookeeper图片"><br>&emsp;&emsp;每个子目录项以及其下的子节点都是一个znode，我们能对这些znodes进行增删查改的操作，并且能够存储数据。<br>有四种类型的znode:  </p>
-<p>1、PERSISTENT-持久化目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点依旧存在</p>
-<p>2、 PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点依旧存在，只是Zookeeper给该节点名称进行顺序编号</p>
-<p>3、EPHEMERAL-临时目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点被删除</p>
-<p>4、EPHEMERAL_SEQUENTIAL-临时顺序编号目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点被删除，只是Zookeeper给该节点名称进行顺序编号  </p>
-<h4 id="2、通知机制"><a href="#2、通知机制" class="headerlink" title="2、通知机制"></a>2、通知机制</h4><p>&emsp;&emsp;客户端注册监听它关心的目录节点，一旦发生变化（数据变化，删除，子目录增加）时，zookeeper节点会通知客户端。  </p>
-<h3 id="Zookeeper的可以用来做什么？"><a href="#Zookeeper的可以用来做什么？" class="headerlink" title="Zookeeper的可以用来做什么？"></a>Zookeeper的可以用来做什么？</h3><hr>
-<h4 id="1、服务注册与发现"><a href="#1、服务注册与发现" class="headerlink" title="1、服务注册与发现"></a>1、服务注册与发现</h4><p>使用doubbo、kafuka等rpc框架进行对象以及数据的传输，在这个过程中，可以使用zookeeper进行服务的注册以及订阅，rpc框架在zoookeeper发布服务的地址，方法，类名。同样的rpcc框架的客户端在zookeeper监听该服务是否存在，然后拿到服务的地址，与rpc框架的服务端进行对象的传输。如果含有多个相同服务，则可以进行权重配比。</p>
-<h4 id="2、配置中心"><a href="#2、配置中心" class="headerlink" title="2、配置中心"></a>2、配置中心</h4><p>所有程序都免不了配置，当你去要做一些开关去开启或者关闭某些功能的时候，以及一些服务器的配置，都可以放入zookeeper的某个节点目录中进行统一管理，当配置信息被改变将会通知各个客户端，更改其服务器配置。<br><img src="https://www.aboutyun.com/data/attachment/forum/201608/20/184509blnln2a7n5qqa95s.png" alt="zookeeper配置中心"></p>
-<h4 id="3、zookeeper集群管理"><a href="#3、zookeeper集群管理" class="headerlink" title="3、zookeeper集群管理"></a>3、zookeeper集群管理</h4><p>zookeeper对于集群的管理就两点：是否有加入新的节点，和选举master。<br>对于第一点：所有机器约定在主节点上的GroupMembers下创建临时目录节点，然后监听父目录的子节点变化消息，一旦有机器挂掉，则临时节点删除，其他机器收到通知。当然新机器也是类似，对于第二点，每次选举最小编号的机器作为主节点就好<br><img src="http://www.aboutyun.com/data/attachment/forum/201608/20/184530b6abmegbk09ffgva.png" alt="zookeeper配置"></p>
-<h4 id="4、zookeeper分布式锁"><a href="#4、zookeeper分布式锁" class="headerlink" title="4、zookeeper分布式锁"></a>4、zookeeper分布式锁</h4><p>zookeeper有两种分布式锁，一种保持独占，一种控制时序。<br>对于第一类，我们将一个临时znode看所一把锁，客户端尝试建立该节点，建立成功的拿到锁，获取资源。创建失败的则进行等待，对于第二类，则在其一个目录节点下面创建多个顺序节点，如果是读，前面几个节点都是读操作，则可以同时拿到资源，如果都是写，则进行独占。  </p>
-<p><img src="http://www.aboutyun.com/data/attachment/forum/201608/20/184557iv77xzbyas7bc99o.png" alt="分布式锁"></p>
-<h4 id="5、队列管理功能"><a href="#5、队列管理功能" class="headerlink" title="5、队列管理功能"></a>5、队列管理功能</h4><ol>
-<li>同步队列<br>&emsp;&emsp;当一个对列成员都到达，这个队列才被视为可用队列。其具体实现为：在约定目录下创建临时目录节点，监听节点数目是否是我们要求的数目。 </li>
-<li>队列按照FIFO方式进行入队和出队操作。<br>&emsp;&emsp;和分布式锁服务中的控制时序场景基本原理一致，入列有编号，出列按编号。  </li>
-</ol>
-<h3 id="分布式的数据与复制"><a href="#分布式的数据与复制" class="headerlink" title="分布式的数据与复制"></a>分布式的数据与复制</h3><p>Zookeeper作为一个集群提供一致的数据服务，自然，它要在所有机器间做数据复制。数据复制的好处：<br>1、容错<br>一个节点出错，不至于整个系统崩溃，别的节点可以接管他的工作。<br>2、提高性能<br>让客户端本地访问就近的节点，提高用户访问速度。  </p>
-<h3 id="数据一致性与paxos算法"><a href="#数据一致性与paxos算法" class="headerlink" title="数据一致性与paxos算法"></a>数据一致性与paxos算法</h3><p> 据说Paxos算法的难理解与算法的知名度一样令人敬仰，所以我们先看如何保持数据的一致性，这里有个原则就是：  </p>
-<p> 在一个分布式数据库系统中，如果各节点的初始状态一致，每个节点都执行相同的操作序列，那么他们最后能得到一个一致的状态。<br> Paxos算法解决的什么问题呢，解决的就是保证每个节点执行相同的操作序列。好吧，这还不简单，master维护一个全局写队列，所有写操作都必须放入这个队列编号，那么无论我们写多少个节点，只要写操作是按编号来的，就能保证一致性。</p>
-<p> 没错，就是这样，可是如果master挂了呢。Paxos算法通过投票来对写操作进行全局编号，同一时刻，只有一个写操作被批准，同时并发的写操作要去争取选票，只有获得过半数选票的写操作才会被批准（所以永远只会有一个写操作得到批准），其他的写操作竞争失败只好再发起一轮投票，就这样，在日复一日年复一年的投票中，所有写操作都被严格编号排序。编号严格递增，当一个节点接受了一个编号为100的写操作，之后又接受到编号为99的写操作（因为网络延迟等很多不可预见原因），它马上能意识到自己数据不一致了，自动停止对外服务并重启同步过程。任何一个节点挂掉都不会影响整个集群的数据一致性（总2n+1台，除非挂掉大于n台）。  </p>
-<h3 id="Zookeeper的工作原理（ZAB协议）"><a href="#Zookeeper的工作原理（ZAB协议）" class="headerlink" title="Zookeeper的工作原理（ZAB协议）"></a>Zookeeper的工作原理（ZAB协议）</h3><h4 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h4><p> zookeeper中的角色主要有以下三类，如下表所示：  </p>
-<p> <img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_932.png" alt="角色"><br> 系统模型如图所示：<br> <img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_540.jpg" alt="zookeeper系统模型">  </p>
-<h4 id="设计目的"><a href="#设计目的" class="headerlink" title="设计目的"></a>设计目的</h4><ol>
-<li>最终一致性：client端不论连接到哪个server,展示给他的都是同一视图以及同一数据，这是zookeeper最重要的功能。</li>
-<li>可靠性：zookeeper具有简单、健壮、良好的性能，如果消息m被一台服务器接受，那么它将被所有的服务器接受。</li>
-<li>实时性：Zookeeper保证客户端将在一个时间间隔范围内获得服务器的更新信息，或者服务器失效的信息。但由于网络延时等原因，Zookeeper不能保证两个客 户端能同时得到刚更新的数据，如果需要最新数据，应该在读数据之前调用sync()接口。</li>
-<li>等待无关性：慢的或者失效的client端的请求不得干预快速的client端的请求，使得每个client都能有效的等待。</li>
-<li>原子性：更新数据或者节点只能成功或者失败。</li>
-<li>顺序性：全局有序性是指如果一台服务器上的消息a在消息b之前发布，则所有服务器上的消息发布都要保持该顺序。<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4>Zookeeper的核心是原子广播，这个机制保证了各个Server之间的同步。实现这个机制的协议叫做Zab协议。Zab协议有两种模式，它们分 别是恢复模式（选主）和广播模式（同步）。当服务启动或者在领导者崩溃后，Zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的 状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系 统状态。<br>为了保证事务的顺序一致性，zookeeper采用了递增的事务id号（zxid）来标识事务。所有的提议（proposal）都在被提出的时候加上 了zxid。实现中zxid是一个64位的数字，它高32位是epoch用来标识leader关系是否改变，每次一个leader被选出来，它都会有一个 新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。</li>
-</ol>
-<p>每个Server在工作过程中有三种状态：</p>
-<p>LOOKING：当前Server不知道leader是谁，正在搜寻<br>LEADING：当前Server即为选举出来的leader<br>FOLLOWING：leader已经选举出来，当前Server与之同步</p>
-<h5 id="选主流程"><a href="#选主流程" class="headerlink" title="选主流程"></a>选主流程</h5><hr>
-<p>当leader崩溃或者失去大部分follower,这时候zk进入恢复模式，恢复模式重新选举出一个新的master,让所有的server恢复到一个正确的状态。zk的选举算法有两种：一种基于basic paxos算法实现，另一种基于fast paxos算法实现。系统默认选举算法为fast paxos算法。先介绍basic paxos流程：  1. 选举线程由当前Server发起选举的线程担任，其主要功能是对投票结果进行统计，并选出推荐的Server；</p>
-<ol start="2">
-<li><p>选举线程首先向所有Server发起一次询问(包括自己)；</p>
-</li>
-<li><p>选举线程收到回复后，验证是否是自己发起的询问(验证zxid是否一致)，然后获取对方的id(myid)，并存储到当前询问对象列表中，最后获取对方提议的leader相关信息(        id,zxid)，并将这些信息存储到当次选举的投票记录表中；</p>
-</li>
-<li><p>收到所有Server回复以后，就计算出zxid最大的那个Server，并将这个Server相关信息设置成下一次要投票的Server；</p>
-</li>
-<li><p>线程将当前zxid最大的Server设置为当前Server要推荐的Leader，如果此时获胜的Server获得n/2 + 1的Server票数， 设置当前推荐的leader为获胜的Server，将根据获胜的Server相关信息设置自己的状态，否则，继续这个过程，直到leader被选举出来。</p>
-</li>
-</ol>
-<p>&emsp;&emsp;通过流程分析我们可以得出：要使Leader获得多数Server的支持，则Server总数必须是奇数2n+1，且存活的Server的数目不得少于n+1.</p>
-<p>每个Server启动后都会重复以上流程。在恢复模式下，如果是刚从崩溃状态恢复的或者刚启动的server还会从磁盘快照中恢复数据和会话信息，zk会记录事务日志并定期进行快照，方便在恢复时进行状态恢复。选主的具体流程图如下所示：  </p>
-<p><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_59.png" alt="basic paxos"><br> fast paxos流程是在选举过程中，某Server首先向所有Server提议自己要成为leader，当其它Server收到提议以后，解决epoch和 zxid的冲突，并接受对方的提议，然后向对方发送接受提议完成的消息，重复这个流程，最后一定能选举出Leader。其流程图如下所示：<br> <img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_900.png" alt="fast paxos">  </p>
-<h5 id="同步流程"><a href="#同步流程" class="headerlink" title="同步流程"></a>同步流程</h5><hr>
-<p> 选完leader以后，zk就进入状态同步过程。</p>
+<h2 id="什么是元数据？元数据分为哪些类型？包括哪些内容？与-cluster-相关的元数据有哪些？元数据是如何保存的？元数据在-cluster-中是如何分布的？"><a href="#什么是元数据？元数据分为哪些类型？包括哪些内容？与-cluster-相关的元数据有哪些？元数据是如何保存的？元数据在-cluster-中是如何分布的？" class="headerlink" title="什么是元数据？元数据分为哪些类型？包括哪些内容？与 cluster 相关的元数据有哪些？元数据是如何保存的？元数据在 cluster 中是如何分布的？"></a>什么是元数据？元数据分为哪些类型？包括哪些内容？与 cluster 相关的元数据有哪些？元数据是如何保存的？元数据在 cluster 中是如何分布的？</h2><p>在非 cluster 模式下，元数据主要分为 Queue 元数据（queue 名字和属性等）、Exchange 元数据（exchange 名字、类型和属性等）、Binding 元数据（存放路由关系的查找表）、Vhost 元数据（vhost 范围内针对前三者的名字空间约束和安全属性设置）。在 cluster 模式下，还包括 cluster 中 node 位置信息和 node 关系信息。元数据按照 erlang node 的类型确定是仅保存于 RAM 中，还是同时保存在 RAM 和 disk 上。元数据在 cluster 中是全 node 分布的。<br>下图所示为 queue 的元数据在单 node 和 cluster 两种模式下的分布图。<br><img src="https://img-blog.csdnimg.cn/20190410145539885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2plcnJ5RHphbg==,size_16,color_FFFFFF,t_70" alt="rabbitmq元数据"></p>
+<h2 id="在单-node-系统和多-node-构成的-cluster-系统中声明-queue、exchange-，以及进行-binding-会有什么不同？"><a href="#在单-node-系统和多-node-构成的-cluster-系统中声明-queue、exchange-，以及进行-binding-会有什么不同？" class="headerlink" title="在单 node 系统和多 node 构成的 cluster 系统中声明 queue、exchange ，以及进行 binding 会有什么不同？"></a>在单 node 系统和多 node 构成的 cluster 系统中声明 queue、exchange ，以及进行 binding 会有什么不同？</h2><p>当你在单 node 上声明 queue 时，只要该 node 上相关元数据进行了变更，你就会得到 Queue.Declare-ok 回应；而在 cluster 上声明 queue ，则要求 cluster 上的全部node 都要进行元数据成功更新，才会得到 Queue.Declare-ok 回应。另外，若 node 类型为 RAM node 则变更的数据仅保存在内存中，若类型为 disk node 则还要变更保存在磁盘上的数据。</p>
+<h2 id="如何确保消息正确地发送至RabbitMQ？"><a href="#如何确保消息正确地发送至RabbitMQ？" class="headerlink" title="如何确保消息正确地发送至RabbitMQ？"></a>如何确保消息正确地发送至RabbitMQ？</h2><p>RabbitMQ使用发送方确认模式，确保消息正确地发送到RabbitMQ。  </p>
+<ul>
+<li>消息落库，对消息状态进行打标：将消息持久化到数据库，设置状态，为发送中，已发送，未发送，发送失败等等状态，收到响应，根据响应状态设置消息状态。对一直未响应的消息做轮询，尝试发送，直到达到一定轮询次数，更改消息发送状态为失败。</li>
+<li>发送方确认模式：将信道设置成confirm模式（发送方确认模式），则所有在信道上发布的消息都会被指派一个唯一的ID。一旦消息被投递到目的队列后，或者消息被写入磁盘后（可持久化的消息），信道会发送一个确认给生产者（包含消息唯一ID）。如果RabbitMQ发生内部错误从而导致消息丢失，会发送一条nack（not acknowledged，未确认）消息。发送方确认模式是异步的，生产者应用程序在等待确认的同时，可以继续发送消息。当确认消息到达生产者应用程序，生产者应用程序的回调方法就会被触发来处理确认消息。</li>
+</ul>
+<h2 id="如何确保消息接收方消费了消息？"><a href="#如何确保消息接收方消费了消息？" class="headerlink" title="如何确保消息接收方消费了消息？"></a>如何确保消息接收方消费了消息？</h2><p>接收方消息确认机制：消费者接收每一条消息后都必须进行确认（消息接收和消息确认是两个不同操作）。只有消费者确认了消息，RabbitMQ才能安全地把消息从队列中删除。这里并没有用到超时机制，RabbitMQ仅通过Consumer的连接中断来确认是否需要重新发送消息。也就是说，只要连接不中断，RabbitMQ给了Consumer足够长的时间来处理消息。</p>
+<p>下面罗列几种特殊情况：</p>
+<ul>
+<li>如果消费者接收到消息，在确认之前断开了连接或取消订阅，RabbitMQ会认为消息没有被分发，然后重新分发给下一个订阅的消费者。（可能存在消息重复消费的隐患，需要根据bizId去重）  </li>
+<li>如果消费者接收到消息却没有确认消息，连接也未断开，则RabbitMQ认为该消费者繁忙，将不会给该消费者分发更多的消息。</li>
+</ul>
+<h2 id="如何避免消息重复投递或重复消费？"><a href="#如何避免消息重复投递或重复消费？" class="headerlink" title="如何避免消息重复投递或重复消费？"></a>如何避免消息重复投递或重复消费？</h2><p>在消息生产时，MQ内部针对每条生产者发送的消息生成一个inner-msg-id，作为去重和幂等的依据（消息投递失败并重传），避免重复的消息进入队列；在消息消费时，要求消息体中必须要有一个bizId（对于同一业务全局唯一，如支付ID、订单ID、帖子ID等）作为去重和幂等的依据，避免同一条消息被重复消费。  </p>
+<p>这个问题针对业务场景来答分以下几点：  </p>
 <ol>
-<li><p>leader等待server连接；</p>
-<p>2 .Follower连接leader，将最大的zxid发送给leader；</p>
-<p>3 .Leader根据follower的zxid确定同步点；</p>
-<p>4 .完成同步后通知follower 已经成为uptodate状态；</p>
-<p>5 .Follower收到uptodate消息后，又可以重新接受client的请求进务了。<br><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213347_647.jpg" alt="同步流程">  </p>
-<h5 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h5><h6 id="Leader工作流程"><a href="#Leader工作流程" class="headerlink" title="Leader工作流程"></a>Leader工作流程</h6><p>Leader主要有三个功能：</p>
-<p>1 .恢复数据；</p>
-<p>2 .维持与Learner的心跳，接收Learner请求并判断Learner的请求消息类型；</p>
-<p>3 .Learner的消息类型主要有PING消息、REQUEST消息、ACK消息、REVALIDATE消息，根据不同的消息类型，进行不同的处理。</p>
-<p>PING消息是指Learner的心跳信息；REQUEST消息是Follower发送的提议息，包括写请求及同步请求；ACK消息是Follower的对提议的回复，超过半数的Follower通过，则commit该提议；REVALIDATE消息是用来延长SESSION有效时间。<br>Leader的工作流程简图如下所示，在实际实现中，流程要比下图复杂得多，启动了三个线程来实现功能。  </p>
+<li><p>比如，你拿到这个消息做数据库的insert操作。那就容易了，给这个消息做一个唯一主键，那么就算出现重复消费的情况，就会导致主键冲突，避免数据库出现脏数据。  </p>
+</li>
+<li><p>再比如，你拿到这个消息做redis的set的操作，那就容易了，不用解决，因为你无论set几次结果都是一样的，set操作本来就算幂等操作。  </p>
+<ol>
+<li>如果消息需要落库，如何保证数据库与缓存的一致性</li>
+<li>如果不落库，如何设置定时同步策略</li>
+</ol>
+</li>
+<li><p>如果上面两种情况还不行，上大招。准备一个第三方介质,来做消费记录。以redis为例，给消息分配一个全局id，只要消费过该消息，将&lt;id,message&gt;以K-V形式写入redis。那消费者开始消费前，先去redis中查询有没消费记录即可。  </p>
 </li>
 </ol>
-<p><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213347_829.png" alt="leader流程">  </p>
-<h6 id="follower工作流程"><a href="#follower工作流程" class="headerlink" title="follower工作流程"></a>follower工作流程</h6><p>Follower主要有四个功能：</p>
-<pre><code>1. 向Leader发送请求（PING消息、REQUEST消息、ACK消息、REVALIDATE消息）；
-
-2 .接收Leader消息并进行处理；
-
-3 .接收Client的请求，如果为写请求，发送给Leader进行投票；
-
-4 .返回Client结果。</code></pre><p>Follower的消息循环处理如下几种来自Leader的消息：</p>
-<pre><code>1 .PING消息： 心跳消息；
-
-2 .PROPOSAL消息：Leader发起的提案，要求Follower投票；
-
-3 .COMMIT消息：服务器端最新一次提案的信息；
-
-4 .UPTODATE消息：表明同步完成；
-
-5 .REVALIDATE消息：根据Leader的REVALIDATE结果，关闭待revalidate的session还是允许其接受消息；
-
-6 .SYNC消息：返回SYNC结果到客户端，这个消息最初由客户端发起，用来强制得到最新的更新。</code></pre><p>Follower的工作流程简图如下所示，在实际实现中，Follower是通过5个线程来实现功能的。  </p>
-<p><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213347_577.png" alt="follower"></p>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p> <a href="https://blog.csdn.net/lingbo229/article/details/81052078" target="_blank" rel="noopener">https://blog.csdn.net/lingbo229/article/details/81052078</a><br> <a href="http://zookeeper.apache.org/" target="_blank" rel="noopener">http://zookeeper.apache.org/</a><br> <a href="http://blog.csdn.net/cutesource/article/details/5822459" target="_blank" rel="noopener">http://blog.csdn.net/cutesource/article/details/5822459</a><br> <a href="http://blog.csdn.net/pwlazy/article/details/8080626" target="_blank" rel="noopener">http://blog.csdn.net/pwlazy/article/details/8080626</a><br> <a href="http://nileader.blog.51cto.com/1381108/795265" target="_blank" rel="noopener">http://nileader.blog.51cto.com/1381108/795265</a><br> <a href="http://nileader.blog.51cto.com/1381108/926753" target="_blank" rel="noopener">http://nileader.blog.51cto.com/1381108/926753</a><br> <a href="http://nileader.blog.51cto.com/1381108/795230" target="_blank" rel="noopener">http://nileader.blog.51cto.com/1381108/795230</a><br> <a href="http://netcome.iteye.com/blog/1474255" target="_blank" rel="noopener">http://netcome.iteye.com/blog/1474255</a></p>
-
+<h2 id="如何解决丢数据的问题"><a href="#如何解决丢数据的问题" class="headerlink" title="如何解决丢数据的问题?"></a>如何解决丢数据的问题?</h2><ol>
+<li>生产者丢数据</li>
+</ol>
+<p>生产者的消息没有投递到MQ中怎么办？从生产者弄丢数据这个角度来看，RabbitMQ提供transaction和confirm模式来确保生产者不丢消息。</p>
+<p>transaction机制就是说，发送消息前，开启事物(channel.txSelect())，然后发送消息，如果发送过程中出现什么异常，事物就会回滚(channel.txRollback())，如果发送成功则提交事物(channel.txCommit())。</p>
+<p>然而缺点就是吞吐量下降了。因此，按照博主的经验，生产上用confirm模式的居多。一旦channel进入confirm模式，所有在该信道上面发布的消息都将会被指派一个唯一的ID(从1开始)，一旦消息被投递到所有匹配的队列之后，rabbitMQ就会发送一个Ack给生产者(包含消息的唯一ID)，这就使得生产者知道消息已经正确到达目的队列了.如果rabiitMQ没能处理该消息，则会发送一个Nack消息给你，你可以进行重试操作。</p>
+<ol start="2">
+<li>消息队列丢数据</li>
+</ol>
+<p>处理消息队列丢数据的情况，一般是开启持久化磁盘的配置。这个持久化配置可以和confirm机制配合使用，你可以在消息持久化磁盘后，再给生产者发送一个Ack信号。这样，如果消息持久化磁盘之前，rabbitMQ阵亡了，那么生产者收不到Ack信号，生产者会自动重发。</p>
+<p>那么如何持久化呢，这里顺便说一下吧，其实也很容易，就下面两步</p>
+<p>①、将queue的持久化标识durable设置为true,则代表是一个持久的队列</p>
+<p>②、发送消息的时候将deliveryMode=2</p>
+<p>这样设置以后，rabbitMQ就算挂了，重启后也能恢复数据。在消息还没有持久化到硬盘时，可能服务已经死掉，这种情况可以通过引入mirrored-queue即镜像队列，但也不能保证消息百分百不丢失（整个集群都挂掉）</p>
+<ol start="3">
+<li>消费者丢数据</li>
+</ol>
+<p>启用手动确认模式可以解决这个问题</p>
+<p>①自动确认模式，消费者挂掉，待ack的消息回归到队列中。消费者抛出异常，消息会不断的被重发，直到处理成功。不会丢失消息，即便服务挂掉，没有处理完成的消息会重回队列，但是异常会让消息不断重试。</p>
+<p>②手动确认模式，如果消费者来不及处理就死掉时，没有响应ack时会重复发送一条信息给其他消费者；如果监听程序处理异常了，且未对异常进行捕获，会一直重复接收消息，然后一直抛异常；如果对异常进行了捕获，但是没有在finally里ack，也会一直重复发送消息(重试机制)。</p>
+<p>③不确认模式，acknowledge=”none” 不使用确认机制，只要消息发送完成会立即在队列移除，无论客户端异常还是断开，只要发送完就移除，不会重发。</p>
+<h2 id="死信队列和延迟队列的使用"><a href="#死信队列和延迟队列的使用" class="headerlink" title="死信队列和延迟队列的使用"></a>死信队列和延迟队列的使用</h2><p>死信队列也是一个正常的Exchange，和一般的Exchange没有区别，他能在任何队列上被指定，实际上就是设置某个队列的属性。<br>当这个队列有死信时，RabbitMQ就会自动将这个消息发布到设置的Exchange上去，进而路由到另一个队列。<br>变成死信队列有以下几种情况：  </p>
+<ul>
+<li>消息被拒绝（basic.reject/basic.nack)并且requeue = false。</li>
+<li>消息TTL过期</li>
+<li>队列达到最大长度</li>
+</ul>
+<p>延迟队列:</p>
+<ul>
+<li>消息的延迟推送</li>
+<li>定时任务的执行</li>
+<li>业务削峰限流，降级的异步延迟消息机制</li>
+</ul>
+<h2 id="使用了消息队列会有什么缺点"><a href="#使用了消息队列会有什么缺点" class="headerlink" title="使用了消息队列会有什么缺点?"></a>使用了消息队列会有什么缺点?</h2><h2 id="RabbitMQ-中的-cluster、mirrored-queue，以及-warrens-机制分别用于解决什么问题？存在哪些问题？"><a href="#RabbitMQ-中的-cluster、mirrored-queue，以及-warrens-机制分别用于解决什么问题？存在哪些问题？" class="headerlink" title="RabbitMQ 中的 cluster、mirrored queue，以及 warrens 机制分别用于解决什么问题？存在哪些问题？"></a>RabbitMQ 中的 cluster、mirrored queue，以及 warrens 机制分别用于解决什么问题？存在哪些问题？</h2><p>cluster 是为了解决当 cluster 中的任意 node 失效后，producer 和 consumer 均可以</p>
+<p>通过其他 node 继续工作，即提高了可用性；另外可以通过增加 node 数量增加 cluster</p>
+<p>的消息吞吐量的目的。cluster 本身不负责 message 的可靠性问题（该问题由 producer 通</p>
+<p>过各种机制自行解决）；cluster 无法解决跨数据中心的问题（即脑裂问题）。另外，在</p>
+<p>cluster 前使用 HAProxy 可以解决 node 的选择问题，即业务无需知道 cluster 中多个</p>
+<p>node 的 ip 地址。可以利用 HAProxy 进行失效 node 的探测，可以作负载均衡。下图为</p>
+<p>HAProxy + cluster 的模型。</p>
+<p>Mirrored queue 是为了解决使用 cluster 时所创建的 queue 的完整信息仅存在于单一</p>
+<p>node 上的问题，从另一个角度增加可用性。若想正确使用该功能，需要保证：1.consumer</p>
+<p>需要支持 Consumer Cancellation Notification 机制；2.consumer 必须能够正确处理重复</p>
+<p>message 。</p>
+<p>Warrens 是为了解决 cluster 中 message 可能被 blackholed 的问题，即不能接受</p>
+<p>producer 不停 republish message 但 RabbitMQ server 无回应的情况。Warrens 有两种构</p>
+<p>成方式，一种模型是两台独立的 RabbitMQ server + HAProxy ，其中两个 server 的状态分</p>
+<p>别为 active 和 hot-standby 。该模型的特点为：两台 server 之间无任何数据共享和协议</p>
+<p>交互，两台 server 可以基于不同的 RabbitMQ 版本。如下图所示</p>
+<p>另一种模型为两台共享存储的 RabbitMQ server + keepalived ，其中两个 server 的状态分</p>
+<p>别为 active 和 cold-standby 。该模型的特点为：两台 server 基于共享存储可以做到完全</p>
+<p>恢复，要求必须基于完全相同的 RabbitMQ 版本。如下图所示</p>
+<p>Warrens 模型存在的问题：对于第一种模型，虽然理论上讲不会丢失消息，但若在该模型</p>
+<p>上使用持久化机制，就会出现这样一种情况，即若作为 active 的 server 异常后，持久化</p>
+<p>在该 server 上的消息将暂时无法被 consume ，因为此时该 queue 将无法在作为 hot-</p>
+<p>standby 的 server 上被重建，所以，只能等到异常的 active server 恢复后，才能从其上的</p>
+<p>queue 中获取相应的 message 进行处理。而对于业务来说，需要具有：a.感知 AMQP 连</p>
+<p>接断开后重建各种 fabric 的能力；b.感知 active server 恢复的能力；c.切换回 active</p>
+<p>server 的时机控制，以及切回后，针对 message 先后顺序产生的变化进行处理的能力。</p>
+<p>对于第二种模型，因为是基于共享存储的模式，所以导致 active server 异常的条件，可能</p>
+<p>同样会导致 cold-standby server 异常；另外，在该模型下，要求 active 和 cold-standby</p>
+<p>的 server 必须具有相同的 node 名和 UID ，否则将产生访问权限问题；最后，由于该模</p>
+<p>型是冷备方案，故无法保证 cold-standby server 能在你要求的时限内成功启动。</p>
+<h2 id="为什么不应该对所有的-message-都使用持久化机制？"><a href="#为什么不应该对所有的-message-都使用持久化机制？" class="headerlink" title="为什么不应该对所有的 message 都使用持久化机制？"></a>为什么不应该对所有的 message 都使用持久化机制？</h2><p>假如有这样一个场景，当有大量的消息在1秒的时间到达，这样就很有可能导致消息丢失，但如果你使用持久化机制，将会导致rabbitmq整个性能急剧下降。有其他解决方式为生产者可以在单独的信道上监听应答队列。每次发送消息带上应答队列的名字，消费者消费了消息，就回发应答确认接收到了。如果消息应答未在合理时间内接收，则重新发送该条消息。持久化机制更多是一些关键的消息，并发量不大，但会通用并不可丢失。</p>
+<h2 id="Basic-Reject-的用法是什么？"><a href="#Basic-Reject-的用法是什么？" class="headerlink" title="Basic.Reject 的用法是什么？"></a>Basic.Reject 的用法是什么？</h2><p>该信令可用于 consumer 对收到的 message 进行 reject 。若在该信令中设置requeue=true，则当 RabbitMQ server 收到该拒绝信令后，会将该 message 重新发送到下一个处于 consume 状态的 consumer 处（理论上仍可能将该消息发送给当前consumer）。若设置 requeue=false ，则 RabbitMQ server 在收到拒绝信令后，将直接将该message 从 queue 中移除。另外一种移除 queue 中 message 的小技巧是，consumer 回复 Basic.Ack 但不对获取到的message 做任何处理。而 Basic.Nack 是对 Basic.Reject 的扩展，以支持一次拒绝多条 message 的能力。</p>
+<h2 id="Consumer-Cancellation-Notification-机制用于什么场景？"><a href="#Consumer-Cancellation-Notification-机制用于什么场景？" class="headerlink" title="Consumer Cancellation Notification 机制用于什么场景？"></a>Consumer Cancellation Notification 机制用于什么场景？</h2><h2 id="什么情况下会出现-blackholed-问题？"><a href="#什么情况下会出现-blackholed-问题？" class="headerlink" title="什么情况下会出现 blackholed 问题？"></a>什么情况下会出现 blackholed 问题？</h2><p>blackholed 问题是指，向 exchange 投递了 message ，而由于各种原因导致该message 丢失，但发送者却不知道。可导致 blackholed 的情况：  </p>
+<ol>
+<li>向未绑定 queue 的exchange 发送 message；  </li>
+<li>exchange 以 binding_key key_A 绑定了 queue queue_A，但向该 exchange 发送 message 使用的 routing_key 却是 key_B。</li>
+</ol>
+<h2 id="如何防止出现-blackholed-问题？"><a href="#如何防止出现-blackholed-问题？" class="headerlink" title="如何防止出现 blackholed 问题？"></a>如何防止出现 blackholed 问题？</h2><p>没有特别好的办法，只能在具体实践中通过各种方式保证相关 fabric 的存在。另外，</p>
+<p>如果在执行 Basic.Publish 时设置 mandatory=true ，则在遇到可能出现 blackholed 情况</p>
+<p>时，服务器会通过返回 Basic.Return 告之当前 message 无法被正确投递（内含原因 312</p>
+<p>NO_ROUTE）。</p>
+<h2 id="为什么说保证-message-被可靠持久化的条件是-queue-和-exchange-具有durable-属性，同时-message-具有-persistent-属性才行？"><a href="#为什么说保证-message-被可靠持久化的条件是-queue-和-exchange-具有durable-属性，同时-message-具有-persistent-属性才行？" class="headerlink" title="为什么说保证 message 被可靠持久化的条件是 queue 和 exchange 具有durable 属性，同时 message 具有 persistent 属性才行？"></a>为什么说保证 message 被可靠持久化的条件是 queue 和 exchange 具有durable 属性，同时 message 具有 persistent 属性才行？</h2><p>若 exchange 或 queue 未设置</p>
+<p>durable 属性，则在其 crash 之后就会无法恢复，那么即使 message 设置了 persistent 属</p>
+<p>性，仍然存在 message 虽然能恢复但却无处容身的问题；同理，若 message 本身未设置</p>
+<p>persistent 属性，则 message 的持久化更无从谈起。</p>
+<h2 id="“dead-letter”queue-的用途？"><a href="#“dead-letter”queue-的用途？" class="headerlink" title="“dead letter”queue 的用途？"></a>“dead letter”queue 的用途？</h2><h2 id="向不存在的-exchange-发-publish-消息会发生什么？向不存在的-queue-执行consume-动作会发生什么？"><a href="#向不存在的-exchange-发-publish-消息会发生什么？向不存在的-queue-执行consume-动作会发生什么？" class="headerlink" title="向不存在的 exchange 发 publish 消息会发生什么？向不存在的 queue 执行consume 动作会发生什么？"></a>向不存在的 exchange 发 publish 消息会发生什么？向不存在的 queue 执行consume 动作会发生什么？</h2>
             </div>
             <hr/>
 
@@ -595,7 +608,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/">//xxy201799.github.io/1024-xy.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</a>
+                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/">//xxy201799.github.io/1024-xy.github.io/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -801,24 +814,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/11/09/hello-world-2/">
+                <a href="/1024-xy.github.io/2019/12/27/wen-ti-xiang-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/1024-xy.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="问题详记">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">问题详记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            问题详记nacos整合gageway产生的问题spring cloud alibaba整合nacos与gateway，发现服务路由一直不行，报错invalid host，开始以为是云服务器无法穿透本地主机，结果本地安装nacos同样不行，将
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-09
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-27
                         </span>
                         <span class="publish-author">
                             
@@ -838,35 +851,34 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/11/01/springaop/">
+                <a href="/1024-xy.github.io/2019/11/23/redis-chi-jiu-hua-ji-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="Spring AOP">
+                        <img src="/1024-xy.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="Redis持久化机制">
                         
-                        <span class="card-title">Spring AOP</span>
+                        <span class="card-title">Redis持久化机制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring AopAop,面向切面编程，是对OOP编程的一种补充，AOP是一个术语，表示从业务逻辑中横切出来的逻辑，比如性能监控、日志记录、权限控制等。其实AOP的最终原理是动态代理
-静态代理以下代码是最原始的静态代理   
-//首先我们
+                            Redis持久化机制redis是单线程，高性能的，并且是拥有持久化机制的nosql内存数据库  
+  
+为什么Redis单线程但却速度很快呢？？
+基于内存操作，速度非常快
+采用单线程，避免上下文切换导致消耗CPU
+采用单线程，不用去考虑各种
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-23
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/1024-xy.github.io/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    框架学习
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
                             
                         </span>
                     </div>

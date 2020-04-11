@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Categories, Hexo">
-    <meta name="description" content="Categories | Hexo">
+    <meta name="keywords" content="Category: 框架学习, Hexo">
+    <meta name="description" content="Category: 框架学习 | Hexo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Categories | Hexo</title>
+    <title>Category: 框架学习 | Hexo</title>
     <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
@@ -375,7 +375,7 @@
                 
                 <a href="/1024-xy.github.io/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="框架学习: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
+                             chip-active "
                             style="background-color: #D5F5E3;">框架学习
                         <span class="tag-length">1</span>
                     </span>
@@ -397,64 +397,55 @@
 </div>
 
     
-    <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
 
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
-    </div>
-</div>
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/1024-xy.github.io/2019/11/01/springaop/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/1024-xy.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="Spring AOP">
+                            
+                            <span class="card-title">Spring AOP</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Spring AopAop,面向切面编程，是对OOP编程的一种补充，AOP是一个术语，表示从业务逻辑中横切出来的逻辑，比如性能监控、日志记录、权限控制等。其实AOP的最终原理是动态代理
+静态代理以下代码是最原始的静态代理   
+//首先我们
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/1024-xy.github.io/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    框架学习
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-<script type="text/javascript" src="/1024-xy.github.io/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
-
-    
-
-    let option = {
-        title: {
-            left: 'center',
-            text: 'Post Categories Radar Chart',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"缓存中间件","max":8},{"name":"分布式中间件","max":8},{"name":"框架学习","max":8},{"name":"并发编程","max":8}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [1,1,1,7],
-                    name : 'Number of Categories'
-                }
-            ]
-        }]
-    };
-
-    radarChart.setOption(option);
-</script>
-    
-
+                    
+                </div>
+            </div>
+            
+        </div>
+    </article>
 </main>
+
+
 
 
     <footer class="page-footer bg-color">

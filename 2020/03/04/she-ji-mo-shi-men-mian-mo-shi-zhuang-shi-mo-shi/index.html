@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="zookeeper分布式原理与应用, Hexo">
-    <meta name="description" content="zookeeper分布式原理与应用场景一
-&amp;emsp;&amp;emsp;假设我们有20个搜索引擎的服务器（每个负责总索引中的一部分搜索任务）和一个总服务器（负责向这20个搜索引擎的服务器发出搜索请求并合并 结果集），一个备用的总服务器（负责总服务">
+    <meta name="keywords" content="设计模式_门面模式_装饰模式, Hexo">
+    <meta name="description" content="门面模式与装饰器模式门面模式门面模式又叫外观模式，提供了一个统一的接口，用来访问子系统的一群接口。
+特征：门面模式定义了一个高层接口，让子系统更容易使用。属于结构模式  
+门面模式适用场景越来越复杂的子系统，需要一个统一的接口，供用户使用。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>zookeeper分布式原理与应用 | Hexo</title>
+    <title>设计模式_门面模式_装饰模式 | Hexo</title>
     <link rel="icon" type="image/png" href="/1024-xy.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/1024-xy.github.io/libs/awesome/css/all.css">
@@ -305,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/1024-xy.github.io/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        zookeeper分布式原理与应用
+                        设计模式_门面模式_装饰模式
                     </div>
                 </div>
             </div>
@@ -428,22 +429,13 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/1024-xy.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category">
-                                分布式中间件
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-11-01
+                    2020-03-04
                 </div>
 
                 
@@ -459,117 +451,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="zookeeper分布式原理与应用"><a href="#zookeeper分布式原理与应用" class="headerlink" title="zookeeper分布式原理与应用"></a>zookeeper分布式原理与应用</h1><h3 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h3><hr>
-<p>&emsp;&emsp;假设我们有20个搜索引擎的服务器（每个负责总索引中的一部分搜索任务）和一个总服务器（负责向这20个搜索引擎的服务器发出搜索请求并合并 结果集），一个备用的总服务器（负责总服务器宕机时替换总服务器），一个web cli（向总服务器发出搜索请求）。搜索引擎的服务器中的15个服务器现在提供搜索服务，5个服务器正在生成索引。这20个搜索引擎的服务器经常要让正在 提供搜索服务的服务器停止提供服务开始生成索引,或生成索引的服务器已经把索引生成完成可以搜索提供服务了.使用Zookeeper可以保证总服务器自动 感知有多少提供搜索引擎的服务器并向这些服务器发出搜索请求,备用的总服务器宕机时自动启用备用的总服务器,web的cgi能够自动地获知总服务器的网络地址变化.这些又如何做到呢?   </p>
-<ol>
-<li>提供搜索引擎的服务器都在Zookeeper中创建znode,zk.create(“/search/nodes/node1”,</li>
-</ol>
-<p>“hostname”.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateFlags.EPHEMERAL);</p>
-<ol start="2">
-<li><p>总服务器可以从Zookeeper中获取一个znode的子节点的列表,zk.getChildren(“/search/nodes”, true);</p>
-</li>
-<li><p>总服务器遍历这些子节点,并获取子节点的数据生成提供搜索引擎的服务器列表.</p>
-</li>
-<li><p>当总服务器接收到子节点改变的事件信息,重新返回第二步.</p>
-</li>
-<li><p>总服务器在Zookeeper中创建节点,zk.create(“/search/master”, “hostname”.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateFlags.EPHEMERAL);</p>
-</li>
-<li><p>备用的总服务器监控Zookeeper中的”/search/master”节点.当这个znode的节点数据改变时,把自己启动变成总服务器,并把自己的网络地址数据放进这个节点.</p>
-</li>
-<li><p>web的cgi从Zookeeper中”/search/master”节点获取总服务器的网络地址数据并向其发送搜索请求.</p>
-</li>
-<li><p>web的cgi监控Zookeeper中的”/search/master”节点,当这个znode的节点数据改变时,从这个节点获取总服务器的网络地址数据,并改变当前的总服务器的网络地址.  </p>
-</li>
-</ol>
-<h3 id="Zookeeper的功能有哪些"><a href="#Zookeeper的功能有哪些" class="headerlink" title="Zookeeper的功能有哪些"></a>Zookeeper的功能有哪些</h3><hr>
-<h4 id="1、文件系统"><a href="#1、文件系统" class="headerlink" title="1、文件系统"></a>1、文件系统</h4><p>zookeeper维护了一个类似文件系统的数据结构：<br><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213344_45.png" alt="zookeeper图片"><br>&emsp;&emsp;每个子目录项以及其下的子节点都是一个znode，我们能对这些znodes进行增删查改的操作，并且能够存储数据。<br>有四种类型的znode:  </p>
-<p>1、PERSISTENT-持久化目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点依旧存在</p>
-<p>2、 PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点依旧存在，只是Zookeeper给该节点名称进行顺序编号</p>
-<p>3、EPHEMERAL-临时目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点被删除</p>
-<p>4、EPHEMERAL_SEQUENTIAL-临时顺序编号目录节点</p>
-<p>客户端与zookeeper断开连接后，该节点被删除，只是Zookeeper给该节点名称进行顺序编号  </p>
-<h4 id="2、通知机制"><a href="#2、通知机制" class="headerlink" title="2、通知机制"></a>2、通知机制</h4><p>&emsp;&emsp;客户端注册监听它关心的目录节点，一旦发生变化（数据变化，删除，子目录增加）时，zookeeper节点会通知客户端。  </p>
-<h3 id="Zookeeper的可以用来做什么？"><a href="#Zookeeper的可以用来做什么？" class="headerlink" title="Zookeeper的可以用来做什么？"></a>Zookeeper的可以用来做什么？</h3><hr>
-<h4 id="1、服务注册与发现"><a href="#1、服务注册与发现" class="headerlink" title="1、服务注册与发现"></a>1、服务注册与发现</h4><p>使用doubbo、kafuka等rpc框架进行对象以及数据的传输，在这个过程中，可以使用zookeeper进行服务的注册以及订阅，rpc框架在zoookeeper发布服务的地址，方法，类名。同样的rpcc框架的客户端在zookeeper监听该服务是否存在，然后拿到服务的地址，与rpc框架的服务端进行对象的传输。如果含有多个相同服务，则可以进行权重配比。</p>
-<h4 id="2、配置中心"><a href="#2、配置中心" class="headerlink" title="2、配置中心"></a>2、配置中心</h4><p>所有程序都免不了配置，当你去要做一些开关去开启或者关闭某些功能的时候，以及一些服务器的配置，都可以放入zookeeper的某个节点目录中进行统一管理，当配置信息被改变将会通知各个客户端，更改其服务器配置。<br><img src="https://www.aboutyun.com/data/attachment/forum/201608/20/184509blnln2a7n5qqa95s.png" alt="zookeeper配置中心"></p>
-<h4 id="3、zookeeper集群管理"><a href="#3、zookeeper集群管理" class="headerlink" title="3、zookeeper集群管理"></a>3、zookeeper集群管理</h4><p>zookeeper对于集群的管理就两点：是否有加入新的节点，和选举master。<br>对于第一点：所有机器约定在主节点上的GroupMembers下创建临时目录节点，然后监听父目录的子节点变化消息，一旦有机器挂掉，则临时节点删除，其他机器收到通知。当然新机器也是类似，对于第二点，每次选举最小编号的机器作为主节点就好<br><img src="http://www.aboutyun.com/data/attachment/forum/201608/20/184530b6abmegbk09ffgva.png" alt="zookeeper配置"></p>
-<h4 id="4、zookeeper分布式锁"><a href="#4、zookeeper分布式锁" class="headerlink" title="4、zookeeper分布式锁"></a>4、zookeeper分布式锁</h4><p>zookeeper有两种分布式锁，一种保持独占，一种控制时序。<br>对于第一类，我们将一个临时znode看所一把锁，客户端尝试建立该节点，建立成功的拿到锁，获取资源。创建失败的则进行等待，对于第二类，则在其一个目录节点下面创建多个顺序节点，如果是读，前面几个节点都是读操作，则可以同时拿到资源，如果都是写，则进行独占。  </p>
-<p><img src="http://www.aboutyun.com/data/attachment/forum/201608/20/184557iv77xzbyas7bc99o.png" alt="分布式锁"></p>
-<h4 id="5、队列管理功能"><a href="#5、队列管理功能" class="headerlink" title="5、队列管理功能"></a>5、队列管理功能</h4><ol>
-<li>同步队列<br>&emsp;&emsp;当一个对列成员都到达，这个队列才被视为可用队列。其具体实现为：在约定目录下创建临时目录节点，监听节点数目是否是我们要求的数目。 </li>
-<li>队列按照FIFO方式进行入队和出队操作。<br>&emsp;&emsp;和分布式锁服务中的控制时序场景基本原理一致，入列有编号，出列按编号。  </li>
-</ol>
-<h3 id="分布式的数据与复制"><a href="#分布式的数据与复制" class="headerlink" title="分布式的数据与复制"></a>分布式的数据与复制</h3><p>Zookeeper作为一个集群提供一致的数据服务，自然，它要在所有机器间做数据复制。数据复制的好处：<br>1、容错<br>一个节点出错，不至于整个系统崩溃，别的节点可以接管他的工作。<br>2、提高性能<br>让客户端本地访问就近的节点，提高用户访问速度。  </p>
-<h3 id="数据一致性与paxos算法"><a href="#数据一致性与paxos算法" class="headerlink" title="数据一致性与paxos算法"></a>数据一致性与paxos算法</h3><p> 据说Paxos算法的难理解与算法的知名度一样令人敬仰，所以我们先看如何保持数据的一致性，这里有个原则就是：  </p>
-<p> 在一个分布式数据库系统中，如果各节点的初始状态一致，每个节点都执行相同的操作序列，那么他们最后能得到一个一致的状态。<br> Paxos算法解决的什么问题呢，解决的就是保证每个节点执行相同的操作序列。好吧，这还不简单，master维护一个全局写队列，所有写操作都必须放入这个队列编号，那么无论我们写多少个节点，只要写操作是按编号来的，就能保证一致性。</p>
-<p> 没错，就是这样，可是如果master挂了呢。Paxos算法通过投票来对写操作进行全局编号，同一时刻，只有一个写操作被批准，同时并发的写操作要去争取选票，只有获得过半数选票的写操作才会被批准（所以永远只会有一个写操作得到批准），其他的写操作竞争失败只好再发起一轮投票，就这样，在日复一日年复一年的投票中，所有写操作都被严格编号排序。编号严格递增，当一个节点接受了一个编号为100的写操作，之后又接受到编号为99的写操作（因为网络延迟等很多不可预见原因），它马上能意识到自己数据不一致了，自动停止对外服务并重启同步过程。任何一个节点挂掉都不会影响整个集群的数据一致性（总2n+1台，除非挂掉大于n台）。  </p>
-<h3 id="Zookeeper的工作原理（ZAB协议）"><a href="#Zookeeper的工作原理（ZAB协议）" class="headerlink" title="Zookeeper的工作原理（ZAB协议）"></a>Zookeeper的工作原理（ZAB协议）</h3><h4 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h4><p> zookeeper中的角色主要有以下三类，如下表所示：  </p>
-<p> <img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_932.png" alt="角色"><br> 系统模型如图所示：<br> <img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_540.jpg" alt="zookeeper系统模型">  </p>
-<h4 id="设计目的"><a href="#设计目的" class="headerlink" title="设计目的"></a>设计目的</h4><ol>
-<li>最终一致性：client端不论连接到哪个server,展示给他的都是同一视图以及同一数据，这是zookeeper最重要的功能。</li>
-<li>可靠性：zookeeper具有简单、健壮、良好的性能，如果消息m被一台服务器接受，那么它将被所有的服务器接受。</li>
-<li>实时性：Zookeeper保证客户端将在一个时间间隔范围内获得服务器的更新信息，或者服务器失效的信息。但由于网络延时等原因，Zookeeper不能保证两个客 户端能同时得到刚更新的数据，如果需要最新数据，应该在读数据之前调用sync()接口。</li>
-<li>等待无关性：慢的或者失效的client端的请求不得干预快速的client端的请求，使得每个client都能有效的等待。</li>
-<li>原子性：更新数据或者节点只能成功或者失败。</li>
-<li>顺序性：全局有序性是指如果一台服务器上的消息a在消息b之前发布，则所有服务器上的消息发布都要保持该顺序。<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4>Zookeeper的核心是原子广播，这个机制保证了各个Server之间的同步。实现这个机制的协议叫做Zab协议。Zab协议有两种模式，它们分 别是恢复模式（选主）和广播模式（同步）。当服务启动或者在领导者崩溃后，Zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的 状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系 统状态。<br>为了保证事务的顺序一致性，zookeeper采用了递增的事务id号（zxid）来标识事务。所有的提议（proposal）都在被提出的时候加上 了zxid。实现中zxid是一个64位的数字，它高32位是epoch用来标识leader关系是否改变，每次一个leader被选出来，它都会有一个 新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。</li>
-</ol>
-<p>每个Server在工作过程中有三种状态：</p>
-<p>LOOKING：当前Server不知道leader是谁，正在搜寻<br>LEADING：当前Server即为选举出来的leader<br>FOLLOWING：leader已经选举出来，当前Server与之同步</p>
-<h5 id="选主流程"><a href="#选主流程" class="headerlink" title="选主流程"></a>选主流程</h5><hr>
-<p>当leader崩溃或者失去大部分follower,这时候zk进入恢复模式，恢复模式重新选举出一个新的master,让所有的server恢复到一个正确的状态。zk的选举算法有两种：一种基于basic paxos算法实现，另一种基于fast paxos算法实现。系统默认选举算法为fast paxos算法。先介绍basic paxos流程：  1. 选举线程由当前Server发起选举的线程担任，其主要功能是对投票结果进行统计，并选出推荐的Server；</p>
-<ol start="2">
-<li><p>选举线程首先向所有Server发起一次询问(包括自己)；</p>
-</li>
-<li><p>选举线程收到回复后，验证是否是自己发起的询问(验证zxid是否一致)，然后获取对方的id(myid)，并存储到当前询问对象列表中，最后获取对方提议的leader相关信息(        id,zxid)，并将这些信息存储到当次选举的投票记录表中；</p>
-</li>
-<li><p>收到所有Server回复以后，就计算出zxid最大的那个Server，并将这个Server相关信息设置成下一次要投票的Server；</p>
-</li>
-<li><p>线程将当前zxid最大的Server设置为当前Server要推荐的Leader，如果此时获胜的Server获得n/2 + 1的Server票数， 设置当前推荐的leader为获胜的Server，将根据获胜的Server相关信息设置自己的状态，否则，继续这个过程，直到leader被选举出来。</p>
-</li>
-</ol>
-<p>&emsp;&emsp;通过流程分析我们可以得出：要使Leader获得多数Server的支持，则Server总数必须是奇数2n+1，且存活的Server的数目不得少于n+1.</p>
-<p>每个Server启动后都会重复以上流程。在恢复模式下，如果是刚从崩溃状态恢复的或者刚启动的server还会从磁盘快照中恢复数据和会话信息，zk会记录事务日志并定期进行快照，方便在恢复时进行状态恢复。选主的具体流程图如下所示：  </p>
-<p><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_59.png" alt="basic paxos"><br> fast paxos流程是在选举过程中，某Server首先向所有Server提议自己要成为leader，当其它Server收到提议以后，解决epoch和 zxid的冲突，并接受对方的提议，然后向对方发送接受提议完成的消息，重复这个流程，最后一定能选举出Leader。其流程图如下所示：<br> <img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213346_900.png" alt="fast paxos">  </p>
-<h5 id="同步流程"><a href="#同步流程" class="headerlink" title="同步流程"></a>同步流程</h5><hr>
-<p> 选完leader以后，zk就进入状态同步过程。</p>
-<ol>
-<li><p>leader等待server连接；</p>
-<p>2 .Follower连接leader，将最大的zxid发送给leader；</p>
-<p>3 .Leader根据follower的zxid确定同步点；</p>
-<p>4 .完成同步后通知follower 已经成为uptodate状态；</p>
-<p>5 .Follower收到uptodate消息后，又可以重新接受client的请求进务了。<br><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213347_647.jpg" alt="同步流程">  </p>
-<h5 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h5><h6 id="Leader工作流程"><a href="#Leader工作流程" class="headerlink" title="Leader工作流程"></a>Leader工作流程</h6><p>Leader主要有三个功能：</p>
-<p>1 .恢复数据；</p>
-<p>2 .维持与Learner的心跳，接收Learner请求并判断Learner的请求消息类型；</p>
-<p>3 .Learner的消息类型主要有PING消息、REQUEST消息、ACK消息、REVALIDATE消息，根据不同的消息类型，进行不同的处理。</p>
-<p>PING消息是指Learner的心跳信息；REQUEST消息是Follower发送的提议息，包括写请求及同步请求；ACK消息是Follower的对提议的回复，超过半数的Follower通过，则commit该提议；REVALIDATE消息是用来延长SESSION有效时间。<br>Leader的工作流程简图如下所示，在实际实现中，流程要比下图复杂得多，启动了三个线程来实现功能。  </p>
-</li>
-</ol>
-<p><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213347_829.png" alt="leader流程">  </p>
-<h6 id="follower工作流程"><a href="#follower工作流程" class="headerlink" title="follower工作流程"></a>follower工作流程</h6><p>Follower主要有四个功能：</p>
-<pre><code>1. 向Leader发送请求（PING消息、REQUEST消息、ACK消息、REVALIDATE消息）；
-
-2 .接收Leader消息并进行处理；
-
-3 .接收Client的请求，如果为写请求，发送给Leader进行投票；
-
-4 .返回Client结果。</code></pre><p>Follower的消息循环处理如下几种来自Leader的消息：</p>
-<pre><code>1 .PING消息： 心跳消息；
-
-2 .PROPOSAL消息：Leader发起的提案，要求Follower投票；
-
-3 .COMMIT消息：服务器端最新一次提案的信息；
-
-4 .UPTODATE消息：表明同步完成；
-
-5 .REVALIDATE消息：根据Leader的REVALIDATE结果，关闭待revalidate的session还是允许其接受消息；
-
-6 .SYNC消息：返回SYNC结果到客户端，这个消息最初由客户端发起，用来强制得到最新的更新。</code></pre><p>Follower的工作流程简图如下所示，在实际实现中，Follower是通过5个线程来实现功能的。  </p>
-<p><img src="http://static.open-open.com/lib/uploadImg/20141108/20141108213347_577.png" alt="follower"></p>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p> <a href="https://blog.csdn.net/lingbo229/article/details/81052078" target="_blank" rel="noopener">https://blog.csdn.net/lingbo229/article/details/81052078</a><br> <a href="http://zookeeper.apache.org/" target="_blank" rel="noopener">http://zookeeper.apache.org/</a><br> <a href="http://blog.csdn.net/cutesource/article/details/5822459" target="_blank" rel="noopener">http://blog.csdn.net/cutesource/article/details/5822459</a><br> <a href="http://blog.csdn.net/pwlazy/article/details/8080626" target="_blank" rel="noopener">http://blog.csdn.net/pwlazy/article/details/8080626</a><br> <a href="http://nileader.blog.51cto.com/1381108/795265" target="_blank" rel="noopener">http://nileader.blog.51cto.com/1381108/795265</a><br> <a href="http://nileader.blog.51cto.com/1381108/926753" target="_blank" rel="noopener">http://nileader.blog.51cto.com/1381108/926753</a><br> <a href="http://nileader.blog.51cto.com/1381108/795230" target="_blank" rel="noopener">http://nileader.blog.51cto.com/1381108/795230</a><br> <a href="http://netcome.iteye.com/blog/1474255" target="_blank" rel="noopener">http://netcome.iteye.com/blog/1474255</a></p>
+                <h1 id="门面模式与装饰器模式"><a href="#门面模式与装饰器模式" class="headerlink" title="门面模式与装饰器模式"></a>门面模式与装饰器模式</h1><h2 id="门面模式"><a href="#门面模式" class="headerlink" title="门面模式"></a>门面模式</h2><p>门面模式又叫外观模式，提供了一个统一的接口，用来访问子系统的一群接口。</p>
+<p>特征：门面模式定义了一个高层接口，让子系统更容易使用。属于结构模式  </p>
+<h3 id="门面模式适用场景"><a href="#门面模式适用场景" class="headerlink" title="门面模式适用场景"></a>门面模式适用场景</h3><p>越来越复杂的子系统，需要一个统一的接口，供用户使用。 </p>
 
             </div>
             <hr/>
@@ -595,7 +479,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="//xxy201799.github.io/1024-xy.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/">//xxy201799.github.io/1024-xy.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</a>
+                    <a href="//xxy201799.github.io/1024-xy.github.io/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/">//xxy201799.github.io/1024-xy.github.io/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -801,24 +685,25 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/11/09/hello-world-2/">
+                <a href="/1024-xy.github.io/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/1024-xy.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="设计模式_原型模式_建造者模式">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">设计模式_原型模式_建造者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            原型模式与建造者模式原型模式原型模式其主要目的是为了防止当我们想新建一个实体对象并为其赋值时，需要不停调用其get set方法为该对象赋值，而，原型模式是将对象赋值放在该对象内部，直接调用其克隆方法就能完成赋值。
+浅克隆实现cloneabl
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-09
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
                         </span>
                         <span class="publish-author">
                             
@@ -838,35 +723,43 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/1024-xy.github.io/2019/11/01/springaop/">
+                <a href="/1024-xy.github.io/2020/03/03/she-ji-mo-shi-gong-han-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/1024-xy.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="Spring AOP">
+                        <img src="/1024-xy.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="设计模式_工厂模式">
                         
-                        <span class="card-title">Spring AOP</span>
+                        <span class="card-title">设计模式_工厂模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring AopAop,面向切面编程，是对OOP编程的一种补充，AOP是一个术语，表示从业务逻辑中横切出来的逻辑，比如性能监控、日志记录、权限控制等。其实AOP的最终原理是动态代理
-静态代理以下代码是最原始的静态代理   
-//首先我们
+                            设计模式总览，工厂模式软件设计原则
+开闭原则
+对扩展开放，对修改关闭
+
+
+单一职责原则
+一个类，一个方法，一个接口，只干一件事
+
+
+依赖倒置原则
+通过抽象，实现各个类之间，各个模块之间相互不影响
+
+
+接口隔离原则
+接口非常单一，只做某一类事
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-03
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/1024-xy.github.io/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    框架学习
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
                             
                         </span>
                     </div>
