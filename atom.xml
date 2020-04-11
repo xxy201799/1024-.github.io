@@ -5,9 +5,9 @@
   
   <link href="/1024-xy.github.io/atom.xml" rel="self"/>
   
-  <link href="//xxy201799.github.io/"/>
+  <link href="http://xxystudybook.club/"/>
   <updated>2020-03-07T15:09:54.685Z</updated>
-  <id>//xxy201799.github.io/</id>
+  <id>http://xxystudybook.club/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>算法_排序算法</title>
-    <link href="//xxy201799.github.io/2020/03/07/suan-fa-pai-xu-suan-fa/"/>
-    <id>//xxy201799.github.io/2020/03/07/suan-fa-pai-xu-suan-fa/</id>
+    <link href="http://xxystudybook.club/2020/03/07/suan-fa-pai-xu-suan-fa/"/>
+    <id>http://xxystudybook.club/2020/03/07/suan-fa-pai-xu-suan-fa/</id>
     <published>2020-03-07T15:07:15.678Z</published>
     <updated>2020-03-07T15:09:54.685Z</updated>
     
@@ -41,8 +41,8 @@
   
   <entry>
     <title>设计模式_原型模式_建造者模式</title>
-    <link href="//xxy201799.github.io/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/"/>
-    <id>//xxy201799.github.io/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/</id>
+    <link href="http://xxystudybook.club/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/"/>
+    <id>http://xxystudybook.club/2020/03/07/she-ji-mo-shi-yuan-xing-mo-shi-jian-zao-zhe-mo-shi/</id>
     <published>2020-03-07T15:03:41.134Z</published>
     <updated>2020-03-08T12:35:32.510Z</updated>
     
@@ -64,8 +64,8 @@
   
   <entry>
     <title>设计模式_门面模式_装饰模式</title>
-    <link href="//xxy201799.github.io/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/"/>
-    <id>//xxy201799.github.io/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/</id>
+    <link href="http://xxystudybook.club/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/"/>
+    <id>http://xxystudybook.club/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/</id>
     <published>2020-03-04T12:48:32.036Z</published>
     <updated>2020-03-08T13:55:32.555Z</updated>
     
@@ -87,8 +87,8 @@
   
   <entry>
     <title>设计模式_工厂模式</title>
-    <link href="//xxy201799.github.io/2020/03/03/she-ji-mo-shi-gong-han-mo-shi/"/>
-    <id>//xxy201799.github.io/2020/03/03/she-ji-mo-shi-gong-han-mo-shi/</id>
+    <link href="http://xxystudybook.club/2020/03/03/she-ji-mo-shi-gong-han-mo-shi/"/>
+    <id>http://xxystudybook.club/2020/03/03/she-ji-mo-shi-gong-han-mo-shi/</id>
     <published>2020-03-02T17:24:51.555Z</published>
     <updated>2020-03-07T14:16:52.377Z</updated>
     
@@ -110,8 +110,8 @@
   
   <entry>
     <title>问题详记</title>
-    <link href="//xxy201799.github.io/2019/12/27/wen-ti-xiang-ji/"/>
-    <id>//xxy201799.github.io/2019/12/27/wen-ti-xiang-ji/</id>
+    <link href="http://xxystudybook.club/2019/12/27/wen-ti-xiang-ji/"/>
+    <id>http://xxystudybook.club/2019/12/27/wen-ti-xiang-ji/</id>
     <published>2019-12-26T16:35:39.777Z</published>
     <updated>2019-12-26T16:35:39.778Z</updated>
     
@@ -133,8 +133,8 @@
   
   <entry>
     <title>RabbitMQ常见面试题详解</title>
-    <link href="//xxy201799.github.io/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/"/>
-    <id>//xxy201799.github.io/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/</id>
+    <link href="http://xxystudybook.club/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/"/>
+    <id>http://xxystudybook.club/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/</id>
     <published>2019-11-23T08:42:44.707Z</published>
     <updated>2019-11-26T06:02:32.056Z</updated>
     
@@ -156,8 +156,8 @@
   
   <entry>
     <title>Redis持久化机制</title>
-    <link href="//xxy201799.github.io/2019/11/23/redis-chi-jiu-hua-ji-zhi/"/>
-    <id>//xxy201799.github.io/2019/11/23/redis-chi-jiu-hua-ji-zhi/</id>
+    <link href="http://xxystudybook.club/2019/11/23/redis-chi-jiu-hua-ji-zhi/"/>
+    <id>http://xxystudybook.club/2019/11/23/redis-chi-jiu-hua-ji-zhi/</id>
     <published>2019-11-22T17:02:02.744Z</published>
     <updated>2019-11-22T17:44:00.396Z</updated>
     
@@ -179,8 +179,8 @@
   
   <entry>
     <title>Redis常见问题</title>
-    <link href="//xxy201799.github.io/2019/11/22/redis-chang-jian-mian-shi-ti/"/>
-    <id>//xxy201799.github.io/2019/11/22/redis-chang-jian-mian-shi-ti/</id>
+    <link href="http://xxystudybook.club/2019/11/22/redis-chang-jian-mian-shi-ti/"/>
+    <id>http://xxystudybook.club/2019/11/22/redis-chang-jian-mian-shi-ti/</id>
     <published>2019-11-22T04:12:57.000Z</published>
     <updated>2019-11-22T05:16:02.174Z</updated>
     
@@ -197,15 +197,15 @@
     </summary>
     
     
-      <category term="缓存中间件" scheme="//xxy201799.github.io/categories/%E7%BC%93%E5%AD%98%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+      <category term="缓存中间件" scheme="http://xxystudybook.club/categories/%E7%BC%93%E5%AD%98%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
   </entry>
   
   <entry>
     <title>虚拟机基础</title>
-    <link href="//xxy201799.github.io/2019/11/20/xu-ni-ji-ji-chu/"/>
-    <id>//xxy201799.github.io/2019/11/20/xu-ni-ji-ji-chu/</id>
+    <link href="http://xxystudybook.club/2019/11/20/xu-ni-ji-ji-chu/"/>
+    <id>http://xxystudybook.club/2019/11/20/xu-ni-ji-ji-chu/</id>
     <published>2019-11-20T14:31:29.908Z</published>
     <updated>2019-11-25T09:24:12.776Z</updated>
     
@@ -227,8 +227,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="//xxy201799.github.io/2019/11/09/hello-world-2/"/>
-    <id>//xxy201799.github.io/2019/11/09/hello-world-2/</id>
+    <link href="http://xxystudybook.club/2019/11/09/hello-world-2/"/>
+    <id>http://xxystudybook.club/2019/11/09/hello-world-2/</id>
     <published>2019-11-09T02:04:08.955Z</published>
     <updated>2019-10-20T06:36:19.558Z</updated>
     
@@ -249,34 +249,9 @@
   </entry>
   
   <entry>
-    <title>zookeeper分布式原理与应用</title>
-    <link href="//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
-    <id>//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-23T08:42:05.569Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="分布式中间件" scheme="//xxy201799.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Spring AOP</title>
-    <link href="//xxy201799.github.io/2019/11/01/springaop/"/>
-    <id>//xxy201799.github.io/2019/11/01/springaop/</id>
+    <link href="http://xxystudybook.club/2019/11/01/springaop/"/>
+    <id>http://xxystudybook.club/2019/11/01/springaop/</id>
     <published>2019-11-01T04:12:57.000Z</published>
     <updated>2019-11-12T15:52:34.084Z</updated>
     
@@ -293,15 +268,40 @@
     </summary>
     
     
-      <category term="框架学习" scheme="//xxy201799.github.io/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="框架学习" scheme="http://xxystudybook.club/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zookeeper分布式原理与应用</title>
+    <link href="http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
+    <id>http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-23T08:42:05.569Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+      <category term="分布式中间件" scheme="http://xxystudybook.club/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
   </entry>
   
   <entry>
     <title>并发编程_Callable&amp;Future</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
     <updated>2019-11-09T01:59:39.226Z</updated>
     
@@ -318,40 +318,15 @@
     </summary>
     
     
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_共享对象</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:00:05.074Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-共享对象&quot;&gt;&lt;a href=&quot;#并发编程-共享对象&quot; class=&quot;headerlink&quot; title=&quot;并发编程_共享对象&quot;&gt;&lt;/a&gt;并发编程_共享对象&lt;/h1&gt;&lt;h2 id=&quot;可见性&quot;&gt;&lt;a href=&quot;#可见性&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
     
   </entry>
   
   <entry>
     <title>并发编程_基础</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/</id>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-ji-chu-2/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-ji-chu-2/</id>
     <published>2019-11-01T04:12:57.000Z</published>
     <updated>2019-11-09T01:59:22.769Z</updated>
     
@@ -369,15 +344,15 @@
     </summary>
     
     
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
     
   </entry>
   
   <entry>
     <title>并发编程_线程安全</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/</id>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-java-nei-cun-mo-xing-2/</id>
     <published>2019-11-01T04:12:57.000Z</published>
     <updated>2019-11-09T01:59:53.479Z</updated>
     
@@ -394,17 +369,17 @@
     </summary>
     
     
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
     
   </entry>
   
   <entry>
-    <title>并发编程_构建块</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</id>
+    <title>并发编程_共享对象</title>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:00:38.811Z</updated>
+    <updated>2019-11-09T02:00:05.074Z</updated>
     
     <summary type="html">
     
@@ -412,47 +387,22 @@
       
         
         
-          &lt;h1 id=&quot;并发编程-构建块&quot;&gt;&lt;a href=&quot;#并发编程-构建块&quot; class=&quot;headerlink&quot; title=&quot;并发编程_构建块&quot;&gt;&lt;/a&gt;并发编程_构建块&lt;/h1&gt;&lt;h2 id=&quot;同步容器&quot;&gt;&lt;a href=&quot;#同步容器&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;并发编程-共享对象&quot;&gt;&lt;a href=&quot;#并发编程-共享对象&quot; class=&quot;headerlink&quot; title=&quot;并发编程_共享对象&quot;&gt;&lt;/a&gt;并发编程_共享对象&lt;/h1&gt;&lt;h2 id=&quot;可见性&quot;&gt;&lt;a href=&quot;#可见性&quot;
         
       
     
     </summary>
     
     
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_线程池原理</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:58:49.004Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-线程池原理&quot;&gt;&lt;a href=&quot;#并发编程-线程池原理&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程池原理&quot;&gt;&lt;/a&gt;并发编程_线程池原理&lt;/h1&gt;&lt;h2 id=&quot;阻塞队列与非阻塞队列&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
     
   </entry>
   
   <entry>
     <title>并发编程_线程之间的通讯</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/</id>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
     <updated>2019-11-09T02:01:43.992Z</updated>
     
@@ -469,7 +419,57 @@
     </summary>
     
     
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程_构建块</title>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T02:00:38.811Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-构建块&quot;&gt;&lt;a href=&quot;#并发编程-构建块&quot; class=&quot;headerlink&quot; title=&quot;并发编程_构建块&quot;&gt;&lt;/a&gt;并发编程_构建块&lt;/h1&gt;&lt;h2 id=&quot;同步容器&quot;&gt;&lt;a href=&quot;#同步容器&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程_线程池原理</title>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T01:58:49.004Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-线程池原理&quot;&gt;&lt;a href=&quot;#并发编程-线程池原理&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程池原理&quot;&gt;&lt;/a&gt;并发编程_线程池原理&lt;/h1&gt;&lt;h2 id=&quot;阻塞队列与非阻塞队列&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
     
   </entry>
