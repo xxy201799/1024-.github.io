@@ -249,6 +249,31 @@
   </entry>
   
   <entry>
+    <title>Spring AOP</title>
+    <link href="http://xxystudybook.club/2019/11/01/springaop/"/>
+    <id>http://xxystudybook.club/2019/11/01/springaop/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-12T15:52:34.084Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Spring-Aop&quot;&gt;&lt;a href=&quot;#Spring-Aop&quot; class=&quot;headerlink&quot; title=&quot;Spring Aop&quot;&gt;&lt;/a&gt;Spring
+        
+      
+    
+    </summary>
+    
+    
+      <category term="框架学习" scheme="http://xxystudybook.club/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>zookeeper分布式原理与应用</title>
     <link href="http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
     <id>http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
@@ -269,6 +294,31 @@
     
     
       <category term="分布式中间件" scheme="http://xxystudybook.club/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程_Callable&amp;Future</title>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T01:59:39.226Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-Callable-amp-Future&quot;&gt;&lt;a href=&quot;#并发编程-Callable-amp-Future&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
     
   </entry>
@@ -299,11 +349,11 @@
   </entry>
   
   <entry>
-    <title>并发编程_Callable&amp;Future</title>
-    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
-    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
+    <title>并发编程_共享对象</title>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:59:39.226Z</updated>
+    <updated>2019-11-09T02:00:05.074Z</updated>
     
     <summary type="html">
     
@@ -311,7 +361,7 @@
       
         
         
-          &lt;h1 id=&quot;并发编程-Callable-amp-Future&quot;&gt;&lt;a href=&quot;#并发编程-Callable-amp-Future&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;并发编程-共享对象&quot;&gt;&lt;a href=&quot;#并发编程-共享对象&quot; class=&quot;headerlink&quot; title=&quot;并发编程_共享对象&quot;&gt;&lt;/a&gt;并发编程_共享对象&lt;/h1&gt;&lt;h2 id=&quot;可见性&quot;&gt;&lt;a href=&quot;#可见性&quot;
         
       
     
@@ -350,31 +400,6 @@
   </entry>
   
   <entry>
-    <title>并发编程_共享对象</title>
-    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/"/>
-    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:00:05.074Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-共享对象&quot;&gt;&lt;a href=&quot;#并发编程-共享对象&quot; class=&quot;headerlink&quot; title=&quot;并发编程_共享对象&quot;&gt;&lt;/a&gt;并发编程_共享对象&lt;/h1&gt;&lt;h2 id=&quot;可见性&quot;&gt;&lt;a href=&quot;#可见性&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>并发编程_构建块</title>
     <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/"/>
     <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</id>
@@ -395,31 +420,6 @@
     
     
       <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Spring AOP</title>
-    <link href="http://xxystudybook.club/2019/11/01/springaop/"/>
-    <id>http://xxystudybook.club/2019/11/01/springaop/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-12T15:52:34.084Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Spring-Aop&quot;&gt;&lt;a href=&quot;#Spring-Aop&quot; class=&quot;headerlink&quot; title=&quot;Spring Aop&quot;&gt;&lt;/a&gt;Spring
-        
-      
-    
-    </summary>
-    
-    
-      <category term="框架学习" scheme="http://xxystudybook.club/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
