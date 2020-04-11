@@ -40,31 +40,6 @@
   </entry>
   
   <entry>
-    <title>分布式中间件</title>
-    <link href="//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
-    <id>//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:02:28.982Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>并发编程_Callable&amp;Future</title>
     <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
     <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
@@ -140,6 +115,32 @@
   </entry>
   
   <entry>
+    <title>并发编程_基础</title>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T01:59:22.769Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程基础&quot;&gt;&lt;a href=&quot;#并发编程基础&quot; class=&quot;headerlink&quot; title=&quot;并发编程基础&quot;&gt;&lt;/a&gt;并发编程基础&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;进程与线程的区别与联系&quot;&gt;&lt;a href=&quot;#进程与线程的区别与联系&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>并发编程_构建块</title>
     <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/"/>
     <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</id>
@@ -165,11 +166,11 @@
   </entry>
   
   <entry>
-    <title>并发编程_基础</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-ji-chu-2/</id>
+    <title>并发编程_线程池原理</title>
+    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/"/>
+    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:59:22.769Z</updated>
+    <updated>2019-11-09T01:58:49.004Z</updated>
     
     <summary type="html">
     
@@ -177,8 +178,7 @@
       
         
         
-          &lt;h1 id=&quot;并发编程基础&quot;&gt;&lt;a href=&quot;#并发编程基础&quot; class=&quot;headerlink&quot; title=&quot;并发编程基础&quot;&gt;&lt;/a&gt;并发编程基础&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id=&quot;进程与线程的区别与联系&quot;&gt;&lt;a href=&quot;#进程与线程的区别与联系&quot;
+          &lt;h1 id=&quot;并发编程-线程池原理&quot;&gt;&lt;a href=&quot;#并发编程-线程池原理&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程池原理&quot;&gt;&lt;/a&gt;并发编程_线程池原理&lt;/h1&gt;&lt;h2 id=&quot;阻塞队列与非阻塞队列&quot;&gt;&lt;a
         
       
     
@@ -216,11 +216,11 @@
   </entry>
   
   <entry>
-    <title>并发编程_线程池原理</title>
-    <link href="//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/"/>
-    <id>//xxy201799.github.io/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/</id>
+    <title>zookeeper分布式原理与应用</title>
+    <link href="//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
+    <id>//xxy201799.github.io/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:58:49.004Z</updated>
+    <updated>2019-11-09T02:08:03.238Z</updated>
     
     <summary type="html">
     
@@ -228,14 +228,14 @@
       
         
         
-          &lt;h1 id=&quot;并发编程-线程池原理&quot;&gt;&lt;a href=&quot;#并发编程-线程池原理&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程池原理&quot;&gt;&lt;/a&gt;并发编程_线程池原理&lt;/h1&gt;&lt;h2 id=&quot;阻塞队列与非阻塞队列&quot;&gt;&lt;a
+          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
         
       
     
     </summary>
     
     
-      <category term="并发编程" scheme="//xxy201799.github.io/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+      <category term="分布式中间件" scheme="//xxy201799.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
   </entry>
