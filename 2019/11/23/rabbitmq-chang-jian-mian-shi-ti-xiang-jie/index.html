@@ -583,7 +583,9 @@
 <p>durable 属性，则在其 crash 之后就会无法恢复，那么即使 message 设置了 persistent 属</p>
 <p>性，仍然存在 message 虽然能恢复但却无处容身的问题；同理，若 message 本身未设置</p>
 <p>persistent 属性，则 message 的持久化更无从谈起。</p>
-<h2 id="“dead-letter”queue-的用途？"><a href="#“dead-letter”queue-的用途？" class="headerlink" title="“dead letter”queue 的用途？"></a>“dead letter”queue 的用途？</h2><h2 id="向不存在的-exchange-发-publish-消息会发生什么？向不存在的-queue-执行consume-动作会发生什么？"><a href="#向不存在的-exchange-发-publish-消息会发生什么？向不存在的-queue-执行consume-动作会发生什么？" class="headerlink" title="向不存在的 exchange 发 publish 消息会发生什么？向不存在的 queue 执行consume 动作会发生什么？"></a>向不存在的 exchange 发 publish 消息会发生什么？向不存在的 queue 执行consume 动作会发生什么？</h2>
+<h2 id="“dead-letter”queue-的用途？"><a href="#“dead-letter”queue-的用途？" class="headerlink" title="“dead letter”queue 的用途？"></a>“dead letter”queue 的用途？</h2><p>为了保证订单业务的消息数据不丢失，需要使用到RabbitMQ的死信队列机制，当消息消费发生异常时，将消息投入死信队列中。这些死信队列中的消息系统可以进行相关的业务处理</p>
+<h2 id="向不存在的-exchange-发-publish-消息会发生什么？向不存在的-queue-执行consume-动作会发生什么？"><a href="#向不存在的-exchange-发-publish-消息会发生什么？向不存在的-queue-执行consume-动作会发生什么？" class="headerlink" title="向不存在的 exchange 发 publish 消息会发生什么？向不存在的 queue 执行consume 动作会发生什么？"></a>向不存在的 exchange 发 publish 消息会发生什么？向不存在的 queue 执行consume 动作会发生什么？</h2><p>都会收到channel.close信令告知不存在。</p>
+
             </div>
             <hr/>
 

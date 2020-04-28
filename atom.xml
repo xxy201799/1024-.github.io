@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xxystudybook.club/"/>
-  <updated>2020-03-07T15:09:54.685Z</updated>
+  <updated>2020-04-28T15:26:31.009Z</updated>
   <id>http://xxystudybook.club/</id>
   
   <author>
@@ -15,6 +15,98 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker中部署springCloudAlibaba无法访问的问题</title>
+    <link href="http://xxystudybook.club/2020/04/28/docker-zhong-bu-shu-springcloudalibaba-wu-fa-fang-wen-de-wen-ti/"/>
+    <id>http://xxystudybook.club/2020/04/28/docker-zhong-bu-shu-springcloudalibaba-wu-fa-fang-wen-de-wen-ti/</id>
+    <published>2020-04-28T15:02:31.096Z</published>
+    <updated>2020-04-28T15:26:31.009Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Docker中部署SpringCloudAlibaba无法访问的问题&quot;&gt;&lt;a href=&quot;#Docker中部署SpringCloudAlibaba无法访问的问题&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Zookeeper_zookeeper源码搭建与编译</title>
+    <link href="http://xxystudybook.club/2020/04/19/zookeeper-zookeeper-yuan-ma-da-jian-yu-bian-yi/"/>
+    <id>http://xxystudybook.club/2020/04/19/zookeeper-zookeeper-yuan-ma-da-jian-yu-bian-yi/</id>
+    <published>2020-04-19T15:29:38.685Z</published>
+    <updated>2020-04-19T15:56:33.378Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Zookeeper3-5-5本地源码环境搭建以及编译&quot;&gt;&lt;a href=&quot;#Zookeeper3-5-5本地源码环境搭建以及编译&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Spring篇_IOC源码解析</title>
+    <link href="http://xxystudybook.club/2020/04/19/spring-pian-ioc-yuan-ma-jie-xi/"/>
+    <id>http://xxystudybook.club/2020/04/19/spring-pian-ioc-yuan-ma-jie-xi/</id>
+    <published>2020-04-19T15:28:20.998Z</published>
+    <updated>2020-04-19T15:57:23.922Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Spring-IOC源码解析&quot;&gt;&lt;a href=&quot;#Spring-IOC源码解析&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式_观察者模式_访问者模式</title>
+    <link href="http://xxystudybook.club/2020/04/14/she-ji-mo-shi-guan-cha-zhe-mo-shi-fang-wen-zhe-mo-shi/"/>
+    <id>http://xxystudybook.club/2020/04/14/she-ji-mo-shi-guan-cha-zhe-mo-shi-fang-wen-zhe-mo-shi/</id>
+    <published>2020-04-14T15:50:18.558Z</published>
+    <updated>2020-04-14T15:50:18.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;设计模式-访问者模式-观察者模式&quot;&gt;&lt;a href=&quot;#设计模式-访问者模式-观察者模式&quot; class=&quot;headerlink&quot; title=&quot;设计模式_访问者模式_观察者模式&quot;&gt;&lt;/a&gt;设计模式_访问者模式_观察者模式&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>算法_排序算法</title>
@@ -67,7 +159,7 @@
     <link href="http://xxystudybook.club/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/"/>
     <id>http://xxystudybook.club/2020/03/04/she-ji-mo-shi-men-mian-mo-shi-zhuang-shi-mo-shi/</id>
     <published>2020-03-04T12:48:32.036Z</published>
-    <updated>2020-03-08T13:55:32.555Z</updated>
+    <updated>2020-04-12T16:52:47.286Z</updated>
     
     <summary type="html">
     
@@ -136,7 +228,7 @@
     <link href="http://xxystudybook.club/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/"/>
     <id>http://xxystudybook.club/2019/11/23/rabbitmq-chang-jian-mian-shi-ti-xiang-jie/</id>
     <published>2019-11-23T08:42:44.707Z</published>
-    <updated>2019-11-26T06:02:32.056Z</updated>
+    <updated>2020-04-12T16:40:10.757Z</updated>
     
     <summary type="html">
     
@@ -274,31 +366,6 @@
   </entry>
   
   <entry>
-    <title>zookeeper分布式原理与应用</title>
-    <link href="http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
-    <id>http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-23T08:42:05.569Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="分布式中间件" scheme="http://xxystudybook.club/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>并发编程_Callable&amp;Future</title>
     <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/"/>
     <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-callable-future-1/</id>
@@ -349,6 +416,31 @@
   </entry>
   
   <entry>
+    <title>并发编程_共享对象</title>
+    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/"/>
+    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</id>
+    <published>2019-11-01T04:12:57.000Z</published>
+    <updated>2019-11-09T02:00:05.074Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;并发编程-共享对象&quot;&gt;&lt;a href=&quot;#并发编程-共享对象&quot; class=&quot;headerlink&quot; title=&quot;并发编程_共享对象&quot;&gt;&lt;/a&gt;并发编程_共享对象&lt;/h1&gt;&lt;h2 id=&quot;可见性&quot;&gt;&lt;a href=&quot;#可见性&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>并发编程_基础</title>
     <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-ji-chu-2/"/>
     <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-ji-chu-2/</id>
@@ -375,11 +467,11 @@
   </entry>
   
   <entry>
-    <title>并发编程_构建块</title>
-    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/"/>
-    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</id>
+    <title>zookeeper分布式原理与应用</title>
+    <link href="http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/"/>
+    <id>http://xxystudybook.club/2019/11/01/zookeeper-gong-zuo-yuan-li-yu-ying-yong-2/</id>
     <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:00:38.811Z</updated>
+    <updated>2019-11-23T08:42:05.569Z</updated>
     
     <summary type="html">
     
@@ -387,89 +479,14 @@
       
         
         
-          &lt;h1 id=&quot;并发编程-构建块&quot;&gt;&lt;a href=&quot;#并发编程-构建块&quot; class=&quot;headerlink&quot; title=&quot;并发编程_构建块&quot;&gt;&lt;/a&gt;并发编程_构建块&lt;/h1&gt;&lt;h2 id=&quot;同步容器&quot;&gt;&lt;a href=&quot;#同步容器&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;a href=&quot;#zookeeper分布式原理与应用&quot; class=&quot;headerlink&quot; title=&quot;zookeeper分布式原理与应用&quot;&gt;&lt;/a&gt;zookeeper分布式原理与应用&lt;/h1&gt;&lt;h3
         
       
     
     </summary>
     
     
-      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_共享对象</title>
-    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/"/>
-    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gong-xiang-dui-xiang-1/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:00:05.074Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-共享对象&quot;&gt;&lt;a href=&quot;#并发编程-共享对象&quot; class=&quot;headerlink&quot; title=&quot;并发编程_共享对象&quot;&gt;&lt;/a&gt;并发编程_共享对象&lt;/h1&gt;&lt;h2 id=&quot;可见性&quot;&gt;&lt;a href=&quot;#可见性&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_线程之间的通讯</title>
-    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/"/>
-    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T02:01:43.992Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-线程之间的通讯&quot;&gt;&lt;a href=&quot;#并发编程-线程之间的通讯&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程之间的通讯&quot;&gt;&lt;/a&gt;并发编程_线程之间的通讯&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程_线程池原理</title>
-    <link href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/"/>
-    <id>http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-xian-cheng-chi-yuan-li-1/</id>
-    <published>2019-11-01T04:12:57.000Z</published>
-    <updated>2019-11-09T01:58:49.004Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;并发编程-线程池原理&quot;&gt;&lt;a href=&quot;#并发编程-线程池原理&quot; class=&quot;headerlink&quot; title=&quot;并发编程_线程池原理&quot;&gt;&lt;/a&gt;并发编程_线程池原理&lt;/h1&gt;&lt;h2 id=&quot;阻塞队列与非阻塞队列&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="并发编程" scheme="http://xxystudybook.club/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+      <category term="分布式中间件" scheme="http://xxystudybook.club/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
   </entry>

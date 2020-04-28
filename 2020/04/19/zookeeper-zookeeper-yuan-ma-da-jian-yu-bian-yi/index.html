@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="并发编程_构建块, Hexo">
-    <meta name="description" content="并发编程_构建块同步容器同步容器分为两部分，一个是vector和HashTable。他们早期是JDK的一部分：另一个是他们的同系容器，在JDK1.2才被加入的同步包装类。这些类是由Collections.synchronizedxxx工厂方">
+    <meta name="keywords" content="Zookeeper_zookeeper源码搭建与编译, Hexo">
+    <meta name="description" content="Zookeeper3.5.5本地源码环境搭建以及编译本次我们通过搭建zookeeper的源码环境，通过ant编译的方式编译zookeeper，然后启动本地源码zookeeper。
+需求分析
+本次拉取zookeeper的源码可以进行系统的学习">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>并发编程_构建块 | Hexo</title>
+    <title>Zookeeper_zookeeper源码搭建与编译 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        并发编程_构建块
+                        Zookeeper_zookeeper源码搭建与编译
                     </div>
                 </div>
             </div>
@@ -427,22 +429,13 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                并发编程
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-11-01
+                    2020-04-19
                 </div>
 
                 
@@ -458,107 +451,61 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="并发编程-构建块"><a href="#并发编程-构建块" class="headerlink" title="并发编程_构建块"></a>并发编程_构建块</h1><h2 id="同步容器"><a href="#同步容器" class="headerlink" title="同步容器"></a>同步容器</h2><p>同步容器分为两部分，一个是vector和HashTable。他们早期是JDK的一部分：另一个是他们的同系容器，在JDK1.2才被加入的同步包装类。这些类是由Collections.synchronizedxxx工厂方法创建的。这些类通过封装他们的状态，并对每一个公共的方法进行同步而实现了线程安全。</p>
-<h2 id="并发容器"><a href="#并发容器" class="headerlink" title="并发容器"></a>并发容器</h2><p>并发容器是为多线程而设计的，其中有代替Map的ConcurrentHashMap;读多写少的CopyOnWriteArrayList。同样新增了Queue和BlockingQueue。Queue用来临时保存正在等待被进一步处理的一系列元素。JDK提供了几种实现，包括一个传统的FIFO队列，ConcurrnetLinkedQueue;一个具有优先级的队列，PriorityQueue。BlockingQueue扩展了Queue，增加了可阻塞的插入和获取的操作。如果队列是空的，一个获取操作会阻塞到直到队列中存在元素；如果队列是满的，会阻塞到存在空间。阻塞队列对于生产者和消费者的设计非常有用。</p>
-<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>ConcurrentHashMap与其他容器一起，提供了不会抛出ConcurrentModificationException的迭代器，因此不需要再容器中加锁。但是对于整个Map进行操作的方法如size()和isEmpty,他们的语义在反映容器并发特性上被轻微的弱化了。因为size()的结果对于计算的时候可能已经过期，它仅仅是一个估算值。concurrentHashMap使用的是分离锁。</p>
-<h3 id="对比ConcurrentHashMap与HashMap"><a href="#对比ConcurrentHashMap与HashMap" class="headerlink" title="对比ConcurrentHashMap与HashMap"></a>对比ConcurrentHashMap与HashMap</h3><h4 id="1、HashMap"><a href="#1、HashMap" class="headerlink" title="1、HashMap"></a>1、HashMap</h4><p>hashmap分为1.7与1.8两个版本其中1.7的版本如下图所示：<br><img src="https://i.loli.net/2019/05/08/5cd1d2be77958.jpg" alt="hashmap1.7结构图"><br>看看其实现<br><img src="https://i.loli.net/2019/05/08/5cd1d2bfd6aba.jpg" alt="hashmap实现">  </p>
-<ul>
-<li>初始化桶大小</li>
-<li>桶最大值</li>
-<li>默认负载因子</li>
-<li>table真正存放数据的数组</li>
-<li>Map存放数量的大小</li>
-<li>桶大小</li>
-<li>负载因子，可在初始化时显示指定  </li>
+                <h1 id="Zookeeper3-5-5本地源码环境搭建以及编译"><a href="#Zookeeper3-5-5本地源码环境搭建以及编译" class="headerlink" title="Zookeeper3.5.5本地源码环境搭建以及编译"></a>Zookeeper3.5.5本地源码环境搭建以及编译</h1><p>本次我们通过搭建zookeeper的源码环境，通过ant编译的方式编译zookeeper，然后启动本地源码zookeeper。</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><ul>
+<li>本次拉取zookeeper的源码可以进行系统的学习zookeeper协同框架。</li>
+<li>需要开发一个线上注册中心，能实现自己的业务功能</li>
 </ul>
-<p>而在1.8的版本中增加了当链表达到8的长度时会转化为红黑树，而Entry改成了Node。在put方法中会判断结构是否是红黑树，如果是红黑树则按照红黑树的规则插入数据，判断是否大于阈值，大于则转为红黑树。</p>
-<p>但是HashMap同样存在并发问题</p>
-<pre><code>final HashMap&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-for (int i = 0; i &lt; 1000; i++) {
-    new Thread(new Runnable() {
-        @Override
-        public void run() {
-            map.put(UUID.randomUUID().toString(), &quot;&quot;);
-        }
-    }).start();
-}</code></pre><p>HashMap 扩容的时候会调用 resize() 方法，就是这里的并发操作容易在一个桶上形成环形链表；这样当获取一个不存在的 key 时，计算出的 index 正好是环形链表的下标就会出现死循环。</p>
-<h4 id="ConcurrentHashMap-1"><a href="#ConcurrentHashMap-1" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><p>1.7版本结构图：  </p>
-<p><img src="https://i.loli.net/2019/05/08/5cd1d2c5ce95c.jpg" alt="ConcurrentHashMap结构图"><br>如图所示，是由 Segment 数组、HashEntry 组成，和 HashMap 一样，仍然是数组加链表。<br>它的核心成员变量：</p>
-<pre><code>/**
- * Segment 数组，存放数据时首先需要定位到具体的 Segment 中。
- */
-final Segment&lt;K,V&gt;[] segments;
-transient Set&lt;K&gt; keySet;
-transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</code></pre><p>Segment 是 ConcurrentHashMap 的一个内部类，主要的组成如下：</p>
-<pre><code> static final class Segment&lt;K,V&gt; extends ReentrantLock implements Serializable {
-       private static final long serialVersionUID = 2249069246763182397L;
+<p>拉取zookeeper的源码在于本人需要实现一款针对企业接入的第三方注册中心，线上可配置化，可以对服务进行系统监控，限流，协议选择，服务上下架等功能。</p>
+<h2 id="Ant环境搭建"><a href="#Ant环境搭建" class="headerlink" title="Ant环境搭建"></a>Ant环境搭建</h2><p>首先我们需要从官网下载ant：<a href="https://ant.apache.org/bindownload.cgi" target="_blank" rel="noopener" title="ant官网下载地址">https://ant.apache.org/bindownload.cgi</a>  </p>
+<p>下载解压后，我们需要配置系统环境变量，首先你得保证你配置了JAVA_HOME。</p>
+<pre><code>//修改为自己本地安装的目录
+ANT_HOMT=D:\apache-ant-1.10.7 
+PATH=%ANT_HOME%/bin
+CLASSPATH=%ANT_HOME%/lib  </code></pre><p>配置好后，测试下Ant是否安装成功。ant -version,得到如下信息则代表安装成功： </p>
+<pre><code>Apache Ant(TM) version 1.10.7 compiled on September 1 2019  </code></pre><p>Ant的安装跟JDK的安装和配置非常相似，这里不做过多介绍。  </p>
+<h2 id="下载zookeeper源码"><a href="#下载zookeeper源码" class="headerlink" title="下载zookeeper源码"></a>下载zookeeper源码</h2><p>源码地址：<a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">https://github.com/apache/zookeeper</a>  </p>
+<p>这里我们tag版本选择3.5.5  </p>
+<h3 id="重点：编译zookeeper源码"><a href="#重点：编译zookeeper源码" class="headerlink" title="重点：编译zookeeper源码"></a>重点：编译zookeeper源码</h3><p>切换到源码所在目录，运行ant eclipse将项目编译并转成eclipse的项目结构。  </p>
+<p><img src="https://img-blog.csdnimg.cn/20191230152211788.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="zookeeper编译图片">  </p>
+<p>这个编译过程会比较长，差不多等了7分钟。如果编译成功，会出现如下结果：  </p>
+<p><img src="https://img-blog.csdnimg.cn/20191230152345614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="zookeeper编译成功图片">  </p>
+<h2 id="导入IDEA"><a href="#导入IDEA" class="headerlink" title="导入IDEA"></a>导入IDEA</h2><p>上面已经将项目编译并转成eclipse的项目结构，按eclipse的形式导入项目。<br><img src="https://img-blog.csdnimg.cn/20191230152519906.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="导入IDEA">  </p>
+<p><img src="https://img-blog.csdnimg.cn/20191230152653707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="导入IDEA">  </p>
+<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><p>将源码导入IDEA后在org.apache.zookeeper.Version中发现很多红色警告，很明显少了org.apache.zookeeper.version.Info类。  </p>
+<p><img src="https://img-blog.csdnimg.cn/20191230155040951.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="info类缺失">  </p>
+<p>查询源码得知是用来发布的时候生成版本用的，我们只是研读源码，又不发布版本所以直接写死就ok了。  </p>
+<p><img src="https://img-blog.csdnimg.cn/20191230155439579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="自定义Info类">  </p>
+<p>即新增Info类： </p>
+<pre><code>package org.apache.zookeeper.version;
 
-       // 和 HashMap 中的 HashEntry 作用一样，真正存放数据的桶
-       transient volatile HashEntry&lt;K,V&gt;[] table;
-       transient int count;
-       transient int modCount;
-       transient int threshold;
-       final float loadFactor;
-
-}</code></pre><p>看看其中 HashEntry 的组成：<br><img src="https://i.loli.net/2019/05/08/5cd1d2c635c69.jpg" alt="HashEntry"><br>和 HashMap 非常类似，唯一的区别就是其中的核心数据如 value ，以及链表都是 volatile 修饰的，保证了获取时的可见性。</p>
-<p>原理上来说：ConcurrentHashMap 采用了分段锁技术，其中 Segment 继承于 ReentrantLock。不会像 HashTable 那样不管是 put 还是 get 操作都需要做同步处理，理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。每当一个线程占用锁访问一个 Segment 时，不会影响到其他的 Segment。  </p>
-<p>下面也来看看核心的 put get 方法。<br>put 方法</p>
-<pre><code>public V put(K key, V value) {
-    Segment&lt;K,V&gt; s;
-    if (value == null)
-        throw new NullPointerException();
-    int hash = hash(key);
-    int j = (hash &gt;&gt;&gt; segmentShift) &amp; segmentMask;
-    if ((s = (Segment&lt;K,V&gt;)UNSAFE.getObject          // nonvolatile; recheck
-         (segments, (j &lt;&lt; SSHIFT) + SBASE)) == null) //  in ensureSegment
-        s = ensureSegment(j);
-    return s.put(key, hash, value, false);
-}</code></pre><p>首先是通过 key 定位到 Segment，之后在对应的 Segment 中进行具体的 put。  </p>
-<pre><code>final V put(K key, int hash, V value, boolean onlyIfAbsent) {
-    HashEntry&lt;K,V&gt; node = tryLock() ? null :
-        scanAndLockForPut(key, hash, value);
-    V oldValue;
-    try {
-        HashEntry&lt;K,V&gt;[] tab = table;
-        int index = (tab.length - 1) &amp; hash;
-        HashEntry&lt;K,V&gt; first = entryAt(tab, index);
-        for (HashEntry&lt;K,V&gt; e = first;;) {
-            if (e != null) {
-                K k;
-                if ((k = e.key) == key ||
-                    (e.hash == hash &amp;&amp; key.equals(k))) {
-                    oldValue = e.value;
-                    if (!onlyIfAbsent) {
-                        e.value = value;
-                        ++modCount;
-                    }
-                    break;
-                }
-                e = e.next;
-            }
-            else {
-                if (node != null)
-                    node.setNext(first);
-                else
-                    node = new HashEntry&lt;K,V&gt;(hash, key, value, first);
-                int c = count + 1;
-                if (c &gt; threshold &amp;&amp; tab.length &lt; MAXIMUM_CAPACITY)
-                    rehash(node);
-                else
-                    setEntryAt(tab, index, node);
-                ++modCount;
-                count = c;
-                oldValue = null;
-                break;
-            }
-        }
-    } finally {
-        unlock();
-    }
-    return oldValue;
-}</code></pre><p>虽然 HashEntry 中的 value 是用 volatile 关键词修饰的，但是并不能保证并发的原子性，所以 put 操作时仍然需要加锁处理。</p>
-<p>首先第一步的时候会尝试获取锁，如果获取失败肯定就有其他线程存在竞争，则利用 scanAndLockForPut() 自旋获取锁。  </p>
-<p>在1.8版本中，则使用了synchronized+cas算法来进行锁的获取  </p>
+public interface Info {
+    int MAJOR = 3;
+    int MINOR = 5;
+    int MICRO = 6;
+    String QUALIFIER = null;
+    String REVISION_HASH = &quot;c11b7e26bc554b8523dc929761dd28808913f091&quot;;
+    String BUILD_DATE = &quot;10/08/2019 20:18 GMT&quot;;
+}</code></pre><h2 id="启动zookeeper"><a href="#启动zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><p>针对单机版本和集群版本，分别对应两个启动类：</p>
+<ul>
+<li>单机：ZooKeeperServerMain</li>
+<li>集群：QuorumPeerMain</li>
+</ul>
+<p>这里我们只做单机版的测试。</p>
+<p>在conf目录里有个zoo_sample.cfg，复制一份重命名为zoo.cfg。</p>
+<p>zoo.cfg里的内容做点修改（也可以不做修改），方便日志查询。dataDir和dataLogDir根据自己的情况设定。 </p>
+<pre><code>dataDir=D:\\IDEA_WorkSpace\\mygit_project\\zookeeper-release-3.5.5\\data
+dataLogDir=D:\\IDEA_WorkSpace\\mygit_project\\zookeeper-release-3.5.5\\log</code></pre><p>运行主类 org.apache.zookeeper.server.ZooKeeperServerMain，将zoo.cfg的完整路径配置在Program arguments。  </p>
+<p><img src="https://img-blog.csdnimg.cn/20191230153718683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="运行配置"></p>
+<p>运行ZooKeeperServerMain，得到的结果如下：  </p>
+<pre><code>Connected to the target VM, address: &#39;127.0.0.1:0&#39;, transport: &#39;socket&#39;
+log4j:WARN No appenders could be found for logger (org.apache.zookeeper.jmx.ManagedUtil).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.  </code></pre><p>告知日志无法输出，日志文件配置有误。这里需要指定日志文件log4j.properties。  </p>
+<p><img src="https://img-blog.csdnimg.cn/2019123015440042.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="运行配置">  </p>
+<p>在VM options配置，即指定到conf目录下的log4j.properties：</p>
+<pre><code>-Dlog4j.configuration=file:D:/IDEA_WorkSpace/mygit_project/zookeeper-release-3.5.5/conf/log4j.properties</code></pre><p>配置后重新运行ZooKeeperServerMain，输出日志如下， </p>
+<p><img src="https://img-blog.csdnimg.cn/20191230154623937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly95dWFucmVuZ3UuYmxvZy5jc2RuLm5ldA==,size_16,color_FFFFFF,t_70" alt="zk启动日志"></p>
 
             </div>
             <hr/>
@@ -584,7 +531,7 @@ transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</code></pre><p>Segment 是 C
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/">http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</a>
+                    <a href="http://xxystudybook.club/2020/04/19/zookeeper-zookeeper-yuan-ma-da-jian-yu-bian-yi/">http://xxystudybook.club/2020/04/19/zookeeper-zookeeper-yuan-ma-da-jian-yu-bian-yi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -790,35 +737,29 @@ transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</code></pre><p>Segment 是 C
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/">
+                <a href="/2020/04/28/docker-zhong-bu-shu-springcloudalibaba-wu-fa-fang-wen-de-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="并发编程_线程之间的通讯">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Docker中部署springCloudAlibaba无法访问的问题">
                         
-                        <span class="card-title">并发编程_线程之间的通讯</span>
+                        <span class="card-title">Docker中部署springCloudAlibaba无法访问的问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程_线程之间的通讯volatile与Synchronized的区别
-volatile只能保持可见性，但不能保证原子性，synchronized既可以保证可见性又可以保证原子性
-volatile禁止重排序，synchronized不禁止
+                            Docker中部署SpringCloudAlibaba无法访问的问题问题描述：本次由于需要实现jenkins+docker自动化部署，突然发现jar构建成镜像之后，容器内部无法访问的问题，一直报错找不到host，那我们自然想到docker容
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-28
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    并发编程
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
                             
                         </span>
                     </div>
@@ -830,41 +771,36 @@ volatile禁止重排序，synchronized不禁止
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/">
+                <a href="/2020/04/19/spring-pian-ioc-yuan-ma-jie-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="并发编程_构建块">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Spring篇_IOC源码解析">
                         
-                        <span class="card-title">并发编程_构建块</span>
+                        <span class="card-title">Spring篇_IOC源码解析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程_构建块同步容器同步容器分为两部分，一个是vector和HashTable。他们早期是JDK的一部分：另一个是他们的同系容器，在JDK1.2才被加入的同步包装类。这些类是由Collections.synchronizedxxx工厂方
+                            Spring_IOC源码解析
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    并发编程
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
                             
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

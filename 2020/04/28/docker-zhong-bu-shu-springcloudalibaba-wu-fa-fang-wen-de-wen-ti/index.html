@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="并发编程_构建块, Hexo">
-    <meta name="description" content="并发编程_构建块同步容器同步容器分为两部分，一个是vector和HashTable。他们早期是JDK的一部分：另一个是他们的同系容器，在JDK1.2才被加入的同步包装类。这些类是由Collections.synchronizedxxx工厂方">
+    <meta name="keywords" content="Docker中部署springCloudAlibaba无法访问的问题, Hexo">
+    <meta name="description" content="Docker中部署SpringCloudAlibaba无法访问的问题问题描述：本次由于需要实现jenkins+docker自动化部署，突然发现jar构建成镜像之后，容器内部无法访问的问题，一直报错找不到host，那我们自然想到docker容">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>并发编程_构建块 | Hexo</title>
+    <title>Docker中部署springCloudAlibaba无法访问的问题 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +304,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        并发编程_构建块
+                        Docker中部署springCloudAlibaba无法访问的问题
                     </div>
                 </div>
             </div>
@@ -427,22 +427,13 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                并发编程
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-11-01
+                    2020-04-28
                 </div>
 
                 
@@ -458,107 +449,59 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="并发编程-构建块"><a href="#并发编程-构建块" class="headerlink" title="并发编程_构建块"></a>并发编程_构建块</h1><h2 id="同步容器"><a href="#同步容器" class="headerlink" title="同步容器"></a>同步容器</h2><p>同步容器分为两部分，一个是vector和HashTable。他们早期是JDK的一部分：另一个是他们的同系容器，在JDK1.2才被加入的同步包装类。这些类是由Collections.synchronizedxxx工厂方法创建的。这些类通过封装他们的状态，并对每一个公共的方法进行同步而实现了线程安全。</p>
-<h2 id="并发容器"><a href="#并发容器" class="headerlink" title="并发容器"></a>并发容器</h2><p>并发容器是为多线程而设计的，其中有代替Map的ConcurrentHashMap;读多写少的CopyOnWriteArrayList。同样新增了Queue和BlockingQueue。Queue用来临时保存正在等待被进一步处理的一系列元素。JDK提供了几种实现，包括一个传统的FIFO队列，ConcurrnetLinkedQueue;一个具有优先级的队列，PriorityQueue。BlockingQueue扩展了Queue，增加了可阻塞的插入和获取的操作。如果队列是空的，一个获取操作会阻塞到直到队列中存在元素；如果队列是满的，会阻塞到存在空间。阻塞队列对于生产者和消费者的设计非常有用。</p>
-<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>ConcurrentHashMap与其他容器一起，提供了不会抛出ConcurrentModificationException的迭代器，因此不需要再容器中加锁。但是对于整个Map进行操作的方法如size()和isEmpty,他们的语义在反映容器并发特性上被轻微的弱化了。因为size()的结果对于计算的时候可能已经过期，它仅仅是一个估算值。concurrentHashMap使用的是分离锁。</p>
-<h3 id="对比ConcurrentHashMap与HashMap"><a href="#对比ConcurrentHashMap与HashMap" class="headerlink" title="对比ConcurrentHashMap与HashMap"></a>对比ConcurrentHashMap与HashMap</h3><h4 id="1、HashMap"><a href="#1、HashMap" class="headerlink" title="1、HashMap"></a>1、HashMap</h4><p>hashmap分为1.7与1.8两个版本其中1.7的版本如下图所示：<br><img src="https://i.loli.net/2019/05/08/5cd1d2be77958.jpg" alt="hashmap1.7结构图"><br>看看其实现<br><img src="https://i.loli.net/2019/05/08/5cd1d2bfd6aba.jpg" alt="hashmap实现">  </p>
-<ul>
-<li>初始化桶大小</li>
-<li>桶最大值</li>
-<li>默认负载因子</li>
-<li>table真正存放数据的数组</li>
-<li>Map存放数量的大小</li>
-<li>桶大小</li>
-<li>负载因子，可在初始化时显示指定  </li>
-</ul>
-<p>而在1.8的版本中增加了当链表达到8的长度时会转化为红黑树，而Entry改成了Node。在put方法中会判断结构是否是红黑树，如果是红黑树则按照红黑树的规则插入数据，判断是否大于阈值，大于则转为红黑树。</p>
-<p>但是HashMap同样存在并发问题</p>
-<pre><code>final HashMap&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-for (int i = 0; i &lt; 1000; i++) {
-    new Thread(new Runnable() {
-        @Override
-        public void run() {
-            map.put(UUID.randomUUID().toString(), &quot;&quot;);
-        }
-    }).start();
-}</code></pre><p>HashMap 扩容的时候会调用 resize() 方法，就是这里的并发操作容易在一个桶上形成环形链表；这样当获取一个不存在的 key 时，计算出的 index 正好是环形链表的下标就会出现死循环。</p>
-<h4 id="ConcurrentHashMap-1"><a href="#ConcurrentHashMap-1" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><p>1.7版本结构图：  </p>
-<p><img src="https://i.loli.net/2019/05/08/5cd1d2c5ce95c.jpg" alt="ConcurrentHashMap结构图"><br>如图所示，是由 Segment 数组、HashEntry 组成，和 HashMap 一样，仍然是数组加链表。<br>它的核心成员变量：</p>
-<pre><code>/**
- * Segment 数组，存放数据时首先需要定位到具体的 Segment 中。
- */
-final Segment&lt;K,V&gt;[] segments;
-transient Set&lt;K&gt; keySet;
-transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</code></pre><p>Segment 是 ConcurrentHashMap 的一个内部类，主要的组成如下：</p>
-<pre><code> static final class Segment&lt;K,V&gt; extends ReentrantLock implements Serializable {
-       private static final long serialVersionUID = 2249069246763182397L;
-
-       // 和 HashMap 中的 HashEntry 作用一样，真正存放数据的桶
-       transient volatile HashEntry&lt;K,V&gt;[] table;
-       transient int count;
-       transient int modCount;
-       transient int threshold;
-       final float loadFactor;
-
-}</code></pre><p>看看其中 HashEntry 的组成：<br><img src="https://i.loli.net/2019/05/08/5cd1d2c635c69.jpg" alt="HashEntry"><br>和 HashMap 非常类似，唯一的区别就是其中的核心数据如 value ，以及链表都是 volatile 修饰的，保证了获取时的可见性。</p>
-<p>原理上来说：ConcurrentHashMap 采用了分段锁技术，其中 Segment 继承于 ReentrantLock。不会像 HashTable 那样不管是 put 还是 get 操作都需要做同步处理，理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。每当一个线程占用锁访问一个 Segment 时，不会影响到其他的 Segment。  </p>
-<p>下面也来看看核心的 put get 方法。<br>put 方法</p>
-<pre><code>public V put(K key, V value) {
-    Segment&lt;K,V&gt; s;
-    if (value == null)
-        throw new NullPointerException();
-    int hash = hash(key);
-    int j = (hash &gt;&gt;&gt; segmentShift) &amp; segmentMask;
-    if ((s = (Segment&lt;K,V&gt;)UNSAFE.getObject          // nonvolatile; recheck
-         (segments, (j &lt;&lt; SSHIFT) + SBASE)) == null) //  in ensureSegment
-        s = ensureSegment(j);
-    return s.put(key, hash, value, false);
-}</code></pre><p>首先是通过 key 定位到 Segment，之后在对应的 Segment 中进行具体的 put。  </p>
-<pre><code>final V put(K key, int hash, V value, boolean onlyIfAbsent) {
-    HashEntry&lt;K,V&gt; node = tryLock() ? null :
-        scanAndLockForPut(key, hash, value);
-    V oldValue;
-    try {
-        HashEntry&lt;K,V&gt;[] tab = table;
-        int index = (tab.length - 1) &amp; hash;
-        HashEntry&lt;K,V&gt; first = entryAt(tab, index);
-        for (HashEntry&lt;K,V&gt; e = first;;) {
-            if (e != null) {
-                K k;
-                if ((k = e.key) == key ||
-                    (e.hash == hash &amp;&amp; key.equals(k))) {
-                    oldValue = e.value;
-                    if (!onlyIfAbsent) {
-                        e.value = value;
-                        ++modCount;
-                    }
-                    break;
-                }
-                e = e.next;
-            }
-            else {
-                if (node != null)
-                    node.setNext(first);
-                else
-                    node = new HashEntry&lt;K,V&gt;(hash, key, value, first);
-                int c = count + 1;
-                if (c &gt; threshold &amp;&amp; tab.length &lt; MAXIMUM_CAPACITY)
-                    rehash(node);
-                else
-                    setEntryAt(tab, index, node);
-                ++modCount;
-                count = c;
-                oldValue = null;
-                break;
-            }
-        }
-    } finally {
-        unlock();
-    }
-    return oldValue;
-}</code></pre><p>虽然 HashEntry 中的 value 是用 volatile 关键词修饰的，但是并不能保证并发的原子性，所以 put 操作时仍然需要加锁处理。</p>
-<p>首先第一步的时候会尝试获取锁，如果获取失败肯定就有其他线程存在竞争，则利用 scanAndLockForPut() 自旋获取锁。  </p>
-<p>在1.8版本中，则使用了synchronized+cas算法来进行锁的获取  </p>
+                <h1 id="Docker中部署SpringCloudAlibaba无法访问的问题"><a href="#Docker中部署SpringCloudAlibaba无法访问的问题" class="headerlink" title="Docker中部署SpringCloudAlibaba无法访问的问题"></a>Docker中部署SpringCloudAlibaba无法访问的问题</h1><h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>本次由于需要实现jenkins+docker自动化部署，突然发现jar构建成镜像之后，容器内部无法访问的问题，一直报错找不到host，那我们自然想到docker容器内部的ip是互相隔离的，只能通过外网进行映射访问到内部，内部无法直接互联，这样的话会破坏容器直接的隔离性，那么我们怎么解决呢？</p>
+<p>其实Docker容器内部互相访问有三种方式</p>
+<h2 id="方式一、虚拟Ip访问"><a href="#方式一、虚拟Ip访问" class="headerlink" title="方式一、虚拟Ip访问"></a>方式一、虚拟Ip访问</h2><p>安装docker时，docker会默认创建一个内部的桥接网络docker0，每创建一个容器分配一个虚拟网卡，容器之间可以根据ip互相访问。  </p>
+<pre><code>[root@33fcf82ab4dd /]# [root@CentOS ~]# ifconfig
+......
+docker0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 0.0.0.0
+        inet6 fe80::42:35ff:feac:66d8  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 02:42:35:ac:66:d8  txqueuelen 0  (Ethernet)
+        RX packets 4018  bytes 266467 (260.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 4226  bytes 33935667 (32.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+...... </code></pre><p>运行一个centos镜像， 查看ip地址得到：172.17.0.7  </p>
+<pre><code>[root@CentOS ~]# docker run -it --name centos-1 docker.io/centos:latest
+[root@6d214ff8d70a /]# ifconfig
+eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 172.17.0.7  netmask 255.255.0.0  broadcast 0.0.0.0
+        inet6 fe80::42:acff:fe11:7  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 02:42:ac:11:00:07  txqueuelen 0  (Ethernet)
+        RX packets 16  bytes 1296 (1.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 8  bytes 648 (648.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0  </code></pre><p>以同样的命令再起一个容器，查看ip地址得到：172.17.0.8 </p>
+<pre><code>[root@CentOS ~]# docker run -it --name centos-2 docker.io/centos:latest
+[root@33fcf82ab4dd /]# ifconfig
+eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 172.17.0.8  netmask 255.255.0.0  broadcast 0.0.0.0
+        inet6 fe80::42:acff:fe11:8  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 02:42:ac:11:00:08  txqueuelen 0  (Ethernet)
+        RX packets 8  bytes 648 (648.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 8  bytes 648 (648.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</code></pre><p>容器内部ping测试结果如下： </p>
+<pre><code>[root@33fcf82ab4dd /]# ping 172.17.0.7
+PING 172.17.0.7 (172.17.0.7) 56(84) bytes of data.
+bytes from 172.17.0.7: icmp_seq=1 ttl=64 time=0.205 ms
+bytes from 172.17.0.7: icmp_seq=2 ttl=64 time=0.119 ms
+bytes from 172.17.0.7: icmp_seq=3 ttl=64 time=0.118 ms
+bytes from 172.17.0.7: icmp_seq=4 ttl=64 time=0.101 ms</code></pre><p>重点：这种方式必须知道每个容器的ip，在实际使用中并不实用。 </p>
+<h2 id="方式二、link"><a href="#方式二、link" class="headerlink" title="方式二、link"></a>方式二、link</h2><p>运行容器的时候加上参数link  </p>
+<p>运行第一个容器  </p>
+<pre><code>docker run -it --name centos-1 docker.io/centos:latest  </code></pre><p>运行第二个容器<br>    [root@CentOS ~]# docker run -it –name centos-2 –link centos-1:centos-1 docker.io/centos:latest  </p>
+<p>–link：参数中第一个centos-1是容器名，第二个centos-1是定义的容器别名（使用别名访问容器），为了方便使用，一般别名默认容器名。  </p>
+<p> 此方法对容器创建的顺序有要求，如果集群内部多个容器要互访，使用就不太方便。</p>
+<h2 id="方式三、创建bridge网络（通用）"><a href="#方式三、创建bridge网络（通用）" class="headerlink" title="方式三、创建bridge网络（通用）"></a>方式三、创建bridge网络（通用）</h2><p>1.安装好docker后，运行如下命令创建bridge网络：docker network create testnet</p>
+<p>查询到新创建的bridge testnet。  </p>
+<p><img src="https://img2018.cnblogs.com/blog/1236854/201809/1236854-20180927180733526-105666636.png" alt="图片">  </p>
+<p>2.运行容器连接到testnet网络。 </p>
+<p>使用方法：docker run -it –name &lt;容器名&gt; —network <bridge> –network-alias &lt;网络别名&gt; &lt;镜像名&gt;  </p>
+<pre><code>[root@CentOS ~]# docker run -it --name centos-1 --network testnet --network-alias centos-1 docker.io/centos:latest
+[root@CentOS ~]# docker run -it --name centos-2 --network testnet --network-alias centos-2 docker.io/centos:latest  </code></pre><p>3.若访问容器中服务，可以使用这用方式访问 &lt;网络别名&gt;：&lt;服务端口号&gt; </p>
+<p>推荐使用这种方法，自定义网络，因为使用的是网络别名，可以不用顾虑ip是否变动，只要连接到docker内部bright网络即可互访。bridge也可以建立多个，隔离在不同的网段。</p>
 
             </div>
             <hr/>
@@ -584,7 +527,7 @@ transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</code></pre><p>Segment 是 C
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/">http://xxystudybook.club/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/</a>
+                    <a href="http://xxystudybook.club/2020/04/28/docker-zhong-bu-shu-springcloudalibaba-wu-fa-fang-wen-de-wen-ti/">http://xxystudybook.club/2020/04/28/docker-zhong-bu-shu-springcloudalibaba-wu-fa-fang-wen-de-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -786,43 +729,39 @@ transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</code></pre><p>Segment 是 C
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2019/11/01/bing-fa-bian-cheng-xian-cheng-zhi-jian-de-tong-xun-1/">
+                <a href="/2020/04/28/docker-zhong-bu-shu-springcloudalibaba-wu-fa-fang-wen-de-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="并发编程_线程之间的通讯">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Docker中部署springCloudAlibaba无法访问的问题">
                         
-                        <span class="card-title">并发编程_线程之间的通讯</span>
+                        <span class="card-title">Docker中部署springCloudAlibaba无法访问的问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程_线程之间的通讯volatile与Synchronized的区别
-volatile只能保持可见性，但不能保证原子性，synchronized既可以保证可见性又可以保证原子性
-volatile禁止重排序，synchronized不禁止
+                            Docker中部署SpringCloudAlibaba无法访问的问题问题描述：本次由于需要实现jenkins+docker自动化部署，突然发现jar构建成镜像之后，容器内部无法访问的问题，一直报错找不到host，那我们自然想到docker容
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-28
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    并发编程
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
                             
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -830,41 +769,38 @@ volatile禁止重排序，synchronized不禁止
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/11/01/bing-fa-bian-cheng-gou-jian-kuai-1/">
+                <a href="/2020/04/19/zookeeper-zookeeper-yuan-ma-da-jian-yu-bian-yi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="并发编程_构建块">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Zookeeper_zookeeper源码搭建与编译">
                         
-                        <span class="card-title">并发编程_构建块</span>
+                        <span class="card-title">Zookeeper_zookeeper源码搭建与编译</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            并发编程_构建块同步容器同步容器分为两部分，一个是vector和HashTable。他们早期是JDK的一部分：另一个是他们的同系容器，在JDK1.2才被加入的同步包装类。这些类是由Collections.synchronizedxxx工厂方
+                            Zookeeper3.5.5本地源码环境搭建以及编译本次我们通过搭建zookeeper的源码环境，通过ant编译的方式编译zookeeper，然后启动本地源码zookeeper。
+需求分析
+本次拉取zookeeper的源码可以进行系统的学习
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    并发编程
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
                             
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
